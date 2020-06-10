@@ -1,0 +1,7 @@
+Week 1
+Got meeting with team members and chose the exact project we want to create. We chose scrum master and spilt tasks.
+I start learning spring boot , sql but still long way to go. 
+
+Week 2
+
+Discuss with Shizuka the story board. Start learning reactjs to build frontend. Still, long way to go.
