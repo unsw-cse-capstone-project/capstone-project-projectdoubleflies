@@ -1,0 +1,3 @@
+Week 1
+
+Group is formed and group name is called “Project DoubleFlies”. Sijie and Yu wrote user stories and Danting and I checked it. I started to draw userboard based on the user stories. I have designed database and system structures. We also chose software language and tools that we can you in this project
