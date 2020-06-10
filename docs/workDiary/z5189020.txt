@@ -1,0 +1,5 @@
+﻿Week 2:
+
+Joined the team. Modified some user stories and started to work on System Architechture.
+
+Finished Use Case Diagram.
