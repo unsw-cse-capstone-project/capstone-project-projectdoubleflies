@@ -1,0 +1,6 @@
+﻿Background:
+
+
+    People love cooking but many of them always get lost in hundreds of methods to make delicious meals. Our website aims to solve this problem. We provide a great variety of ingredients so that users can choose what they have on hand. Each time users choose a new ingredient, our system will update the results. Users can get an amount of recipes for their own ingredients, following the instruction and description, and food can be easily cooked. 
+   Our website can make every user become a recipe contributor. Users can also upload their own recipes and ideas about cooking, adding images for their meals. They can not only explore but also provide cooking methods to the public.
+   One example in the same scenario we found is taste.com. They provide recipes but lack a user-friendly searching way. Users must type the name of ingredients by hand not just by clicking , which saves their time. Also there are no categories for ingredients displaying on the mainpage. For those who want to explore only one type of food, they have to think of instances of that type by themselves.
