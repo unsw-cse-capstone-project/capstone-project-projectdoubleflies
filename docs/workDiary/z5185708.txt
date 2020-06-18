@@ -16,4 +16,7 @@ achieve their needs. Therefore, I will lead my team members to review their work
 
 
 Week3
-We started to do website functionality, the first user story that we need to do is account management. Actually, it's a little bit difficult for me to do since all stuff are new things and need time to know how to do. Therefore, I am learning spring boot and sql now and trying to connect Mysql workbench to Spring boot. Hope it works at the end of this week.
+We started to do website functionality, the first user story that we need to do is account management. 
+Actually, it's a little bit difficult for me to do since all stuff are new things and need time to know how to do. 
+Therefore, I am learning spring boot and sql now and trying to connect Mysql workbench to Spring boot. 
+Hope it works at the end of this week.
