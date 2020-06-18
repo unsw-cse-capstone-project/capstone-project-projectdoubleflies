@@ -13,3 +13,7 @@ However, after struggling for a while, i understand how to use it and finally co
 that need to be recorrect such as grammar error or misunderstanding description of user storie, so I asked my team mates to help me find these
 errors and fix them.Everyone is happy with user stories but i believe we should double check is there anything that need to be done to
 achieve their needs. Therefore, I will lead my team members to review their work and try to make this proposal perfect at next week. 
+
+
+Week3
+We started to do website functionality, the first user story that we need to do is account management. Actually, it's a little bit difficult for me to do since all stuff are new things and need time to know how to do. Therefore, I am learning spring boot and sql now and trying to connect Mysql workbench to Spring boot. Hope it works at the end of this week.
