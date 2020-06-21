@@ -9,3 +9,6 @@ Week 2
 I read the description of meal match carefully, then i wrote the user stories and sent it to Kyrie, he uploaded it to jira and asked the 
 other group member if there is any problem with the user stories, everyone was happy with that. We are going to have a meeting this week to
 discuss further tasks. I hope everyone having a great time to do this project.
+
+Week 3
+We had a meeting on Sunday, i was assigned to do the show ingredients and pick ingredients.
