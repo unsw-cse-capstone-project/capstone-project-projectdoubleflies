@@ -10,3 +10,7 @@ We started to write report with the diagrams we made last week.
 The project is going smoothly. 
 I have started to learn how to use java spring boot and wrote basic react project
 to fetch data from the backend.
+
+Week3
+I started to study for react redux and axios to use api from backend to display in frontend.
+I have done login form and registeration form and some of the contributor page.
