@@ -115,12 +115,17 @@ public class RecipeController {
     	return "searched";
     }
 
-  /* @GetMapping("/favorite/{username}")
+   @GetMapping("/favorite/{username}")
 //     public Set<Recipe> showMyFavorite(@PathVariable String username){
     public List<Recipe> showMyFavorite(@PathVariable String username){
-       
-    	return userRepository.showFavoriteRecipe(username);
-    }*/
+       List<Recipe> result = new ArrayList<>();
+       User user = userRepository.findByUsername(username);
+       for(Recipe r : user.favorite()) {
+    	   result.add(r);
+       }
+       return result;
+    	//return userRepository.showFavoriteRecipe(username);
+    }
     // return ingredient by category ------Brute Force-----------
     @GetMapping("/search/ingredient")
     public Map<String, List<Ingredient>> test(){
