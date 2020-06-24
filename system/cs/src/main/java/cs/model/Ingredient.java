@@ -18,7 +18,14 @@ public class Ingredient {
 	@NotEmpty
 	private String amount;
 	
+	public Ingredient() {}
 	
+	public Ingredient(String ingredient, String category, String amount) {
+		// TODO Auto-generated constructor stub
+		this.amount = amount;
+		this.ingredient = ingredient;
+		this.category = category;
+	}
 	public String getIngredient() {
 		return ingredient;
 	}
@@ -36,6 +43,11 @@ public class Ingredient {
 	}
 	public void setAmount(String amount) {
 		this.amount = amount;
+	}
+	
+	@Override
+	public String toString() {
+		return this.ingredient+" "+this.amount+" "+this.category;
 	}
 
 }

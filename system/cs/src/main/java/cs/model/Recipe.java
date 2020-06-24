@@ -1,5 +1,5 @@
 package cs.model;
-import java.util.List;
+import java.util.*;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -8,11 +8,10 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.EqualsAndHashCode;
 
 
@@ -20,13 +19,15 @@ import lombok.EqualsAndHashCode;
 // @Table(name="recipe_info")
 // @Embeddable
 @EqualsAndHashCode(callSuper = false)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "likes"})
 public class Recipe{
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "recipeID")
+ //   private Long id;
 	private Integer recipeID;
-
+    
 //	@NotEmpty
 //	@Valid
 	@ElementCollection
@@ -46,15 +47,22 @@ public class Recipe{
 	@Column(name="instruction", nullable=false)
 	private List<@Size(min=1) String> instructions;
 	
-	
-	@ManyToOne(fetch=FetchType.LAZY, cascade = {CascadeType.MERGE})
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="username")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 	@JsonBackReference
 	private User user;
 	
 	
-	@NotNull
+   
+ 
+	@ManyToMany(mappedBy="favorite_recipe")
+	//@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	//@JsonManagedReference
+	@JsonIgnore
+    private Set<User> likes = new HashSet<>();
+	
+    @NotNull
 	@Length(min=2)
 	private String title;
 
@@ -68,22 +76,15 @@ public class Recipe{
 	
 	public Recipe() {}
 	
-	// public Recipe(String title, String description, List<Ingredient> ingredients, List<String> instructions, String type) {
-	// 	this.title = title;
-	// 	this.description = description;
-	// 	this.ingredients = ingredients;
-	// 	this.instructions = instructions;
-	// 	this.type = type;
-	// }
+	
 
-	public Recipe(String title, String description, List<Ingredient> ingredients, List<String> instructions, String type, User user) {
-		// this.recipeID = id;
+	public Recipe(String title, String description, List<Ingredient> ingredients, List<String> instructions, String type) {
 		this.title = title;
 		this.description = description;
 		this.ingredients = ingredients;
 		this.instructions = instructions;
 		this.type = type;
-		this.user = user;
+	//	this.user = user;
 	}
 	
 	public Integer getRecipeID() {
@@ -142,7 +143,27 @@ public class Recipe{
 	public void setUser(User user) {
 		this.user = user;
 	}
+   @JsonIgnore
+   public Set<User> getUsers(){
+        return this.likes;
+    }
 	
+    @Override
+    public int hashCode(){
+        return this.recipeID;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o == null) return false;
+        Recipe r = (Recipe) o;
+        return r.user == user;
+    }
+    @Override
+    public String toString(){
+        return "success";
+    }
 }
 
 

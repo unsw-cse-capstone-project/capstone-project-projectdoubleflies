@@ -1,5 +1,6 @@
 package cs.model;
-import java.util.List;
+
+import java.util.*;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -10,6 +11,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.EqualsAndHashCode;
@@ -17,8 +19,9 @@ import lombok.EqualsAndHashCode;
 
 
 @Entity
-@Table(name = "User")
+//@Table(name = "User")
 @EqualsAndHashCode(callSuper = false)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "favorite_recipe"})
 public class User{
     
     @Id
@@ -30,9 +33,21 @@ public class User{
     @Column(name = "password")
     private String password;
     
-//    @JsonManagedReference
-//    @OneToMany(fetch = FetchType.LAZY, targetEntity=Recipe.class, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval=true)
-//    private List<Recipe> recipes;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Recipe> recipes = new ArrayList<>();
+
+   
+    //@JsonIgnore
+  //  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToMany
+   // @JsonBackReference
+    @JoinTable(
+        name="Explorer_Info",
+        joinColumns = @JoinColumn(name="username"),
+        inverseJoinColumns = @JoinColumn(name="favorite_recipe"))
+    @JsonIgnore
+    private Set<Recipe> favorite_recipe = new HashSet<>();
     
     public User() {}
     
@@ -60,12 +75,38 @@ public class User{
     public String getPassword(){
         return this.password;
     }
-//
-//    public List<Recipe> getRecipe(){
-//        return this.recipes;
-//    }
-//    
-//    public List<Recipe> Recipe(List<Recipe> recipes){
-//        return this.recipes = recipes;
-//    }
+
+    public List<Recipe> getRecipe(){
+        return this.recipes;
+    }
+
+    
+    
+    public void addFavorite(Recipe recipe){
+        this.favorite_recipe.add(recipe);
+        recipe.getUsers().add(this);
+    }
+
+    public void removeFavorite(Recipe recipe){
+        this.favorite_recipe.remove(recipe);
+        recipe.getUsers().remove(this);
+    }
+    
+    public Set<Recipe> favorite(){
+    	return this.favorite_recipe;
+    }
+    
+    @Override
+    public int hashCode(){
+        return username.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if(o ==  null) return false;
+        if(this.getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return user.username ==  username && user.password == password;
+    }
 }

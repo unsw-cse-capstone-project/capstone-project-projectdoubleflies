@@ -1,8 +1,6 @@
 package cs.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +31,8 @@ public class RecipeController {
 	RecipeInfoRepository recipeInfoRepository;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	searchRepository searchrepo;
 	
 	@GetMapping("/recipe/{id}")
 	public List<Recipe> getRecipe(@PathVariable String id) {
@@ -51,35 +51,11 @@ public class RecipeController {
         //return "saved";
     }
 	
-/*	@PostMapping("/recipe/{recipeJson}")
-	public Recipe adddRecipe(@PathVariable String recipeJson){
-		System.out.println(recipeJson);
-		Gson gson = new Gson();
-		Recipe recipe = gson.fromJson(recipeJson,  Recipe.class);
-		// System.out.println(recipeJson);
-		return recipeInfoRepository.save(recipe);
-	}*/
-// 	@PostMapping("/recipe/")
-// 	public Recipe addRecipe(@RequestBody Recipe recipe) {
-// 		// System.out.println(recipe);
-//
-// 		return recipeInfoRepository.save(recipe);
-// 	}
 	
 	@PostMapping("/recipe/")
  	public @ResponseBody String addRecipe(@RequestBody Recipe recipe) {
-//		System.out.println(recipevo.getUser().getID());
-//		String username = recipevo.getUsername();
-//		System.out.println(username);
-//		User user = userRepository.findByUsername(username);
-//		System.out.println(user.getID());
-//		System.out.println(user.getPassword());
-//		
-//		User new_user = new User(user.getID(), user.getPassword());
-//		Recipe recipe = new Recipe(recipevo.getTitle(), recipevo.getDescription(), recipevo.getIngredients(), recipevo.getInstructions(), recipevo.getType(), new_user);
  	    recipeInfoRepository.save(recipe);
         return "saved";
-//		return null;
  	}
 
     @PutMapping("/recipe/{id}")
@@ -88,9 +64,7 @@ public class RecipeController {
            Recipe recipe = recipeInfoRepository.findRecipeById(recipeID);
            if(recipe == null){
              newRecipe.setRecipeID(recipeID);
-             //System.out.println("id:"+newRecipe.getRecipeID());
              return recipeInfoRepository.save(newRecipe);
-             //return newRecipe;
            }else{
              recipe.setInstructions(newRecipe.getInstructions());
              recipe.setType(newRecipe.getType());
@@ -99,21 +73,6 @@ public class RecipeController {
              recipe.setDescription(newRecipe.getDescription());
              return recipeInfoRepository.save(recipe);
            }
-           //System.out.println(newRecipe);*/
-	    /* Integer recipeID = Integer.parseInt(id);
-         return recipeInfoRepository.findRecipeById(recipeID)
-          .map(recipe->{
-           recipe.setInstructions(newRecipe.getInstructions());
-           recipe.setType(newRecipe.getType());
-           recipe.setIngredients(newRecipe.getIngredients());
-           recipe.setTitle(newRecipe.getTitle());
-           recipe.setDescription(newRecipe.getDescription());
-                       return recipeInfoRepository.save(recipe);
-        })
-        .orElseGet(() ->{
-           newRecipe.setRecipeID(recipeID);
-                       return recipeInfoRepository.save(newRecipe);			
-        });*/
 	}
 	
 	@DeleteMapping("/recipe/{id}")
@@ -126,6 +85,70 @@ public class RecipeController {
 	public String getSuggestion(@PathVariable String ingredient) {
 		return recipeInfoRepository.getSuggestion(ingredient);
 	}
+
+   /*@GetMapping("/favorite/user")
+    public @ResponseBody String addFavorite(@RequestParam String id, @RequestParam String username){
+        Integer recipeID = Integer.parseInt(id);
+        User user = userRepository.findByUsername(username);
+        Recipe recipe = recipeInfoRepository.findRecipeById(recipeID);
+        user.addFavorite(recipe);
+       // userRepository.addFavorite(username, recipeID);
+        userRepository.save(user);
+        
+        return "saved";
+    }
+     @GetMapping("/favorite/{id}/delete")
+    public @ResponseBody String deleteFavorite(@PathVariable String id, @RequestParam String recipeName){
+        Integer recipeID = Integer.parseInt(recipeName);
+        User user = userRepository.findByUsername(id);
+        Recipe recipe = recipeInfoRepository.findRecipeById(recipeID);
+        user.removeFavorite(recipe);
+        userRepository.save(user);
+        return "deleted";
+    }*/
+    
+    @PostMapping("/search")
+    public @ResponseBody String addSearch(@RequestBody List<String> ingredient) {
+    	SearchHistory search = new SearchHistory();
+    	search.setIngredients(ingredient);
+    	searchrepo.save(search);
+    	return "searched";
+    }
+
+  /* @GetMapping("/favorite/{username}")
+//     public Set<Recipe> showMyFavorite(@PathVariable String username){
+    public List<Recipe> showMyFavorite(@PathVariable String username){
+       
+    	return userRepository.showFavoriteRecipe(username);
+    }*/
+    
+    @GetMapping("/search/ingredient")
+    public Map<String, Ingredient> test(){
+    	Ingredient i = new Ingredient("egg","diary","10");
+    	Map<String, Ingredient> map = new HashMap<>();
+    	map.put("diary", i);
+    	return map;
+    }
+    /*public List<Ingredient> searchCategory(/*@PathVariable String id @RequestParam String name*/
+    	/*Integer recipeID = Integer.parseInt(id);
+    	Recipe r = recipeInfoRepository.findRecipeById(recipeID);
+    	/*List<String> res = new ArrayList<>();
+    	for(Ingredient m: r.getIngredients()) {
+    		res.add(m.toString());
+    	}
+    	return res;
+    	return r.getIngredients();
+    	List<Recipe> recipe = recipeInfoRepository.findAll();
+    	List<Ingredient> result = new ArrayList<>();
+    	for(Recipe r : recipe) {
+    		for(Ingredient ingre : r.getIngredients()) {
+    			if(ingre.getCategory().equals("meat")) {
+    				result.add(ingre);
+    			}
+    		}
+    	}
+    	return result;
+    }*/
 }
 
 
