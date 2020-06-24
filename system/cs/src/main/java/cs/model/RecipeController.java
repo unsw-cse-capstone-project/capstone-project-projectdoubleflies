@@ -86,7 +86,7 @@ public class RecipeController {
 		return recipeInfoRepository.getSuggestion(ingredient);
 	}
 
-   /*@GetMapping("/favorite/user")
+   @GetMapping("/favorite/user")
     public @ResponseBody String addFavorite(@RequestParam String id, @RequestParam String username){
         Integer recipeID = Integer.parseInt(id);
         User user = userRepository.findByUsername(username);
@@ -105,7 +105,7 @@ public class RecipeController {
         user.removeFavorite(recipe);
         userRepository.save(user);
         return "deleted";
-    }*/
+    }
     
     @PostMapping("/search")
     public @ResponseBody String addSearch(@RequestBody List<String> ingredient) {
