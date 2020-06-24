@@ -86,7 +86,7 @@ public class RecipeController {
 		return recipeInfoRepository.getSuggestion(ingredient);
 	}
 
-   @GetMapping("/favorite/user")
+   /*@GetMapping("/favorite/user")
     public @ResponseBody String addFavorite(@RequestParam String id, @RequestParam String username){
         Integer recipeID = Integer.parseInt(id);
         User user = userRepository.findByUsername(username);
@@ -105,7 +105,7 @@ public class RecipeController {
         user.removeFavorite(recipe);
         userRepository.save(user);
         return "deleted";
-    }
+    }*/
     
     @PostMapping("/search")
     public @ResponseBody String addSearch(@RequestBody List<String> ingredient) {
@@ -121,12 +121,27 @@ public class RecipeController {
        
     	return userRepository.showFavoriteRecipe(username);
     }*/
-    
+    // return ingredient by category ------Brute Force-----------
     @GetMapping("/search/ingredient")
-    public Map<String, Ingredient> test(){
-    	Ingredient i = new Ingredient("egg","diary","10");
-    	Map<String, Ingredient> map = new HashMap<>();
-    	map.put("diary", i);
+    public Map<String, List<Ingredient>> test(){
+    	Set<String> name = new HashSet<>();
+    	Map<String, List<Ingredient>> map = new HashMap<>();
+    	List<Recipe> recipe = recipeInfoRepository.findAll();
+    	for(Recipe r : recipe) {
+    		for(Ingredient ingre : r.getIngredients()) {
+    			if(!name.contains(ingre.getCategory())) {
+    				name.add(ingre.getCategory());
+    				map.put(ingre.getCategory(), new ArrayList<>());
+    			}
+    			map.get(ingre.getCategory()).add(ingre);
+    		}
+    	}
+    	/*Ingredient i = new Ingredient("egg","diary","10");
+    	Ingredient g = new Ingredient("milk","diary","10");
+    	List<Ingredient> l = new ArrayList<>();
+    	l.add(i);
+    	l.add(g);
+    	map.put("diary", l);*/
     	return map;
     }
     /*public List<Ingredient> searchCategory(/*@PathVariable String id @RequestParam String name*/
