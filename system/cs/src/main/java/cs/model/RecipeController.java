@@ -86,7 +86,7 @@ public class RecipeController {
 		return recipeInfoRepository.getSuggestion(ingredient);
 	}
 
-   /*@GetMapping("/favorite/user")
+   @GetMapping("/favorite/user")
     public @ResponseBody String addFavorite(@RequestParam String id, @RequestParam String username){
         Integer recipeID = Integer.parseInt(id);
         User user = userRepository.findByUsername(username);
@@ -105,7 +105,7 @@ public class RecipeController {
         user.removeFavorite(recipe);
         userRepository.save(user);
         return "deleted";
-    }*/
+    }
     
     @PostMapping("/search")
     public @ResponseBody String addSearch(@RequestBody List<String> ingredient) {
@@ -149,26 +149,42 @@ public class RecipeController {
     	map.put("diary", l);*/
     	return map;
     }
-    /*public List<Ingredient> searchCategory(/*@PathVariable String id @RequestParam String name*/
-    	/*Integer recipeID = Integer.parseInt(id);
-    	Recipe r = recipeInfoRepository.findRecipeById(recipeID);
-    	/*List<String> res = new ArrayList<>();
-    	for(Ingredient m: r.getIngredients()) {
-    		res.add(m.toString());
-    	}
-    	return res;
-    	return r.getIngredients();
+    @PostMapping("/recommend/recipe")
+    public List<Recipe> recommendRecipe(@RequestBody List<String> ingredient){
     	List<Recipe> recipe = recipeInfoRepository.findAll();
-    	List<Ingredient> result = new ArrayList<>();
-    	for(Recipe r : recipe) {
-    		for(Ingredient ingre : r.getIngredients()) {
-    			if(ingre.getCategory().equals("meat")) {
-    				result.add(ingre);
+    	Comparator<Recipe> recipeCompare = new Comparator<Recipe>() {
+    		@Override
+    		public int compare(Recipe r1, Recipe r2) {
+    			ArrayList<String> t1 = new ArrayList<>(ingredient);
+    			t1.retainAll(r1.ingredeintNames());
+    			int len1 = t1.size();
+    			ArrayList<String> t2 = new ArrayList<>(ingredient);
+    			t2.retainAll(r2.ingredeintNames());
+    			int len2 = t2.size();
+    			if(len1 == len2) {
+    				return r1.ingredeintNames().size() - r2.ingredeintNames().size();
+    			}else {
+    				return len2 -len1;
     			}
     		}
+    	};
+    	PriorityQueue<Recipe> res = new PriorityQueue<>(recipeCompare);
+    	for(Recipe r : recipe) {
+    		List<String> temp = new ArrayList<>(ingredient);
+    		temp.retainAll(r.ingredeintNames());
+    		if(temp.size() == 0) continue;
+    		else {
+    		    res.add(r);
+    		}
     	}
+    	List<Recipe> result = new ArrayList<>();
+    	while(!res.isEmpty()) {
+    		result.add(res.remove());
+    	}
+    	
     	return result;
-    }*/
+    }
+    
 }
 
 
