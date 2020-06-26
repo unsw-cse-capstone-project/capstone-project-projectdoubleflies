@@ -14,3 +14,6 @@ to fetch data from the backend.
 Week3
 I started to study for react redux and axios to use api from backend to display in frontend.
 I have done login form and registeration form and some of the contributor page.
+
+Week4
+I have done pick ingredient form, list recipe, post recipe, edit recipe and delete recipe for frontend.
