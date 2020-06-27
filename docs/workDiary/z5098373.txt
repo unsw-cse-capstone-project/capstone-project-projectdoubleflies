@@ -11,4 +11,5 @@ other group member if there is any problem with the user stories, everyone was h
 discuss further tasks. I hope everyone having a great time to do this project.
 
 Week 3
-We had a meeting on Sunday, i was assigned to do the show ingredients and pick ingredients.
+We had a meeting on Sunday, i was assigned to do the show ingredients and pick ingredients. 
+This task is very difficult for me, because everything is relatively new to me, so I spent a long time to learn, it just seems to come up with something but after adding some new code, the program appears a lot Problem,i'm still trying to fix these problems.
