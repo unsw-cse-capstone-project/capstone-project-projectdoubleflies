@@ -5,3 +5,7 @@ I start learning spring boot , sql but still long way to go.
 Week 2
 
 Discuss with Shizuka the story board. Start learning reactjs to build frontend. Still, long way to go.
+
+Week3
+Do recipe backend. Recipe can be added, deleted, eidted. Users can choose favorite recipes, can search for favorite reicpes.
+System can recommend recipes which best match ingredients. 
