@@ -13,6 +13,7 @@ import HomePage from './pages/HomePage';
 import PublicPage from './pages/PublicPage'
 import {PrivateRoute} from './helpers/PrivateRoute';
 import ExplorerPage from './pages/ExplorerPage';
+import Ingredients from './layouts/Ingredients';
 function App() {
     return ( 
       <Provider store={store}>

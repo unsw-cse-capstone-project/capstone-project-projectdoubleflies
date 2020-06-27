@@ -16,7 +16,8 @@ class PostRecipe extends Component {
       desc: "",
       ingredient_rows:[],
       instruction_rows:[],
-      chosen: "Chosen...",
+      categories: ["Dairy", "Vegetables", "Fruites", "Baking & Grains", "Added Sweeteners", "Spices", "Meats", "Fish", "Seafood", "Condiments", "Oils", "Seasonings", "Sauces", "Legumes", "Alcohol", "Soup", "Nuts", "Dairy Alternative", "Desserts & Snacks", "Beverages"],
+      chosen: "Choose...",
       selections:["Breakfast", "Lunch", "Snack", "Dinner"],
       display:["Breakfast", "Lunch", "Snack", "Dinner"]
     })
@@ -234,8 +235,18 @@ class PostRecipe extends Component {
           <div className="col">
             <input id={`ing_name_${id}`} name="ingredient" type="text" className="form-control" placeholder="Ingredient" value={item.ingredient} onChange={(e)=>this.onChangeIngredient(e)} />
           </div>
-          <div className="col">
+          {/* <div className="col">
             <input id={`ing_category_${id}`} name="category" type="text" className="form-control" placeholder="category" value={item.category} onChange={(e)=>this.onChangeCategory(e)} />
+          </div> */}
+          <div className="col">
+            <select id={`ing_category_${id}`} className="form-control" onChange={(e)=>this.onChangeCategory(e)} value={item.category}>
+            <option selected>{item.category}</option>
+            {this.state.categories.map((category, id)=>{
+              return (
+                <option key={id}>{category}</option>
+              )  
+            })}
+            </select>
           </div>
           <div className="col">
             <input id={`ing_amount_${id}`} name="amount" type="text" className="form-control" placeholder="amount" value={item.amount} onChange={(e)=>this.onChangeAmount(e)} />

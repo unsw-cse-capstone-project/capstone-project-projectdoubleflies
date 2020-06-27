@@ -1,4 +1,4 @@
-import { FETCH_RECIPES, NEW_RECIPES, GET_RECIPE, DELETE_RECIPE, GIVE_RECOMMENDATION, FETCH_USER_RECIPES, GET_USER_RECIPE, EDIT_RECIPE} from '../actions/types';
+import { FETCH_RECIPES, NEW_RECIPES, GET_RECIPE, DELETE_RECIPE, GIVE_RECOMMENDATION, FETCH_USER_RECIPES, GET_USER_RECIPE, EDIT_RECIPE, SEARCH_RECIPE} from '../actions/types';
 
 const initialState = {
 	items:[],
@@ -67,6 +67,13 @@ export default function(state = initialState, action) {
 			return {
 				...state, 
 				user_items:  array
+			}
+
+		case SEARCH_RECIPE:
+			console.log("search")
+			return {
+				...state,
+				items: action.payload
 			}
 
 		default:

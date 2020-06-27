@@ -21,7 +21,6 @@ public class Ingredient {
 	public Ingredient() {}
 	
 	public Ingredient(String ingredient, String category, String amount) {
-		// TODO Auto-generated constructor stub
 		this.amount = amount;
 		this.ingredient = ingredient;
 		this.category = category;

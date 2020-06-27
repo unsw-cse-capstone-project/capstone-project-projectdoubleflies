@@ -7,6 +7,7 @@ import { fetchRecipes, fetchUserRecipes, deleteRecipe} from '../actions/recipeAc
 import { fetchUserFavourite, removeFavourite, addFavourite} from '../actions/explorerActions';
 import { checkLoggedIn } from '../actions/userActions';
 import { Redirect } from 'react-router'
+import Ingredients from '../layouts/Ingredients'
 import {
 	Grid,
 } from '@material-ui/core/'
@@ -84,8 +85,11 @@ class ListRecipe extends Component {
 		
 		return (
 			<div className="container">	
+			{this.state.kind==="recipes" && <Ingredients/>}
+			
 			<Grid container direction="row" justify="center" alignItems="center">
 				{cards}
+
 			</Grid>
 			</div>
 		)

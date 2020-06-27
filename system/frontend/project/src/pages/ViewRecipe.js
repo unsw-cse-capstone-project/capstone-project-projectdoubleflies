@@ -28,7 +28,7 @@ class ViewRecipe extends Component {
 		const path = window.location.pathname
 		var temp = path.split('/')
 		const id = temp[temp.length-1];
-		let showEdit = temp[1]=="contributor" ? true : false
+		let showEdit = temp[1]==="contributor" ? true : false
 		this.props.checkLoggedIn()
 		if(this.props.loggedIn === true){
 			this.props.getUserRecipe(parseInt(id))

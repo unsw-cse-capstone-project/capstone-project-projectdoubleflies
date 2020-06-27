@@ -1,32 +1,22 @@
 import { FETCH_INGREDIENTS, PICK_INGREDIENT, FETCH_USER_FAVOURITES,  ADD_FAVOURITE, REMOVE_FAVOURITE} from './types'
+import axios from 'axios';
 
 const apiUrl = "http://localhost:8080";
 
 export const fetchIngredients=()=> dispatch=>{
 
-	const data = [
-		{
-            "ingredient": "egg",
-            "category": "dairy",
-            "amount": "1"
-		},
-		{
-            "ingredient": "tomato",
-            "category": "vegetable",
-            "amount": "1"
-		},
-		{
-            "ingredient": "milk",
-            "category": "dairy",
-            "amount": "1"
-        }
-	]
+	const data = {Dairy: ["milk", "egg"], Vegetables:["tomato"], "Baking & Grains": ["bread"], Spices:["tomato"], Meats: ["bread"],Fish:["tomato"], "Baking & Grains": ["bread"], Seafood:["tomato"], "Baking & Grains": ["bread"],  Sauces:["tomato"], Legumes: ["bread"], Beverages:["b"], Nuts:["nuts"], Alcohol:[], Condiments:[], Oils:[]}
 	dispatch({
 		type: FETCH_INGREDIENTS,
 		payload: data
-
 	})
-
+	// axios.get(`${apiUrl}/search/ingredient`)
+	// .then(response => {
+	// 	dispatch({
+	// 		type: FETCH_INGREDIENTS,
+	// 		payload: response.data
+	// 	})
+	// })
 }
 
 export const pickIngredient = (ingredient)=>dispatch => {
@@ -108,3 +98,5 @@ export const removeFavourite = (id) => dispatch => {
 		payload: id
 	})
 }
+
+

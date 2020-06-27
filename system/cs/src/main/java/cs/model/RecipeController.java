@@ -105,7 +105,13 @@ public class RecipeController {
         user.removeFavorite(recipe);
         userRepository.save(user);
         return "deleted";
-    }*/
+	}*/
+	
+	@PostMapping("/test")
+	public List<Recipe> getIngredients(@RequestBody List<String> ingredients){
+		// return recipeInfoRepository.ing();
+		return recipeInfoRepository.ing(ingredients);
+	}
     
     @PostMapping("/search")
     public @ResponseBody String addSearch(@RequestBody List<String> ingredient) {
@@ -127,28 +133,38 @@ public class RecipeController {
     	//return userRepository.showFavoriteRecipe(username);
     }
     // return ingredient by category ------Brute Force-----------
-    @GetMapping("/search/ingredient")
-    public Map<String, List<Ingredient>> test(){
-    	Set<String> name = new HashSet<>();
-    	Map<String, List<Ingredient>> map = new HashMap<>();
-    	List<Recipe> recipe = recipeInfoRepository.findAll();
-    	for(Recipe r : recipe) {
-    		for(Ingredient ingre : r.getIngredients()) {
-    			if(!name.contains(ingre.getCategory())) {
-    				name.add(ingre.getCategory());
-    				map.put(ingre.getCategory(), new ArrayList<>());
-    			}
-    			map.get(ingre.getCategory()).add(ingre);
-    		}
-    	}
-    	/*Ingredient i = new Ingredient("egg","diary","10");
-    	Ingredient g = new Ingredient("milk","diary","10");
-    	List<Ingredient> l = new ArrayList<>();
-    	l.add(i);
-    	l.add(g);
-    	map.put("diary", l);*/
-    	return map;
-    }
+    // @GetMapping("/search/ingredient")
+    // public Map<String, List<String>> test(){
+    // 	Set<String> name = new HashSet<>();
+    // 	Map<String, List<String>> map = new HashMap<>();
+    // 	List<Recipe> recipe = recipeInfoRepository.findAll();
+    // 	for(Recipe r : recipe) {
+    // 		for(Ingredient ingre : r.getIngredients()) {
+    // 			if(!name.contains(ingre.getCategory())) {
+    // 				name.add(ingre.getCategory());
+    // 				map.put(ingre.getCategory(), new ArrayList<>());
+    // 			}
+    // 			map.get(ingre.getCategory()).add(ingre.getIngredient());
+    // 		}
+    // 	}
+    // 	/*Ingredient i = new Ingredient("egg","diary","10");
+    // 	Ingredient g = new Ingredient("milk","diary","10");
+    // 	List<Ingredient> l = new ArrayList<>();
+    // 	l.add(i);
+    // 	l.add(g);
+    // 	map.put("diary", l);*/
+    // 	return map;
+	// }
+	
+	@GetMapping("/search/ingredient")
+	public Map<String, List<String>> test1(){
+		Map<String, List<String>> map = new HashMap<>();
+		List<String> categories=recipeInfoRepository.test();
+		for(String c: categories){
+			map.put(c, recipeInfoRepository.test1(c));
+		}
+		return map;
+	}
     /*public List<Ingredient> searchCategory(/*@PathVariable String id @RequestParam String name*/
     	/*Integer recipeID = Integer.parseInt(id);
     	Recipe r = recipeInfoRepository.findRecipeById(recipeID);

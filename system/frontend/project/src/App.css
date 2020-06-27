@@ -57,3 +57,17 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
+.modal {
+    overflow: visible !important;
+}
+
+.col-md-5 {
+    height: 400px;
+    overflow: auto !important
+}
+
+.col-md-6 {
+    height: 400px;
+    overflow: auto !important
+}

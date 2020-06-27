@@ -1,40 +1,61 @@
-import { FETCH_RECIPES, NEW_RECIPES, GET_RECIPE, DELETE_RECIPE, GIVE_RECOMMENDATION, FETCH_USER_RECIPES, GET_USER_RECIPE, EDIT_RECIPE} from './types';
+import { FETCH_RECIPES, NEW_RECIPES, GET_RECIPE, DELETE_RECIPE, GIVE_RECOMMENDATION, FETCH_USER_RECIPES, GET_USER_RECIPE, EDIT_RECIPE, SEARCH_RECIPE} from './types';
 import axios from 'axios';
 
 const apiUrl="http://localhost:8080";
 
 export const fetchRecipes = () => dispatch => {
-	// console.log("fetching")
-	// const jstring = [{
-	// 	"recipeID": 5,
-	// 	"ingredients": [
-	// 		{
-	// 			"ingredient": "egg",
-	// 			"category": "dairy",
-	// 			"amount": "1"
-	// 		}
-	// 	],
-	// 	"instructions": [
-	// 		"pan fry"
-	// 	],
-	// 	"user": {
-	// 		"password": "first",
-	// 		"id": "first",
-	// 		"recipe": null
-	// 	},
-	// 	"title": "First",
-	// 	"description": "egg",
-	// 	"type": "Breakfast"
-	// }]
-	// dispatch({
-	// 	type: FETCH_RECIPES,
-	// 	payload: jstring
-	// })
-	axios.get(`${apiUrl}/recipe`)
-	.then(response => dispatch({
+	console.log("fetching")
+	const jstring = [{
+		"recipeID": 5,
+		"ingredients": [
+			{
+				"ingredient": "egg",
+				"category": "dairy",
+				"amount": "1"
+			}
+		],
+		"instructions": [
+			"pan fry"
+		],
+		"user": {
+			"password": "first",
+			"id": "first",
+			"recipe": null
+		},
+		"title": "First",
+		"description": "egg",
+		"type": "Breakfast"
+	},
+	{
+		"recipeID": 6,
+		"ingredients": [
+			{
+				"ingredient": "egg",
+				"category": "dairy",
+				"amount": "1"
+			}
+		],
+		"instructions": [
+			"pan fry"
+		],
+		"user": {
+			"password": "first",
+			"id": "first",
+			"recipe": null
+		},
+		"title": "First",
+		"description": "egg",
+		"type": "Breakfast"
+	}]
+	dispatch({
 		type: FETCH_RECIPES,
-		payload: response.data
-	})).catch(err=> console.log(err))
+		payload: jstring
+	})
+	// axios.get(`${apiUrl}/recipe`)
+	// .then(response => dispatch({
+	// 	type: FETCH_RECIPES,
+	// 	payload: response.data
+	// })).catch(err=> console.log(err))
 }
 
 export const fetchUserRecipes = (username) => dispatch => {
@@ -186,4 +207,28 @@ export const deleteRecipe = (id) => dispatch => {
 		payload: id
 	})
 	
+}
+
+export const searchRecipes = () => dispatch => {
+	const data = 
+		[{
+			"recipeID": 10,
+			"ingredients": [
+				{
+					"ingredient": "egg",
+					"category": "dairy",
+					"amount": "1"
+				}
+			],
+			"instructions": [
+				"pan fry"
+			],
+			"title": "First",
+			"description": "egg",
+			"type": "Breakfast"
+		}]
+	dispatch({
+		type: SEARCH_RECIPE, 
+		payload: data
+	})
 }

@@ -1,7 +1,7 @@
-import { FETCH_INGREDIENTS, PICK_INGREDIENT, ADD_FAVOURITE, FETCH_USER_FAVOURITES, REMOVE_FAVOURITE } from '../actions/types';
+import { FETCH_INGREDIENTS, PICK_INGREDIENT, ADD_FAVOURITE, FETCH_USER_FAVOURITES, REMOVE_FAVOURITE, SEARCH_RECIPE } from '../actions/types';
 
 const initialState ={
-	ingredients: [],
+	ingredients: {},
 	favs:[],
 	picked: [],
 }
