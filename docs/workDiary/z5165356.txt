@@ -13,7 +13,13 @@ to fetch data from the backend.
 
 Week3
 I started to study for react redux and axios to use api from backend to display in frontend.
-I have done login form and registeration form and some of the contributor page.
+I have done login form and registeration form and some of the contributor page such as view own recipe
+and post new recipes. I need to wait for backend to see if this work well with backend.
 
 Week4
+The view recipe from last week is working perfectly with backend.
 I have done pick ingredient form, list recipe, post recipe, edit recipe and delete recipe for frontend.
+I have setted private route on contributor page and explorer page so that not logged in users are not able to
+see those pages.
+Public user can only view pick ingredients, public view pages.
+
