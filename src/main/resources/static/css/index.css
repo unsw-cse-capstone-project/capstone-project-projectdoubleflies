@@ -1,0 +1,263 @@
+body {
+    font-family: "Helvetica Neue",
+    Helvetica,
+    Microsoft Yahei,
+    Hiragino Sans GB,
+    WenQuanYi Micro Hei,
+    sans-serif;
+    margin-top: 20px;
+}
+
+section{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* 顶部header */
+header {
+    margin: 10px auto;
+    height: 40px;
+    width: 90%;
+    /*background-color:lavender;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.logo-area {
+    line-height: 40px;
+}
+
+.logo {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.top_nav {
+    padding-left: 10px;
+}
+
+.logo-area a {
+    font: 18px/40px "微软雅黑";
+    color: red;
+}
+
+.top_nav a {
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    padding: 0 12px;
+}
+
+.top_nav .yinyue {
+    color: red;
+    font-weight: bold;
+}
+
+.search_area {
+    background-color: #F2F2F2;
+    border-radius: 11px 11px;
+    width: 240px;
+    height: 30px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.search_area input {
+    outline: none;
+    border: 0;
+    background-color: #F2F2F2;
+    height: 30px;
+    width: 160px;
+    margin-left: 10px;
+}
+
+.user-img {
+    margin-left: 10px;
+    height: 36px;
+    width: 36px;
+}
+
+/* 导航栏 nav */
+.nav {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.nav .layui-container {
+    background-color: #F0F0F0;
+    height: 46px;
+    width: 100%;
+}
+
+.nav ul {
+    /*去掉小圆点*/
+    list-style: none;
+    display: inline-block;
+    padding-right: 10px;
+}
+
+.nav ul li {
+    float: left;
+    /*width: 80px;*/
+    height: 50px;
+    margin-right: 15px;
+    margin-left: 15px;
+    text-align: center;
+    line-height: 46px;
+}
+
+.nav ul li a {
+    display: block;
+    /*width: 120px;*/
+    height: 36px;
+}
+
+.nav ul .first a {
+    color: red;
+}
+
+/*<!-- 轮播图 -->*/
+
+
+/*<!-- 最新 -->*/
+.title_more {
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 20px;
+    /*background-color: #fcf8e3;*/
+}
+
+.left_title {
+    font-size: 26px;
+}
+
+.image-list ul li img {
+    border-radius: 15px 15px;
+    height: 200px;
+    width: 100%;
+}
+
+.image-list ul {
+    margin-bottom: 20px;
+    list-style: none;
+    display: flex;
+    flex-direction: row ;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.image-list ul  li{
+    width: 18%;
+    margin-bottom: 20px;
+}
+
+
+.box2 {
+    clear: both;
+}
+
+.item-title{
+    line-height: 30px;
+}
+
+.item-desc{
+    line-height: 30px;
+
+}
+
+/*<!-- 热门 -->*/
+
+.item:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 25px;
+    top: 7.5px;
+    height: 153px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAACZCAMAAADth2GJAAABhlBMV…yANgHQVG2P34zivyWz0O5vyZHHY/7at9v/5N8jf/x/+ztmgei0eCDGTAAAAABJRU5ErkJggg==) no-repeat 0 0;
+    display: none;
+}
+
+.album-list li + li {
+    margin-left: 40px;
+    /*margin-right: 24px;*/
+}
+
+.album-list ul .first {
+    /*margin-left: 0;*/
+    /*margin-right: 24px;*/
+}
+
+
+/*<!-- section3 -->*/
+.section3 {
+    margin-top: 20px;
+}
+
+/*<!-- section4 -->*/
+.section4 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.section4 .item:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 25px;
+    top: 7.5px;
+    height: 153px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAACZCAMAAADth2GJAAABhlBMV…yANgHQVG2P34zivyWz0O5vyZHHY/7at9v/5N8jf/x/+ztmgei0eCDGTAAAAABJRU5ErkJggg==) no-repeat 0 0;
+    display: none;
+}
+
+.section4 img {
+    border-radius: 50%;
+}
+
+.subtitle {
+    margin-top: 15px;
+    line-height: 50px;
+}
+
+/*<!-- 底部区域 -->*/
+.about-area {
+    /*width: 2000px;*/
+    background-color: #3C3939;
+}
+
+
+.about-top {
+    /*background-color: #3C3939;*/
+    padding-top: 30px;
+    padding-bottom: 30px;
+    /*padding-left: 30px;*/
+}
+
+.about-top a {
+    margin-right: 40px;
+    color: white;
+}
+
+.about div {
+    margin-top: 25px;
+}
+
+.tuandui {
+    color: #7E8592
+}
+
+.wb-wx-img img {
+    height: 50px;
+    width: 50px;
+}
+
+.foot {
+    padding-top: 40px;
+    background-color: #232323;
+    height: 190px;
+    color: white;
+    /*padding-bottom: 50px;*/
+}
