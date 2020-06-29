@@ -1,0 +1,74 @@
+server:
+  port: 20000
+#  error:
+#    whitelabel:
+#      enabled: false
+#    include-stacktrace: never
+
+spring:
+  #  mvc:
+  #    hiddenmethod:
+  #      filter:
+  #        enabled:  true
+  application:
+    name: myapp
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/ingredient?characterEncoding=utf-8
+    username: root
+    password: 666666
+
+  jpa:
+    database: MySQL
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: true
+
+  jackson:
+    # 参数意义：
+    #JsonInclude.Include.ALWAYS        默认
+    #JsonInclude.Include.NON_DEFAULT   属性为默认值不序列化
+    #JsonInclude.Include.NON_EMPTY     属性为 空（””） 或者为 NULL 都不序列化
+    #JsonInclude.Include.NON_NULL      属性为NULL  不序列化
+    default-property-inclusion: ALWAYS
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  # SpringMVC上传文件配置
+  servlet:
+    multipart:
+      # 默认支持文件上传.
+      enabled: true
+      # 支持文件写入磁盘
+      file-size-threshold: 0
+      # 上传文件的临时目录
+      location:
+      # 最大支持文件大小
+      max-file-size: 5MB
+      # 最大支持请求大小
+      max-request-size: 30MB
+
+
+  freemarker:
+    allow-session-override: false
+    cache: true
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: true
+    settings:
+      template_update_delay: 0
+    # 设定后缀名
+    suffix: .ftl
+    # 设定ftl文件路径
+    template-loader-path: classpath:/templates
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+
