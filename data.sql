@@ -1,0 +1,87 @@
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859510",	"Chinese cabbage"	,"20000.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859511",	"Sanbao cabbage"	,"20001.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859512",	"sweet potato "	,"20002.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859513",	"cauliflower"	,"20003.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859514",	"carrot"	,"20004.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859515",	"sweet green soy bean"	,"20005.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859516",	" spinach"	,"20006.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859517",	"nion"	,"20007.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859518",	" potato "	,"20008.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859519",	"Long cucumber"	,"20009.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859520",	"cabbage"	,"20010.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859521",	"Netherlands cucumber"	,"20011.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859522",	"butterhead"	,"20012.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859523",	"purple sweet potato "	,"20013.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859524",	"cuke"	,"20014.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859525",	"milk Chinese cabbage"	,"20015.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859526",	"QianYe tofu"	,"20016.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859527",	"cucurbit"	,"20017.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859528",	"Romaine lettu"	,"20018.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859529",	"European mixed vegetables"	,"20019.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859530",	"fresh ginger"	,"20020.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859531",	"Yunnan sweet corn"	,"20021.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859532",	"young garlic shoot "	,"20022.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859534",	"mushroom"	,"20024.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859535",	"Chinese yam"	,"20025.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859536",	"needle mushroom",	"20026.jpg"	,"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859537",	"baby cabbage"	,"20027.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859538",	"Anqiu shallot"	,"20028.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859539",	"sweet potato"	,"20029.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859540",	"tomato"	,"20030.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859541",	"pickle"	,"20031.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859542",	"maize"	,"20032.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859543",	"pepper"	,"20033.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859544",	"tomato"	,"20034.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859545",	"dried bean milk cream in tight rolls",	"20035.jpg"	,"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859546",	"bursic acid"	,"20036.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859547",	"lactuca sativa L"	,"20037.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859548",	"green soy bean"	,"20038.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859549",	"green string bean"	,"20039.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859550",	"green vegetables "	,"20040.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859551",	"Anqiu big ginger"	,"20041.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859552",	"Tengzhou potatoes"	,"20042.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859553",	"asparagus lettuce "	,"20043.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859554",	"sweet words "	,"20044.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859555",	"lotus root "	,"20045.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859556",	"cabbage mustard ",	"20046.jpg"	,"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859557",	"small cushaw "	,"20047.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859558",	"bamboo shoots "	,"20048.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859559",	"green pepper"	,"20049.jpg",	"vegetables");
+insert into ingredient (ingredient_id, name, image, category) value ("1190651844153859560",  "fragrant-flowered garlic"  ,"20050.jpg","vegetables");
+
+
+
+insert into ingredient (ingredient_id, name, image, category) value ('1190651844153124510', 'oat' , '30010.jpg','grains');
+insert into ingredient (ingredient_id, name, image, category) value ('1190651844153124511', 'black rice' , '30011.jpg','grains');
+insert into ingredient (ingredient_id, name, image, category) value ('1190651844153124512', 'soybean' , '30012.jpg','grains');
+insert into ingredient (ingredient_id, name, image, category) value ('1190651844153124513', 'peanut' , '30013.jpg','grains');
+insert into ingredient (ingredient_id, name, image, category) value ('1190651844153124514', 'mung' , '30014.jpg','grains');
+insert into ingredient (ingredient_id, name, image, category) value ('1190651844153124515', 'black soya bean' , '30015.jpg','grains');
+insert into ingredient (ingredient_id, name, image, category) value ('1190651844153124516', 'brown rice' , '30016.jpg','grains');
+insert into ingredient (ingredient_id, name, image, category) value ('1190651844153124517', 'ormosia' , '30017.jpg','grains');
+insert into ingredient (ingredient_id, name, image, category) value ('1190651844153124518', 'sorghum' , '30018.jpg','grains');
+insert into ingredient (ingredient_id, name, image, category) value ('1190651844153124519', 'sticky rice' , '30019.jpg','grains');
+insert into ingredient (ingredient_id, name, image, category) value ('1190651844153124520', 'buckwheat rice' , '30020.jpg','grains');
+insert into ingredient (ingredient_id, name, image, category) value ('1190651844153124521', 'wheat' , '30021.jpg','grains');
+insert into ingredient (ingredient_id, name, image, category) value ('1190651844153124522', 'sesame' , '30022.jpg','grains');
+insert into ingredient (ingredient_id, name, image, category) value ('1190651844153124523', 'red rice' , '30023.jpg','grains');
+insert into ingredient (ingredient_id, name, image, category) value ('1190651844153124524', 'chinese grain' , '30024.jpg','grains');
+
+
+
+
+insert into ingredient (ingredient_id, name, image, category) value ('1180651844153541410', 'oyster sauce' , '40010.jpg','seasoning');
+insert into ingredient (ingredient_id, name, image, category) value ('1180651844153541411', 'chicken extract' , '40011.jpg','seasoning');
+insert into ingredient (ingredient_id, name, image, category) value ('1180651844153541412', 'cooking wine' , '40012.jpg','seasoning');
+insert into ingredient (ingredient_id, name, image, category) value ('1180651844153541413', 'soy sauce' , '40013.jpg','seasoning');
+insert into ingredient (ingredient_id, name, image, category) value ('1180651844153541414', 'salt' , '40014.jpg','seasoning');
+insert into ingredient (ingredient_id, name, image, category) value ('1180651844153541415', 'sugar' , '40015.jpg','seasoning');
+insert into ingredient (ingredient_id, name, image, category) value ('1180651844153541416', 'sesame oil' , '40016.jpg','seasoning');
+insert into ingredient (ingredient_id, name, image, category) value ('1180651844153541417', 'tomato sauce' , '40017.jpg','seasoning');
+insert into ingredient (ingredient_id, name, image, category) value ('1180651844153541418', 'thick broad-bean sauce' , '40018.jpg','seasoning');
+insert into ingredient (ingredient_id, name, image, category) value ('1180651844153541419', 'white vinegar' , '40019.jpg','seasoning');
+insert into ingredient (ingredient_id, name, image, category) value ('1180651844153541420', 'chilli sauce' , '40020.jpg','seasoning');
+insert into ingredient (ingredient_id, name, image, category) value ('1180651844153541421', 'sesame paste' , '40021.jpg','seasoning');
+insert into ingredient (ingredient_id, name, image, category) value ('1180651844153541422', 'Sichuan Pepper' , '40022.jpg','seasoning');
+insert into ingredient (ingredient_id, name, image, category) value ('1180651844153541423', 'white pepper' , '40023.jpg','seasoning');
+insert into ingredient (ingredient_id, name, image, category) value ('1180651844153541424', 'star anise' , '40024.jpg','seasoning');
