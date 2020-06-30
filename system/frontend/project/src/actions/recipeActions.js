@@ -4,138 +4,28 @@ import axios from 'axios';
 const apiUrl="http://localhost:8080";
 
 export const fetchRecipes = () => dispatch => {
-	console.log("fetching")
-	const jstring = [{
-		"recipeID": 5,
-		"ingredients": [
-			{
-				"ingredient": "egg",
-				"category": "dairy",
-				"amount": "1"
-			}
-		],
-		"instructions": [
-			"pan fry"
-		],
-		"user": {
-			"password": "first",
-			"id": "first",
-			"recipe": null
-		},
-		"title": "First",
-		"description": "egg",
-		"type": "Breakfast"
-	},
-	{
-		"recipeID": 6,
-		"ingredients": [
-			{
-				"ingredient": "egg",
-				"category": "dairy",
-				"amount": "1"
-			}
-		],
-		"instructions": [
-			"pan fry"
-		],
-		"user": {
-			"password": "first",
-			"id": "first",
-			"recipe": null
-		},
-		"title": "First",
-		"description": "egg",
-		"type": "Breakfast"
-	}]
-	dispatch({
+	axios.get(`${apiUrl}/recipe`)
+	.then(response => dispatch({
 		type: FETCH_RECIPES,
-		payload: jstring
-	})
-	// axios.get(`${apiUrl}/recipe`)
-	// .then(response => dispatch({
-	// 	type: FETCH_RECIPES,
-	// 	payload: response.data
-	// })).catch(err=> console.log(err))
+		payload: response.data
+	})).catch(err=> console.log(err))
 }
 
 export const fetchUserRecipes = (username) => dispatch => {
-	const jstring = [{
-		"recipeID": 4,
-		"ingredients": [
-			{
-				"ingredient": "egg",
-				"category": "dairy",
-				"amount": "1"
-			}
-		],
-		"instructions": [
-			"pan fry"
-		],
-		"user": {
-			"password": "first",
-			"id": "first",
-			"recipe": null
-		},
-		"title": "First",
-		"description": "egg",
-		"type": "Breakfast"
-	},
-	{
-		"recipeID": 5,
-		"ingredients": [
-			{
-				"ingredient": "egg",
-				"category": "dairy",
-				"amount": "1"
-			}
-		],
-		"instructions": [
-			"pan fry"
-		],
-		"user": {
-			"password": "first",
-			"id": "first",
-			"recipe": null
-		},
-		"title": "First",
-		"description": "egg",
-		"type": "Breakfast"
-	},
-	{
-		"recipeID": 6,
-		"ingredients": [
-			{
-				"ingredient": "tomato",
-				"category": "vegetable",
-				"amount": "1"
-			}
-		],
-		"instructions": [
-			"wash"
-		],
-		"user": {
-			"password": "first",
-			"id": "first",
-			"recipe": null
-		},
-		"title": "Second",
-		"description": "hi",
-		"type": "Breakfast"
-	}]
-	dispatch({
+	console.log("fetch user", username)
+	axios.get(`${apiUrl}/recipe/find?username=${username}`)
+	.then(response => dispatch({
 		type: FETCH_USER_RECIPES,
-		payload: jstring
-	})
+		payload: response.data
+	})).catch(err=> console.log(err))
 }
 
 export const createRecipe = (postData) => dispatch => {
-	// const jstring=JSON.stringify(postData)
-	console.log(postData)
 	axios.post(`${apiUrl}/recipe/`, postData)
     .then(response=>{
 		dispatch({
 			type: NEW_RECIPES,
-			payload: response.data
+			payload: response.status
 		})
 	})
 	.catch(error=>{
@@ -146,89 +36,74 @@ export const createRecipe = (postData) => dispatch => {
 		}
     })
 }
-
 export const getRecipe = (id) => dispatch => {
-	dispatch({
+	console.log(id)
+	axios.get(`${apiUrl}/recipe/${id}`)
+	.then(response => dispatch({
 		type: GET_RECIPE,
-		payload: id
-	})
+		payload: response.data
+	}))
 }
 
 export const getUserRecipe = (id) => dispatch => {
-	dispatch({
+	axios.get(`${apiUrl}/recipe/${id}`)
+	.then(response => dispatch({
 		type: GET_USER_RECIPE,
-		payload: id
-	})
+		payload: response.data
+	}))
 }
 
-export const giveRecommendation = (itngredient) => dispatch => {
-	// axios.get(`${apiUrl}/recipe/${ingredient}`)
-	// .then(response => {
-	// 	dispatch({
-	// 		type: GIVE_RECOMMENDATION,
-	// 		payload: response.data
-	// 	})
+export const giveRecommendation = (ingredient) => dispatch => {
+	axios.get(`${apiUrl}/recipe/ingredient/${ingredient}`)
+	.then(response => {
+		dispatch({
+			type: GIVE_RECOMMENDATION,
+			payload: response.data
+		})
+	})
+	// dispatch({
+	// 	type:GIVE_RECOMMENDATION,
+	// 	payload: "test"
 	// })
-	dispatch({
-		type:GIVE_RECOMMENDATION,
-		payload: "test"
-	})
 }
 
-export const editRecipe = (postData) => dispatch => {
-	axios.put(`${apiUrl}/recipe`, postData)
+export const editRecipe = (id, postData) => dispatch => {
+	axios.put(`${apiUrl}/recipe/${id}`, postData)
 	.then(response=>{
 		dispatch({
 			type: EDIT_RECIPE,
 			payload: response.data
 		})
+	}).catch(error=>{
+		if(error.response.status===500){
+			alert("Can not Save")
+		}
 	})
-	// dispatch({
-	// 	type: EDIT_RECIPE,
-	// 	payload: "editing"
-	// })
 }
 
 export const deleteRecipe = (id) => dispatch => {
-	// axios.delete(`${apiUrl}/recipe/${id}`)
-	// .then(response => {
-	// 	dispatch({
-	// 		type: DELETE_RECIPE, 
-	// 		payload: response.data
-	// 	})
-	// })
-	// .catch(error=>{
-	// 	if(error.response.status===500){
-	// 		alert("Can not submit")
-	// 	}
-	// })
-	dispatch({
-		type: DELETE_RECIPE, 
-		payload: id
+	axios.delete(`${apiUrl}/recipe/${id}`)
+	.then(response => {
+		dispatch({
+			type: DELETE_RECIPE, 
+			payload: id
+		})
 	})
-	
+	.catch(error=>{
+		if(error.response.status===500){
+			alert("Can not submit")
+		}
+	})
 }
 
-export const searchRecipes = () => dispatch => {
-	const data = 
-		[{
-			"recipeID": 10,
-			"ingredients": [
-				{
-					"ingredient": "egg",
-					"category": "dairy",
-					"amount": "1"
-				}
-			],
-			"instructions": [
-				"pan fry"
-			],
-			"title": "First",
-			"description": "egg",
-			"type": "Breakfast"
-		}]
-	dispatch({
-		type: SEARCH_RECIPE, 
-		payload: data
+export const searchRecipes = (ingredients) => dispatch => {
+	console.log(ingredients)
+	axios.post(`${apiUrl}/search`, ingredients)
+	.then(response=>{
+		dispatch({
+			type: SEARCH_RECIPE, 
+			payload: response.data
+		})
 	})
+	
 }

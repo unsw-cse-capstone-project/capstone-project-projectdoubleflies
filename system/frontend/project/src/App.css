@@ -71,3 +71,8 @@
     height: 400px;
     overflow: auto !important
 }
+
+img.image {
+    width: 100%;
+    height: 400px;
+}

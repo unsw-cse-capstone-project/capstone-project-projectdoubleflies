@@ -28,8 +28,9 @@ public class Recipe{
  //   private Long id;
 	private Integer recipeID;
     
-//	@NotEmpty
+	
 //	@Valid
+	@NotEmpty
 	@ElementCollection
 	@CollectionTable(
 			name="ingredient_info",
@@ -38,7 +39,7 @@ public class Recipe{
 	@Column(nullable=false)
 	private List<Ingredient> ingredients;
 	
-//	@NotEmpty
+	@NotEmpty
 	@ElementCollection
 	@CollectionTable(
 			name="instruction_info", 

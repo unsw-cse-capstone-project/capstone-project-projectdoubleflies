@@ -35,9 +35,9 @@ public class RecipeController {
 	searchRepository searchrepo;
 	
 	@GetMapping("/recipe/{id}")
-	public List<Recipe> getRecipe(@PathVariable String id) {
+	public Recipe getRecipe(@PathVariable String id) {
 		int recipeID = Integer.parseInt(id);
-		return recipeInfoRepository.findAllByRecipeID(recipeID);
+		return recipeInfoRepository.findRecipeById(recipeID);
 	}
 	
 	@GetMapping("/recipe")
@@ -45,7 +45,7 @@ public class RecipeController {
 		return recipeInfoRepository.findAll();
 	}
 
-    @RequestMapping("/recipe/find")
+    @GetMapping("/recipe/find")
     public List<Recipe> findByname(@RequestParam String username){
         return recipeInfoRepository.findByUsername(username);
         //return "saved";
@@ -86,18 +86,19 @@ public class RecipeController {
 		return recipeInfoRepository.getSuggestion(ingredient);
 	}
 
-   @GetMapping("/favorite/user")
-    public @ResponseBody String addFavorite(@RequestParam String id, @RequestParam String username){
-        Integer recipeID = Integer.parseInt(id);
-        User user = userRepository.findByUsername(username);
+   @PostMapping("/favorite/{id}/add")
+    public @ResponseBody String addFavorite(@PathVariable String id, @RequestParam String recipeName){
+        Integer recipeID = Integer.parseInt(recipeName);
+        User user = userRepository.findByUsername(id);
         Recipe recipe = recipeInfoRepository.findRecipeById(recipeID);
         user.addFavorite(recipe);
        // userRepository.addFavorite(username, recipeID);
         userRepository.save(user);
         
         return "saved";
-    }
-     @GetMapping("/favorite/{id}/delete")
+	}
+	
+     @DeleteMapping("/favorite/{id}/delete")
     public @ResponseBody String deleteFavorite(@PathVariable String id, @RequestParam String recipeName){
         Integer recipeID = Integer.parseInt(recipeName);
         User user = userRepository.findByUsername(id);
@@ -107,19 +108,18 @@ public class RecipeController {
         return "deleted";
 	}
 	
-	@PostMapping("/test")
+	@PostMapping("/search")
 	public List<Recipe> getIngredients(@RequestBody List<String> ingredients){
-		// return recipeInfoRepository.ing();
-		return recipeInfoRepository.ing(ingredients);
+		return recipeInfoRepository.search(ingredients);
 	}
 
-    @PostMapping("/search")
-    public @ResponseBody String addSearch(@RequestBody List<String> ingredient) {
-    	SearchHistory search = new SearchHistory();
-    	search.setIngredients(ingredient);
-    	searchrepo.save(search);
-    	return "searched";
-    }
+    // @PostMapping("/search")
+    // public @ResponseBody String addSearch(@RequestBody List<String> ingredient) {
+    // 	SearchHistory search = new SearchHistory();
+    // 	search.setIngredients(ingredient);
+    // 	searchrepo.save(search);
+    // 	return "searched";
+    // }
 
    @GetMapping("/favorite/{username}")
 //     public Set<Recipe> showMyFavorite(@PathVariable String username){
@@ -133,7 +133,6 @@ public class RecipeController {
     	//return userRepository.showFavoriteRecipe(username);
     }
     // return ingredient by category ------Brute Force-----------
-<<<<<<< HEAD
     // @GetMapping("/search/ingredient")
     // public Map<String, List<String>> test(){
     // 	Set<String> name = new HashSet<>();
@@ -198,41 +197,41 @@ public class RecipeController {
     	map.put("diary", l);*/
     // 	return map;
     // }
-    @PostMapping("/recommend/recipe")
-    public List<Recipe> recommendRecipe(@RequestBody List<String> ingredient){
-    	List<Recipe> recipe = recipeInfoRepository.findAll();
-    	Comparator<Recipe> recipeCompare = new Comparator<Recipe>() {
-    		@Override
-    		public int compare(Recipe r1, Recipe r2) {
-    			ArrayList<String> t1 = new ArrayList<>(ingredient);
-    			t1.retainAll(r1.ingredeintNames());
-    			int len1 = t1.size();
-    			ArrayList<String> t2 = new ArrayList<>(ingredient);
-    			t2.retainAll(r2.ingredeintNames());
-    			int len2 = t2.size();
-    			if(len1 == len2) {
-    				return r1.ingredeintNames().size() - r2.ingredeintNames().size();
-    			}else {
-    				return len2 -len1;
-    			}
-    		}
-    	};
-    	PriorityQueue<Recipe> res = new PriorityQueue<>(recipeCompare);
-    	for(Recipe r : recipe) {
-    		List<String> temp = new ArrayList<>(ingredient);
-    		temp.retainAll(r.ingredeintNames());
-    		if(temp.size() == 0) continue;
-    		else {
-    		    res.add(r);
-    		}
-    	}
-    	List<Recipe> result = new ArrayList<>();
-    	while(!res.isEmpty()) {
-    		result.add(res.remove());
-    	}
+    // @PostMapping("/recommend/recipe")
+    // public List<Recipe> recommendRecipe(@RequestBody List<String> ingredient){
+    // 	List<Recipe> recipe = recipeInfoRepository.findAll();
+    // 	Comparator<Recipe> recipeCompare = new Comparator<Recipe>() {
+    // 		@Override
+    // 		public int compare(Recipe r1, Recipe r2) {
+    // 			ArrayList<String> t1 = new ArrayList<>(ingredient);
+    // 			t1.retainAll(r1.ingredeintNames());
+    // 			int len1 = t1.size();
+    // 			ArrayList<String> t2 = new ArrayList<>(ingredient);
+    // 			t2.retainAll(r2.ingredeintNames());
+    // 			int len2 = t2.size();
+    // 			if(len1 == len2) {
+    // 				return r1.ingredeintNames().size() - r2.ingredeintNames().size();
+    // 			}else {
+    // 				return len2 -len1;
+    // 			}
+    // 		}
+    // 	};
+    // 	PriorityQueue<Recipe> res = new PriorityQueue<>(recipeCompare);
+    // 	for(Recipe r : recipe) {
+    // 		List<String> temp = new ArrayList<>(ingredient);
+    // 		temp.retainAll(r.ingredeintNames());
+    // 		if(temp.size() == 0) continue;
+    // 		else {
+    // 		    res.add(r);
+    // 		}
+    // 	}
+    // 	List<Recipe> result = new ArrayList<>();
+    // 	while(!res.isEmpty()) {
+    // 		result.add(res.remove());
+    // 	}
     	
-    	return result;
-    }
+    // 	return result;
+    // }
     
 }
 

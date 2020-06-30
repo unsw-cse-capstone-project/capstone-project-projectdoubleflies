@@ -5,18 +5,18 @@ const apiUrl = "http://localhost:8080";
 
 export const fetchIngredients=()=> dispatch=>{
 
-	const data = {Dairy: ["milk", "egg"], Vegetables:["tomato"], "Baking & Grains": ["bread"], Spices:["tomato"], Meats: ["bread"],Fish:["tomato"], "Baking & Grains": ["bread"], Seafood:["tomato"], "Baking & Grains": ["bread"],  Sauces:["tomato"], Legumes: ["bread"], Beverages:["b"], Nuts:["nuts"], Alcohol:[], Condiments:[], Oils:[]}
-	dispatch({
-		type: FETCH_INGREDIENTS,
-		payload: data
-	})
-	// axios.get(`${apiUrl}/search/ingredient`)
-	// .then(response => {
-	// 	dispatch({
-	// 		type: FETCH_INGREDIENTS,
-	// 		payload: response.data
-	// 	})
+	// const data = {Dairy: ["milk", "egg"], Vegetables:["tomato"], "Baking & Grains": ["bread"], Spices:["tomato"], Meats: ["bread"],Fish:["tomato"], "Baking & Grains": ["bread"], Seafood:["tomato"], "Baking & Grains": ["bread"],  Sauces:["tomato"], Legumes: ["bread"], Beverages:["b"], Nuts:["nuts"], Alcohol:[], Condiments:[], Oils:[]}
+	// dispatch({
+	// 	type: FETCH_INGREDIENTS,
+	// 	payload: data
 	// })
+	axios.get(`${apiUrl}/search/ingredient`)
+	.then(response => {
+		dispatch({
+			type: FETCH_INGREDIENTS,
+			payload: response.data
+		})
+	})
 }
 
 export const pickIngredient = (ingredient)=>dispatch => {
@@ -27,75 +27,33 @@ export const pickIngredient = (ingredient)=>dispatch => {
 }
 
 export const fetchUserFavourite = (username)=>dispatch=>{
-	// axios.get(`${apiUrl}/favourite/`)
-	// .then(response => {
-	// 	dispatch({
-	// 		type: FETCH_USER_FAVOURITE,
-	// 		payload: response.data
-	// 	})
-	// })
-	const data = [
-		{
-			"recipeID": 4,
-			"ingredients": [
-				{
-					"ingredient": "egg",
-					"category": "dairy",
-					"amount": "1"
-				}
-			],
-			"instructions": [
-				"pan fry"
-			],
-			"title": "First",
-			"description": "egg",
-			"type": "Breakfast"
-		}
-	]
-	dispatch({
-		type: FETCH_USER_FAVOURITES,
-		payload: data
+	axios.get(`${apiUrl}/favorite/${username}`)
+	.then(response => {
+		dispatch({
+			type: FETCH_USER_FAVOURITES,
+			payload: response.data
+		})
 	})
 }
 
 export const addFavourite = (username, id)=> dispatch => {
-	// axios.get(`${apiUrl}/recipe/${id}`)
-	// .then(response => {
-	// 	dispatch({
-	// 		type: ADD_FAVOURITE, 
-	// 		payload: response.data
-	// 	})
-	// })
-
-	const data = 
-		{
-			"recipeID": 10,
-			"ingredients": [
-				{
-					"ingredient": "egg",
-					"category": "dairy",
-					"amount": "1"
-				}
-			],
-			"instructions": [
-				"pan fry"
-			],
-			"title": "First",
-			"description": "egg",
-			"type": "Breakfast"
-		}
-	
-
-	dispatch({
-		type: ADD_FAVOURITE, 
-		payload: data
+	axios.post(`${apiUrl}/favorite/${username}/add?recipeName=${id}`)
+	.then(response => {
+		dispatch({
+			type: ADD_FAVOURITE, 
+			payload: response.data
+		})
 	})
 }
 
-export const removeFavourite = (id) => dispatch => {
-	dispatch({
-		type: REMOVE_FAVOURITE,
-		payload: id
+export const removeFavourite = (username, id) => dispatch => {
+	axios.delete(`${apiUrl}/favorite/${username}/delete?recipeName=${id}`)
+	.then(response => {
+		console.log(response)
+		dispatch({
+			type: REMOVE_FAVOURITE, 
+			payload: id
+		})
 	})
 }
 

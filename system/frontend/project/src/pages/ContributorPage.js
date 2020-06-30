@@ -9,72 +9,34 @@ import { Redirect } from 'react-router'
 import ListRecipe from './ListRecipe'
 import { PRIVATE } from '../helpers/type';
 
-// class ContributorPage extends Component {
-
-// 	componentDidMount() {
-// 		console.log('hi')
-// 		this.props.checkLoggedIn();
-// 		console.log(this.props.loggedIn)
-// 		if(this.props.loggedIn===true){
-// 			console.log("logged in")
-// 			console.log(this.props.username)
-// 			this.props.fetchUserRecipes(this.props.username);
-// 		}else{
-// 			alert("Please Log In")
-// 		}
-// 	}
-
-// 	onClick = (recipeID) =>{
-// 		this.props.getRecipe(recipeID);
-// 	}
-// 	render() {
-// 		console.log(this.props)
-// 		const cards = this.props.recipes.map((item, id) => (
-			
-// 				<div className="card m-2" style={{width: 18 + 'em'}}>
-// 					<div className="card-body">
-// 						<h5 className="card-title">{item.title}</h5>
-// 						<p className="card-text">{item.description}</p>
-// 						<Link className="card-link" to={{ pathname: `/view/${item.recipeID}`}} onClick={this.onClick(item.recipeID)}>
-// 							Check this out
-// 						</Link>
-// 					</div>
-// 				</div>
-		
-// 		))
-// 		return (
-// 			<div className="container">	
-// 			<Grid container direction="row" justify="center" alignItems="center">
-// 				{this.props.loggedIn && cards}
-// 			</Grid>
-// 				{!this.props.loggedIn && <Redirect to="/" />}
-// 			</div>
-// 		)
-// 	}
-// }
-
-// ContributorPage.propTypes = {
-// 	fetchUserRecipe: PropTypes.func.isRequired,
-// 	recipes: PropTypes.array.isRequired
-// }
-// const mapStateToProps = state => ({
-// 	recipes: state.recipes.user_items,
-// 	username: state.users.username,
-// 	loggedIn: state.users.loggedIn
-// });
-
-// export default connect(mapStateToProps, {fetchUserRecipes, getRecipe, checkLoggedIn})(ContributorPage);
-
 class ContributorPage extends Component {
 
-	render(){
+	constructor(props) {
+		super(props)
+		this.state={
+			success: false
+		}
+	}
+	componentDidMount() {
 		this.props.checkLoggedIn();
-		return (
+		// // TODO 
+		if(this.props.location.state===true){
 			
+			return(
+				alert("Recipe Saved")
+			)	
+		}
+		this.setState({
+			success:false
+		})
+	}
+	render(){
+		return (
 			<div className="container">
 				<Link to={{ pathname: "/post"}}>
-					<button className="m-2 btn btn-primary" type="button">Add New Recipe</button>
+					<button className="m-2 btn btn-primary" type="button">Create Recipe</button>
 				</Link>
+				<h4>My Recipes Page</h4>
 				<ListRecipe/>
 				{!this.props.loggedIn && <Redirect to="/"/>}
 			</div>
@@ -82,8 +44,6 @@ class ContributorPage extends Component {
 		)
 	}
 }
-
-
 const mapStateToProps = state => ({
 	loggedIn: state.users.loggedIn
 });

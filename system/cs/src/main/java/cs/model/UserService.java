@@ -1,4 +1,4 @@
-package auth.model;
+package cs.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +11,7 @@ public class UserService {
 	
 	@Autowired
 	UserRepository userRepository;
+	
 	
 	public boolean loginSuccessful(String username, String password){
 		User user = userRepository.findByUsername(username);

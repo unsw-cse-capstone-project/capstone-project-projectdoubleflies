@@ -5,6 +5,10 @@ const initialState = {
 	item: {},
 	category: "",
 	user_items: [],
+	success: false,
+	deleted: false,
+	posted: false,
+	saved: false,
 }
 
 
@@ -23,33 +27,45 @@ export default function(state = initialState, action) {
 			}
 
 		case FETCH_USER_RECIPES:
-			console.log(action.payload)
 			return {
 				...state,
-				user_items: action.payload
+				user_items: action.payload,
+				success: false,
+				saved: false,
+				deleted: false, 
+				posted: false,
 			}
 
 		case NEW_RECIPES:
+			console.log(action.payload)
+			let temp=false
+			if(action.payload==200)
+				temp=true
 			return {
 				...state,
-				item: action.payload
+				success: temp,
+				posted: true,
+				saved: false
 			}
 
 		case GET_RECIPE:
-			console.log("get recipe", action.payload)
-			console.log(state.items)
-			const selected = filterById(state.items, action.payload)
-			console.log(selected)
+			// console.log(action.payload)
 			return {
 				...state, 
-				item: state.items[0]
+				item: action.payload,
+				deleted: false,
+				posted: false,
+				saved: false
 			}
 
 		case GET_USER_RECIPE:
-			const sel = filterById(state.user_items, action.payload)
+			// const sel = filterById(state.user_items, action.payload)
 			return {
 				...state,
-				user_item: sel
+				user_item: action.payload,
+				deleted: false,
+				posted: false,
+				saved: false
 			}
 		case GIVE_RECOMMENDATION:
 			return {
@@ -59,18 +75,19 @@ export default function(state = initialState, action) {
 		case EDIT_RECIPE:
 			return {
 				...state,
-				// user_item: edit
-
+				saved: true
 			}
 		case DELETE_RECIPE:
 			var array = state.user_items.filter((item)=>{return(item['recipeID']!==action.payload)})
 			return {
 				...state, 
-				user_items:  array
+				user_items:  array,
+				deleted: true
 			}
 
 		case SEARCH_RECIPE:
 			console.log("search")
+			console.log(action.payload)
 			return {
 				...state,
 				items: action.payload

@@ -16,7 +16,8 @@ class ListRecipe extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			kind: ""
+			kind: "",
+			deleted: false
 		}
 	}
 
@@ -45,12 +46,13 @@ class ListRecipe extends Component {
 
 	removeFavourite = (e, id)=>{
 		e.preventDefault();
-		this.props.removeFavourite(id)
+		this.props.removeFavourite(this.props.username, id)
 	}
 
 	deleteRecipe = (e, id) => {
 		e.preventDefault();
 		this.props.deleteRecipe(id);
+		{this.props.deleted===true&&alert("Successfully Deleted Recipe")}
 	}
 	render() {
 		let temp
@@ -61,19 +63,19 @@ class ListRecipe extends Component {
 		}else if(this.state.kind==="explorer"){
 			temp = this.props.favs
 		}
-		console.log(this.props)
 		let cards
 		if(temp!==undefined){
 			const pathname = this.state.kind==="contributor" ? "/contributor/view/": "/view/";
 			cards = temp.map((item, id) => (
-					
 				<div className="card m-2" style={{width: 18 + 'em'}}>
 					<Link to={{ pathname: `${pathname}${item.recipeID}`}}>
 					<div className="card-body">
+					//TODO
+					{/* <img class="card-img-top" src={URL.createObjectURL(item.image)} alt="Card image cap"/> */}
 						<h5 className="card-title">{item.title}</h5>
 						<p className="card-text">{item.description}</p>
 						
-							<p className="d-block">Check this out</p>
+							{/* <p className="d-block">Check this out</p> */}
 					</div>
 					</Link>
 					{this.state.kind==="recipes" && this.props.loggedIn && <button className="btn btn-sm btn-danger" onClick={(e)=>this.addFavourite(e, item.recipeID)}>FAVOURITE</button>}
@@ -91,6 +93,7 @@ class ListRecipe extends Component {
 				{cards}
 
 			</Grid>
+			
 			</div>
 		)
 	}
@@ -100,7 +103,8 @@ const mapStateToProps = state => ({
 	favs: state.explorers.favs,
 	recipes: state.recipes.items,
 	username: state.users.username,
-	loggedIn: state.users.loggedIn
+	loggedIn: state.users.loggedIn,
+	deleted: state.recipes.deleted
 });
 
 export default connect(mapStateToProps, {fetchRecipes, fetchUserRecipes, checkLoggedIn, deleteRecipe, fetchUserFavourite, removeFavourite, addFavourite})(ListRecipe);

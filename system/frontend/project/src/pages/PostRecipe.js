@@ -19,7 +19,9 @@ class PostRecipe extends Component {
       categories: ["Dairy", "Vegetables", "Fruites", "Baking & Grains", "Added Sweeteners", "Spices", "Meats", "Fish", "Seafood", "Condiments", "Oils", "Seasonings", "Sauces", "Legumes", "Alcohol", "Soup", "Nuts", "Dairy Alternative", "Desserts & Snacks", "Beverages"],
       chosen: "Choose...",
       selections:["Breakfast", "Lunch", "Snack", "Dinner"],
-      display:["Breakfast", "Lunch", "Snack", "Dinner"]
+      display:["Breakfast", "Lunch", "Snack", "Dinner"],
+      alertPresent: false,
+      file: undefined,
     })
   }
 
@@ -44,7 +46,8 @@ class PostRecipe extends Component {
           ingredient_rows: this.props.recipe.ingredients ? this.props.recipe.ingredients: [],
           instruction_rows: this.props.recipe.instructions ? this.props.recipe.instructions: [],
           chosen: this.props.recipe.type ? this.props.recipe.type: "Chosen ...",
-          display: array
+          display: array,
+          alertPresent: false
         }
       )
     }
@@ -113,15 +116,14 @@ class PostRecipe extends Component {
          { ingredient_rows: array }
       )
   }
-  
-  onChangeIngredient=(event)=>{
+
+  onBlurIngredient=(event)=>{
     event.preventDefault();
     var temp = event.target.id.split("_");
     var id = temp[temp.length-1]
     var array = [...this.state.ingredient_rows];
-    array[id].ingredient=event.target.value
+    console.log(event.target.value, id)
     if(event.target.value!==""){
-      this.props.giveRecommendation(event.target.value)
       array[id].category = this.props.category;
       this.setState(
         {ingredient_rows: array}
@@ -131,8 +133,45 @@ class PostRecipe extends Component {
         {ingredient_rows: array}
       )
     }
-    
-   
+  }
+
+  onKeyPressIngredient=(event)=>{
+    if(event.key!== "Enter"){
+      return
+    }
+    event.preventDefault();
+    var temp = event.target.id.split("_");
+    var id = temp[temp.length-1]
+    var array = [...this.state.ingredient_rows];
+    console.log(event.target.value, id)
+    if(event.target.value!==""){
+      array[id].category = this.props.category;
+      this.setState(
+        {ingredient_rows: array}
+      )
+    }else{
+      this.setState(
+        {ingredient_rows: array}
+      )
+    }
+  }
+  
+  onChangeIngredient=(event)=>{
+    event.preventDefault();
+    var temp = event.target.id.split("_");
+    var id = temp[temp.length-1]
+    var array = [...this.state.ingredient_rows];
+    array[id].ingredient=event.target.value
+    this.setState(
+      {ingredient_rows: array}
+    )
+    if(event.target.value!==""){
+      this.props.giveRecommendation(event.target.value)
+    }else{
+      this.setState(
+        {ingredient_rows: array}
+      )
+    }
   }
 
 
@@ -180,7 +219,6 @@ class PostRecipe extends Component {
       }
       obj.id = obj.username;
       delete obj.username;
-      console.log('submitting')
       var temp ={
         title: this.state.title,
         description: this.state.desc,
@@ -189,32 +227,55 @@ class PostRecipe extends Component {
         type: this.state.chosen,
         user: obj
       }
-      console.log(temp)
       this.props.createRecipe(temp)
-    }else{
-      var obj = JSON.parse(localStorage.getItem("username"))[0];
-      if(obj===null){
-        alert("Please Login First")
-        return
+      if(!this.state.alertPresent){
+        alert("This recipe was successfully posted.")
+        this.setState({
+          alertPresent:true
+        })
       }
-      obj.id = obj.username;
-      delete obj.username;
-      var temp ={
-        title: this.state.title,
-        description: this.state.desc,
-        ingredients: this.state.ingredient_rows, 
-        instructions: this.state.instruction_rows,
-        type: this.state.chosen,
-        user: obj
-      }
-      console.log("editing")
-      console.log(temp)
-      this.props.editRecipe(temp)
+      // {this.props.posted && alert("Recipe Submit")}
     }
     
   }
 
+  onSave = (event)=>{
+    event.preventDefault();
+    var obj = JSON.parse(localStorage.getItem("username"));
+   
+    if(obj===null){
+      alert("Please Login First")
+      return
+    }
+    obj.id = obj.username;
+    delete obj.username;
+    var temp ={
+      title: this.state.title,
+      description: this.state.desc,
+      ingredients: this.state.ingredient_rows, 
+      instructions: this.state.instruction_rows,
+      type: this.state.chosen,
+      user: obj
+    }
+    this.props.editRecipe(this.state.id, temp)
+    if(!this.state.alertPresent){
+      alert("This recipe was successfully saved.")
+      this.setState({
+        alertPresent:true
+      })
+    }
+  }
+
+  onChangeImage=(e)=>{
+    e.preventDefault();
+    // console.log(URL.createObjectURL(e.target.files[0]))
+    this.setState({
+      file: e.target.files[0]
+    })
+  }
+
 	render() {
+    
     this.props.checkLoggedIn()
     const ins_rows = this.state.instruction_rows.map((item, id)=>{
         return (
@@ -233,7 +294,7 @@ class PostRecipe extends Component {
         <div onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }} className="form-row">
           <p>{id+1}:</p>
           <div className="col">
-            <input id={`ing_name_${id}`} name="ingredient" type="text" className="form-control" placeholder="Ingredient" value={item.ingredient} onChange={(e)=>this.onChangeIngredient(e)} />
+            <input id={`ing_name_${id}`} name="ingredient" type="text" className="form-control" placeholder="Ingredient" value={item.ingredient} onChange={(e)=>this.onChangeIngredient(e)} onBlur={e=>this.onBlurIngredient(e)} onKeyPress={e=>this.onKeyPressIngredient(e)}/>
           </div>
           {/* <div className="col">
             <input id={`ing_category_${id}`} name="category" type="text" className="form-control" placeholder="category" value={item.category} onChange={(e)=>this.onChangeCategory(e)} />
@@ -261,14 +322,41 @@ class PostRecipe extends Component {
         <option key={id}>{item}</option>
       )  
     })
+
     
 		return (
       <div className="container">
-        <form onSubmit={ this.onSubmit }>
+        <form onSubmit={ this.state.edit&& this.onSave || !this.state.edit&&this.onSubmit }>
           <div className="form-group">
+            <h4>Create Your Recipe</h4>
             <label htmlFor="title">Title</label>
             <input type="text" className="form-control" id="title" placeholder="Your Recipe Title" onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }} value={this.state.title} onChange={e=>this.onChangeText(e)}/>
           </div>
+          <div className="form-group">
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <span className="input-group-text" id="inputGroupFileAddon01">
+                  Upload Image
+                </span>
+              </div>
+              <div className="custom-file">
+                <input
+                  type="file"
+                  className="custom-file-input"
+                  id="inputGroupFile01"
+                  aria-describedby="inputGroupFileAddon01"
+                  onChange={e=>this.onChangeImage(e)}
+                  accept="image/*"
+                />
+                <label className="custom-file-label" htmlFor="inputGroupFile01">
+                  Choose file
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          {this.state.file!==undefined && <img src={URL.createObjectURL(this.state.file)}class="img-thumbnail"></img>}
+          
           <div className="form-group">
             <textarea id="desc" className="form-control" rows="5" placeholder="Your Recipe Description" value={this.state.desc} onChange={e=>this.onChangeText(e)}/>
           </div>
@@ -290,10 +378,21 @@ class PostRecipe extends Component {
             {options}
             </select>
           </div>
-          {this.state.edit && <a href={`/view/${this.state.id}`}><button type="button" className="btn btn-danger">Cancel</button></a>}
-          <button type="submit" className="btn btn-primary">Submit</button>
+          {this.state.edit && <div><a href={`/view/${this.state.id}`}><button type="button" className="btn btn-danger">Cancel</button></a><button type="submit" className="btn btn-primary">Save</button></div>}
+          {this.state.edit===false &&<button type="submit" className="btn btn-primary">Confirm</button>}
         </form>
+        {/* {this.props.saved && } */}
         {!this.props.loggedIn && <Redirect to="/"/>}
+        
+        {/* {this.props.saved&&window.alert("This post was successfully saved.")}
+        {this.props.saved&&(window.location.href = "/contributor")}
+
+        {this.props.posted&&window.alert("This post was successfully posted.")}
+        {this.props.posted&&(window.location.href = "/contributor")} */}
+        {this.state.alertPresent&&(window.location.href = "/contributor")}
+        {/* {this.props.posted&&<Redirect to="/contributor"/>}
+        {this.props.saved&&<Redirect to="/contributor"/>} */}
+        {/* {this.state.alertPresent&&(window.location.href = "/contributor")} */}
       </div>
 		)
 	}
@@ -302,7 +401,10 @@ class PostRecipe extends Component {
 const mapStateToProps = state=>({
   recipe: state.recipes.user_item,
   category: state.recipes.category,
-  loggedIn: state.users.loggedIn
+  loggedIn: state.users.loggedIn,
+  success: state.recipes.success,
+  posted: state.recipes.posted,
+  saved: state.recipes.saved
 })
 
 export default connect(mapStateToProps, {getRecipe, giveRecommendation,createRecipe, checkLoggedIn, editRecipe})(PostRecipe)

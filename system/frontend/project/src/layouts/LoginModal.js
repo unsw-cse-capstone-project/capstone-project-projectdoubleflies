@@ -116,7 +116,7 @@ class LoginModal extends Component {
 					</Modal.Header>
 
 					<Modal.Body>
-						<p>success</p>
+						<p>Logged in Successfully</p>
 					</Modal.Body>
 
 					<Modal.Footer>

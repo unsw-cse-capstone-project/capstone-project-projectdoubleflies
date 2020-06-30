@@ -56,13 +56,14 @@ class Header extends Component {
 	)
 	render() {
 		console.log(this.props.isLoggedIn)
+		console.log(this.props.username)
 		return (
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
 			<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
 				<span className="navbar-toggler-icon"></span>
 			</button>
 			<div className="collapse navbar-collapse" id="navbarToggler">
-				<a className="navbar-brand" href="/">Recipe Website</a>
+				<a className="navbar-brand" href="/">RecipeHub</a>
 				<ul className="navbar-nav mr-auto mt-2 mt-lg-0">
 				<li className={`"nav-item" + " " + ${this.state.active===1?'active': null}`}>
 					<a className="nav-link" href="/">Home</a>
@@ -75,14 +76,7 @@ class Header extends Component {
 				{this.props.isLoggedIn && <li className={`"nav-item" + " " + ${this.state.active===3?'active': null}`}>
 					<a className="nav-link" href="/contributor">Contributor</a>
 				</li>}
-
-				
 				</ul>
-
-				<form className="form-inline my-2 my-lg-0">
-      				<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-     				 <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    			</form>
 				{this.props.isLoggedIn ? <><p>Welcome {this.props.username}</p> <button type="button" className="btn btn-danger" onClick={this.handleLogout}>Logout</button></> : <><LoginModal/><RegisterModal/></>}
 				
 			</div>

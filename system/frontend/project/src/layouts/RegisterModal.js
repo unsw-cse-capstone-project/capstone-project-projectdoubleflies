@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Button, Modal, Form} from 'react-bootstrap'
-import { checkUsername, registerUser, checkLoggedIn } from '../actions/userActions'
+// import { MDBIcon } from "mdbreact";
+import { checkUsername, registerUser, checkLoggedIn} from '../actions/userActions'
 import { connect } from 'react-redux';
 class RegisterModal extends Component {
 
@@ -11,12 +12,15 @@ class RegisterModal extends Component {
 			show:false, 
 			invalid_user: "d-none",
 			valid_user: "d-none",
+			invalid_password: "d-none",
+			invalid_repassword: "d-none",
 			username: "",
 			password: "",
 			repassword: "", 
 			isValidPass: false,
 			isValidRePass: false,
 			showSuccess: true
+
 		}
 	}
 
@@ -60,30 +64,52 @@ class RegisterModal extends Component {
 		this.check(e.target.value);
 	}
 	checkPassword=(e)=>{
+		console.log("checkPassword")
 		const pass = e.target.value
-		const regex = RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)
-		this.setState(
-			{
+		const regex = RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/)
+		console.log(regex.test(pass))
+		console.log("checkPassword")
+		if(regex.test(pass)===true){
+			console.log("d-block")
+			this.setState(
+				{
+					password: pass,
+					isValidPass: true,
+					invalid_password: "d-none"
+				}
+			)
+		}else{
+			this.setState({
 				password: pass,
-				isValidPass: regex.test(pass)
-			}
-		)
-		console.log(`password ${regex.test(pass)}`)
-		console.log(pass)
+				isValidPass: false,
+				invalid_password: "d-block"
+			})
+		}
+		
 	}
 
 	checkRePassword=(e)=>{
 		const pass = e.target.value
-		const regex = RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/)
-		this.setState(
-			{
-				repassword: pass,
-				isValidRePass: regex.test(pass) && (pass===this.state.password)
-			}
-		)
+		const regex = RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/)
+		if(this.state.password===pass){
+			this.setState(
+				{
+					repassword: pass,
+					isValidRePass: regex.test(pass) && (pass===this.state.password),
+					invalid_repassword: "d-none"
+				}
+			)
+		}else{
+			this.setState(
+				{
+					repassword: pass,
+					isValidRePass: regex.test(pass) && (pass===this.state.password),
+					invalid_repassword: "d-block"
+				}
+			)
+		}
+		
 		console.log(`password ${regex.test(pass) && (pass===this.state.password)}`)
-		console.log(pass)
-		console.log(this.state.password)
 	}
 
 	onKeyDown=(e)=>{
@@ -96,9 +122,6 @@ class RegisterModal extends Component {
 	}
 
 	check = (e, username) => {
-		// console.log('check')
-		console.log(this.state.username)
-		console.log(username)
 		if(this.state.username==="" && username===undefined){
 			this.setState({
 				invalid_user:"d-block",
@@ -158,12 +181,15 @@ class RegisterModal extends Component {
 					
 					<Form.Group controlId="formBasicPassword">
 						<Form.Label>Password</Form.Label>
-						<Form.Control name="passowrd" type="password" placeholder="Password" onFocus={this.check} onChange={this.checkPassword}/>
+						<Form.Control name="passowrd" type="password" placeholder="Password" onFocus={this.checkPassword} onChange={this.checkPassword}></Form.Control>
+						<Form.Text className="text-muted">password should be at least 6 letters long and must contain at least one capital, non-capital and numbers</Form.Text>
+						<Form.Control.Feedback className={this.state.invalid_password} type="invalid">Invalid Password</Form.Control.Feedback>
 					</Form.Group>
 
 					<Form.Group controlId="formBasicRePassword">
 						<Form.Label>Re-Enter Password</Form.Label>
-						<Form.Control name="repassowrd" type="password" placeholder="Password" onChange={this.checkRePassword}/>
+						<Form.Control name="repassowrd" type="password" placeholder="Password" onChange={this.checkRePassword} onFocus={this.checkRePassword}/>
+						<Form.Control.Feedback className={this.state.invalid_repassword} type="invalid">Check Your Password</Form.Control.Feedback>
 					</Form.Group>
 					</Form>
 				</Modal.Body>

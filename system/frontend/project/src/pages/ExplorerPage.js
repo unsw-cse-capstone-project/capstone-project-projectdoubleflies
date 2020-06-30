@@ -10,6 +10,7 @@ class ExplorerPage extends Component {
 		
 		return (
 			<>
+			<h4>Favourite Recipes</h4>
 			{this.props.loggedIn && <ListRecipe/>}
 			{!this.props.loggedIn && <Redirect to="/"/>}
 			</>

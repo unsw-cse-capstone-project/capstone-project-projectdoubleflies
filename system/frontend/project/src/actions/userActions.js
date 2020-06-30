@@ -4,45 +4,33 @@ import axios from 'axios';
 const apiUrl="http://localhost:8080/";
 
 export const loginUser = (username, password) => dispatch => {
-	console.log("login")
-	const user = {username: username}
- 	localStorage.setItem('username', JSON.stringify(user));
-	dispatch({
-		type: LOGIN_USER,
-		validated: true,
-		username: username// replace with axios.get
+	axios.post(`${apiUrl}/login?username=${username}&password=${password}`)
+	.then(response =>{
+		dispatch({
+			type: LOGIN_USER,
+			payload: response.data,
+			username: username
+		})
 	})
-	// axios.post("http://localhost:8080/login", username, password)
-	// .then(recipes => dispatch({
-	// 	type: FETCH_RECIPES,
-	// 	payload: recipes.data
-	// })).catch(err=> console.log(err))
+	.catch(err=> console.log(err))
 }
 
 export const registerUser = (username, password) => dispatch => {
-	console.log("register")
-	const user = {username: username}
- 	localStorage.setItem('username', JSON.stringify(user));
-	dispatch({
-		type: REGISTER_USER,
-		validated: true,
-		username: username// replace with axios.get
+	axios.post(`http://localhost:8080/register?username=${username}&password=${password}`)
+    .then(response=>{
+		dispatch({
+			type: REGISTER_USER,
+			payload: response.data,
+			username: username
+		})
 	})
-	// const jstring=JSON.stringify(postData)
-	// axios.post(`http://localhost:8080/recipe/${jstring}`)
-    // .then(response=>{
-	// 	dispatch({
-	// 		type: NEW_RECIPES,
-	// 		payload: response.data
-	// 	})
-	// })
-	// .catch(error=>{
-	// 	if(error.response!=null){
-	// 		if(error.response.status===500){
-	// 		alert("Can not submit")
-	// 		}
-	// 	}
-    // })
+	.catch(error=>{
+		if(error.response!=null){
+			if(error.response.status===500){
+			alert("Can not submit")
+			}
+		}
+    })
 }
 
 

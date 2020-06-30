@@ -57,7 +57,14 @@ class Ingredients extends Component {
 
 	search=(e)=>{
 		e.preventDefault();
-		this.props.searchRecipes()
+		const ingredients=[]
+		Object.keys(this.state.selected).map(key=>{
+			Object.keys(this.state.selected[key]).map(elem=>{
+				if(this.state.selected[key][elem]===true)
+					ingredients.push(elem)
+			})
+		})
+		this.props.searchRecipes(ingredients)
 	}
 
 	filterSearch=(e)=>{
@@ -125,7 +132,7 @@ class Ingredients extends Component {
 				Object.keys(this.state.selected[key]).map(elem=>{
 					if(this.state.selected[key][elem]===true){
 						return(
-							<li className="list-group-item">{key}: {elem}<button type="button" class="close" aria-label="Close" onClick={e=>this.onDelete(e)}>
+							<li className="list-group-item">{key}: {elem}<button type="button" className="close" aria-label="Close" onClick={e=>this.onDelete(e)}>
 							<span aria-hidden="true" name={key} value={elem}>&times;</span>
 						  </button></li>
 						)
@@ -173,11 +180,11 @@ class Ingredients extends Component {
 							</div>
 						</div>
 						<div className="col-md-5">
-						<form class="form-inline">
-							<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
-							<button class="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
+						<form className="form-inline">
+							<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
+							<button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
 						</form>
-						<div class="form-check">
+						<div className="form-check">
 						{result}
 						</div>
 						</div>

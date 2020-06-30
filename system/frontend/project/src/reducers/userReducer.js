@@ -7,6 +7,7 @@ const initialState = {
 	registered: false,
 	loggedIn: false,
 	logged: false, 
+	username: ""
 }
 
 
@@ -14,28 +15,33 @@ export default function(state = initialState, action) {
 	switch(action.type){
 		case LOGIN_USER:
 			console.log('reducer login')
-			// console.log(action.payload)
-			if(action.validated){
+			if(action.payload){
 				const user = {username: action.username}
- 				localStorage.setItem('username', JSON.stringify(user));
+				 localStorage.setItem('username', JSON.stringify(user));
+				 return {
+					...state, 
+					logged:action.payload
+				}
+			}else{
+				alert("Not valid Username or Password")
 			}
-			return {
-				...state, 
-				logged:action.validated
-			}
+			
 		case REGISTER_USER:
 			console.log('reducer register')
-			console.log(action.validated)
-			if(action.validated){
+			console.log(action.payload)
+			if(action.payload){
 				const user = {username: action.username}
 				localStorage.setItem('username', JSON.stringify(user));
 				const temp= JSON.parse(localStorage.getItem('username'));
 				console.log(`temp ${JSON.stringify(temp)}`)
+				return {
+					...state,
+					registered: action.payload
+				}
+			}else{
+				alert("Not valid Username")
 			}
-			return {
-				...state,
-				registered: action.validated
-			}
+			
 
 		case CHECK_USERNAME:
 			console.log("hi")

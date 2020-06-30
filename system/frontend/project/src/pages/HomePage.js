@@ -9,7 +9,7 @@ export default class HomePage extends Component {
 		return (
 			<div className="container">
 				<img src={Background} alt="" className="bg"/>
-					<Heading fontSize={[ 5, 6, 7 ]} color="primary">Welcome to Recipe Website</Heading>
+					<Heading fontSize={[ 5, 6, 7 ]} color="primary">Welcome to RecipeHub</Heading>
 					<Link to={{ pathname: "/recipes"}}>
 					<button className="btn btn-lg btn-success mid_win" >Start Exloring</button>
 					</Link>
