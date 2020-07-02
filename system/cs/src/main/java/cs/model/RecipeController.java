@@ -121,10 +121,15 @@ public class RecipeController {
 	}
 	
 	@DeleteMapping("/recipe/{id}")
-	public int deleteRecipe(@PathVariable String id){
+	public @ResponseBody String deleteRecipe(@PathVariable String id){
 		int recipeID = Integer.parseInt(id);
-		return recipeInfoRepository.deleteByRecipeID(recipeID);
+		Recipe recipe = recipeInfoRepository.findOne(recipeID);
+		Image img = recipe.getImg();
+		recipeInfoRepository.deleteByRecipeID(recipeID);
+		imgRepository.delete(img.getId());
+		return "recipe and image deleted";
 	}
+
 
 	@GetMapping("/recipe/ingredient/{ingredient}")
 	public String getSuggestion(@PathVariable String ingredient) {
