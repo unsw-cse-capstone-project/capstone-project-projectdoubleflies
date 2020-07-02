@@ -65,6 +65,13 @@ public class RecipeController {
 		
 	}
 	
+	@DeleteMapping("recipe/image/delete/{id}")
+	public @ResponseBody String deleteImage(@PathVariable String id) {
+		Image img = imgRepository.findOne(id);
+		String name = img.getFileName();
+		imgRepository.delete(id);
+		return name+" is deleted";
+	}
 	
 	@GetMapping("/recipe/{id}")
 	public Recipe getRecipe(@PathVariable String id) {
@@ -84,8 +91,8 @@ public class RecipeController {
     }
 	
 	
-	@PostMapping("/recipe/{username}/{imgID}")
- 	public @ResponseBody String addRecipe(@Valid @RequestBody Recipe recipe , @PathVariable String username, @PathVariable String imgID) {
+     @PostMapping("/recipe/{username}/{imgID}")
+     public @ResponseBody String addRecipe(@Valid @RequestBody Recipe recipe , @PathVariable String username, @PathVariable String imgID) {
  	    User user = userRepository.findByUsername(username);
  	    Image img = imgRepository.findOne(imgID);
 		recipe.setUser(user);
@@ -93,7 +100,16 @@ public class RecipeController {
 		recipeInfoRepository.save(recipe);
 		
         return "saved";
- 	}
+      }
+	
+     @PostMapping("/{id}/imagechange/{imgID}")
+     public @ResponseBody String changeImage(@PathVariable String id, @PathVariable String imgID) {
+		Integer recipeId = Integer.parseInt(id);
+		Recipe recipe = recipeInfoRepository.findRecipeById(recipeId);
+		Image img = imgRepository.findOne(imgID);
+		recipe.setImg(img);
+		return "image changed";
+     }
 
     @PutMapping("/recipe/{id}")
     public Recipe editRecipe(@RequestBody Recipe newRecipe, @PathVariable String id){
