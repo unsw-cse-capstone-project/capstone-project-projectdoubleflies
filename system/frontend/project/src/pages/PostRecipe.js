@@ -26,19 +26,39 @@ class PostRecipe extends Component {
     })
   }
 
+  dataURLtoFile=(dataurl, filename)=>{
+ 
+    var arr = dataurl.split(','),
+    mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]), 
+    n = bstr.length, 
+    u8arr = new Uint8Array(n);
+        
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    
+    return new File([u8arr], filename, {type:mime});
+}
+
+
   componentDidMount() {
     if(this.state.edit===true){
       const path = window.location.pathname
       var temp = path.split('/')
       const id = temp[temp.length-1];
-      // console.log(id)
       this.props.getRecipe(id)
-      // this.props.getRecipe(5)
       var array = [...this.state.selections];
       if(this.props.chosen!==undefined)
         array = array.filter(e=>e!==this.props.chosen)
 
-      console.log(this.props.recipe)
+      const imgData = this.props.recipe.img
+      let imgFile
+      if(imgData!==undefined){
+        let imgUri=`data:${imgData.fileType};base64,${imgData.data}`
+        imgFile=this.dataURLtoFile(imgUri, imgData.fileName)
+      }
+
       this.setState(
         {
           title: this.props.recipe.title ? this.props.recipe.title: "",
@@ -46,6 +66,7 @@ class PostRecipe extends Component {
           desc: this.props.recipe.description ? this.props.recipe.description: "",
           ingredient_rows: this.props.recipe.ingredients ? this.props.recipe.ingredients: [],
           instruction_rows: this.props.recipe.instructions ? this.props.recipe.instructions: [],
+          file: imgFile,
           chosen: this.props.recipe.type ? this.props.recipe.type: "Chosen ...",
           display: array,
           alertPresent: false
@@ -234,13 +255,6 @@ class PostRecipe extends Component {
       console.log(formData.get("file"))
       console.log(temp)
       this.props.createRecipe(obj.id, temp, formData)
-      // if(!this.state.alertPresent&&this.props.posted){
-      //   alert("This recipe was successfully posted.")
-      //   this.setState({
-      //     alertPresent:true
-      //   })
-      // }
-      // {this.props.posted && alert("Recipe Submit")}
     }
     
   }
@@ -267,12 +281,6 @@ class PostRecipe extends Component {
     const formData = new FormData();
     formData.append('file', this.state.file);
     this.props.editRecipe(this.state.id, temp,formData)
-    // if(!this.state.alertPresent&&this.props.saved){
-    //   alert("This recipe was successfully saved.")
-    //   this.setState({
-    //     alertPresent:true
-    //   })
-    // }
   }
 
   onChangeImage=(e)=>{
@@ -290,7 +298,7 @@ class PostRecipe extends Component {
   }
 
 	render() {
-    
+    console.log(this.state.file)
     this.props.checkLoggedIn()
     const ins_rows = this.state.instruction_rows.map((item, id)=>{
         return (
@@ -338,7 +346,6 @@ class PostRecipe extends Component {
       )  
     })
 
-    console.log(this.state.edit)
 		return (
       <div className="container">
         <form onSubmit={ this.state.edit&& this.onSave || !this.state.edit&&this.onSubmit }>
@@ -396,18 +403,9 @@ class PostRecipe extends Component {
           {this.state.edit && <div><a href={`/view/${this.state.id}`}><button type="button" className="btn btn-danger">Cancel</button></a><button type="submit" className="btn btn-primary">Save</button></div>}
           {this.state.edit===false &&<button type="submit" className="btn btn-primary">Confirm</button>}
         </form>
-        {/* {this.props.saved && } */}
         {!this.props.loggedIn && <Redirect to="/"/>}
-        
-        {/* {this.props.saved&&window.alert("This post was successfully saved.")}
-        {this.props.saved&&(window.location.href = "/contributor")}
-
-        {this.props.posted&&window.alert("This post was successfully posted.")}
-        {this.props.posted&&(window.location.href = "/contributor")} */}
         {this.props.posted&&(window.location.href = "/contributor")}
-        {/* {this.props.posted&&<Redirect to="/contributor"/>}
-        {this.props.saved&&<Redirect to="/contributor"/>} */}
-        {/* {this.state.alertPresent&&(window.location.href = "/contributor")} */}
+        {this.props.saved&&(window.location.href = "/contributor")}
       </div>
 		)
 	}

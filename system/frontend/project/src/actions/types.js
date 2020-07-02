@@ -6,6 +6,7 @@ export const GET_RECIPE = 'GET_RECIPE';
 export const GET_USER_RECIPE = 'GET_USER_RECIPE';
 export const GIVE_RECOMMENDATION = 'GIVE_RECOMMENDATION';
 export const DELETE_RECIPE = 'DELETE_RECIPE';
+export const GET_IMAGE = "GET_IMAGE";
 
 export const LOGIN_USER= 'LOGIN_USER';
 export const REGISTER_USER='REGISTER_USER';

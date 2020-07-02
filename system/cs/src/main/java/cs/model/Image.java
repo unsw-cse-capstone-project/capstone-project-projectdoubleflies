@@ -18,7 +18,6 @@ public class Image {
 
     private String fileType;
     
-  // @JsonManagedReference
     @OneToOne(mappedBy = "img",cascade = CascadeType.ALL)
     private Recipe recipe;
     

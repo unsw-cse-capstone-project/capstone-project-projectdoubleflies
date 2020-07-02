@@ -1,4 +1,4 @@
-import { FETCH_RECIPES, NEW_RECIPES, GET_RECIPE, DELETE_RECIPE, GIVE_RECOMMENDATION, FETCH_USER_RECIPES, GET_USER_RECIPE, EDIT_RECIPE, SEARCH_RECIPE} from './types';
+import { FETCH_RECIPES, NEW_RECIPES, GET_RECIPE, DELETE_RECIPE, GIVE_RECOMMENDATION, FETCH_USER_RECIPES, GET_USER_RECIPE, EDIT_RECIPE, SEARCH_RECIPE, GET_IMAGE} from './types';
 import axios from 'axios';
 
 const apiUrl="http://localhost:8080";
@@ -21,12 +21,6 @@ export const fetchUserRecipes = (username) => dispatch => {
 }
 
 export const createRecipe = (username, postData, image) => dispatch => {
-	// const request = {
-	// 	method: 'post',
-	// 	url: `${apiUrl}/uploadFile`,
-	// 	file: image,
-	// }
-	console.log(image.get('file'))
 	axios.post(`${apiUrl}/uploadFile`, image,{
 		headers: {
 		  'Content-Type': 'multipart/form-data'
@@ -38,21 +32,17 @@ export const createRecipe = (username, postData, image) => dispatch => {
 		console.log(postData)
 		axios.post(`${apiUrl}/recipe/${username}/${imageID}`, postData)
     	.then(response=>{
-		// axios.post(`${apiUrl}/image/`, image)
-		// .then(res=>{
-		// 	dispatch({
-		// 		type: NEW_RECIPES,
-		// 		payload: response.status
-		// 	})
-		// })
-		
 			dispatch({
 				type: NEW_RECIPES,
 				payload: response.status
 			})
 		}).catch(error=>{
-			alert("Can not submit")
-			//TODO:
+			axios.delete(`${apiUrl}/recipe/image/delete/${imageID}`)
+			.then(r=>{
+				alert("Can not submit")
+			}).catch(error=>{
+				alert("something wrong")
+			})
 			// Delete submitted image
 		})
 	}).catch(error=>{
@@ -86,32 +76,47 @@ export const giveRecommendation = (ingredient) => dispatch => {
 			payload: response.data
 		})
 	})
-	// dispatch({
-	// 	type:GIVE_RECOMMENDATION,
-	// 	payload: "test"
-	// })
 }
 
 export const editRecipe = (id, postData, image) => dispatch => {
-	axios.put(`${apiUrl}/recipe/${id}`, postData)
-	.then(response=>{
-		// axios.post(`${apiUrl}/image/`, image)
-		// .then(res=>{
-		// 	dispatch({
-		// 		type: NEW_RECIPES,
-		// 		payload: response.status
-		// 	})
-		// })
-		dispatch({
-			type: EDIT_RECIPE,
-			payload: response.data
+	axios.post(`${apiUrl}/uploadFile`, image,{
+		headers: {
+		  'Content-Type': 'multipart/form-data'
+		}
+	}).then(res=>{
+		const data = res.data.split('/')
+		const imageID=data[data.length-1]
+		console.log(postData)
+		axios.put(`${apiUrl}/recipe/${id}`, postData)
+		.then(response=>{
+			dispatch({
+				type: EDIT_RECIPE,
+				payload: response.status
+			})
+		}).catch(error=>{
+			axios.delete(`${apiUrl}/recipe/image/delete/${imageID}`)
+			.then(r=>{
+				alert("Can not submit")
+			}).catch(error=>{
+				alert("something wrong")
+			})
 		})
 	}).catch(error=>{
-		if(error.response.status===500){
-			alert("Can not Save")
-		}
+		alert("Cannot submit image")
 	})
 }
+// 	axios.put(`${apiUrl}/recipe/${id}`, postData)
+// 	.then(response=>{
+// 		dispatch({
+// 			type: EDIT_RECIPE,
+// 			payload: response.data
+// 		})
+// 	}).catch(error=>{
+// 		if(error.response.status===500){
+// 			alert("Can not Save")
+// 		}
+// 	})
+// }
 
 export const deleteRecipe = (id) => dispatch => {
 	axios.delete(`${apiUrl}/recipe/${id}`)
@@ -138,4 +143,14 @@ export const searchRecipes = (ingredients) => dispatch => {
 		})
 	})
 	
+}
+
+export const getImage = (id) => dispatch => {
+	axios.get(`${apiUrl}/recipe/image/${id}`)
+	.then(response => {
+		dispatch({
+			type: GET_IMAGE,
+			payload: response.data
+		})
+	})
 }

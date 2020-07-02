@@ -1,4 +1,4 @@
-import { FETCH_RECIPES, NEW_RECIPES, GET_RECIPE, DELETE_RECIPE, GIVE_RECOMMENDATION, FETCH_USER_RECIPES, GET_USER_RECIPE, EDIT_RECIPE, SEARCH_RECIPE} from '../actions/types';
+import { FETCH_RECIPES, NEW_RECIPES, GET_RECIPE, DELETE_RECIPE, GIVE_RECOMMENDATION, FETCH_USER_RECIPES, GET_USER_RECIPE, EDIT_RECIPE, SEARCH_RECIPE, GET_IMAGE} from '../actions/types';
 
 const initialState = {
 	items:[],
@@ -9,6 +9,7 @@ const initialState = {
 	deleted: false,
 	posted: false,
 	saved: false,
+	image: {}
 }
 
 
@@ -37,7 +38,6 @@ export default function(state = initialState, action) {
 			}
 
 		case NEW_RECIPES:
-			console.log(action.payload)
 			let temp=false
 			if(action.payload===200)
 				alert("This recipe was successfully posted.")
@@ -50,7 +50,6 @@ export default function(state = initialState, action) {
 			}
 
 		case GET_RECIPE:
-			// console.log(action.payload)
 			return {
 				...state, 
 				item: action.payload,
@@ -60,7 +59,6 @@ export default function(state = initialState, action) {
 			}
 
 		case GET_USER_RECIPE:
-			// const sel = filterById(state.user_items, action.payload)
 			console.log(action.payload)
 			return {
 				...state,
@@ -75,6 +73,8 @@ export default function(state = initialState, action) {
 				category: action.payload
 			}
 		case EDIT_RECIPE:
+			if(action.payload===200)
+				alert("This recipe was successfully edited.")
 			return {
 				...state,
 				saved: true
@@ -93,6 +93,12 @@ export default function(state = initialState, action) {
 			return {
 				...state,
 				items: action.payload
+			}
+		
+		case GET_IMAGE:
+			return {
+				...state,
+				image: action.payload
 			}
 
 		default:
