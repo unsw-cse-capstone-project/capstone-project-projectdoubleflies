@@ -22,6 +22,9 @@ public class ImageController {
 
     @Autowired
     private ImageService service;
+    
+   @Autowired
+   ImageRepository imgRepository;
 
     @PostMapping("/uploadFile")
     public ResponseEntity uploadFile(@RequestParam("file") MultipartFile file) {
@@ -52,6 +55,15 @@ public class ImageController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + img.getFileName() + "\"")
                 .body(new ByteArrayResource(img.getData()));
     }
+    
+    @DeleteMapping("/image/delete/{id}")
+    public @ResponseBody String deleteImage(@PathVariable String id) {
+		Image img = imgRepository.findOne(id);
+		String name = img.getFileName();
+		imgRepository.delete(id);
+		return name+" is deleted";
+    }
+	
     
     
 }
