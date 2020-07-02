@@ -19,6 +19,8 @@ class ViewRecipe extends Component {
 	}
 
 	dataURLtoFile=(imgData)=>{
+		if(imgData===undefined)
+			return
 		const filename=imgData.fileName
 		const dataurl=`data:${imgData.fileType};base64,${imgData.data}`
 		var arr = dataurl.split(','),
