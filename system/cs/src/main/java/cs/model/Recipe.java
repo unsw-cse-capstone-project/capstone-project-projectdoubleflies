@@ -25,12 +25,10 @@ public class Recipe{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "recipeID")
- //   private Long id;
 	private Integer recipeID;
     
-	
-//	@Valid
 	@NotEmpty
+	@Valid
 	@ElementCollection
 	@CollectionTable(
 			name="ingredient_info",
@@ -39,13 +37,15 @@ public class Recipe{
 	@Column(nullable=false)
 	private List<Ingredient> ingredients;
 	
-	@NotEmpty
+    @NotEmpty
 	@ElementCollection
 	@CollectionTable(
 			name="instruction_info", 
 			joinColumns=@JoinColumn(name="recipeID")
 	)
 	@Column(name="instruction", nullable=false)
+    @Size(min=1 , message="You must enter at least one instruction!")
+    @Valid
 	private List<@Size(min=1) String> instructions;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -54,26 +54,39 @@ public class Recipe{
 	@JsonBackReference
 	private User user;
 	
-	
    
- 
 	@ManyToMany(mappedBy="favorite_recipe")
-	//@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-	//@JsonManagedReference
 	@JsonIgnore
     private Set<User> likes = new HashSet<>();
 	
+	
     @NotNull
-	@Length(min=2)
+	@Length(min=2, message="Title length must be at least two!")
+    @Valid
 	private String title;
 
 	@NotNull
-	@Length(min=2)
+	@Length(min=2, message="Description length must be at least two!")
+	@Valid
 	private String description;
 	
 	@NotNull
-	@Length(min=2)
+	@Length(min=2,message="Type length must be at least two!")
+	@Valid
 	private String type;
+	
+	
+	/* Test ----------------------------------------------------------------------
+	@Lob
+	@Column(name="picture")
+	@JsonIgnore
+	private byte[] data;
+	/* Test ----------------------------------------------------------------------*/
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="uuid")
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	//@JsonBackReference
+	private Image img;
 	
 	public Recipe() {}
 	
@@ -119,7 +132,15 @@ public class Recipe{
 	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
-
+  
+	@JsonIgnore
+	public List<String> ingredeintNames(){
+		List<String> res = new ArrayList<>();
+		for(Ingredient ing: this.getIngredients()) {
+			res.add(ing.getIngredient());
+		}
+		return res;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -165,58 +186,34 @@ public class Recipe{
     public String toString(){
         return "success";
     }
+
+
+
+	public Image getImg() {
+		return img;
+	}
+
+
+
+	public void setImg(Image img) {
+		this.img = img;
+	}
+
+/*
+    @JsonIgnore
+	public byte[] getData() {
+		return data;
+	}
+
+
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
+
+*/
+    
+	
 }
 
-
-	
-//	private Set<String> ingredients = new LinkedHashSet<String>();
-//	private Set<String> categories = new LinkedHashSet<String>();
-	
-//	public Recipe(Set<String> ingredients) {
-//		this.ingredients = ingredients;
-//	}
-//	public Recipe(Integer recipeID, List<String> ingredients) {
-//		this.recipeID = recipeID;
-//		this.ingredients = ingredients;
-//	}
-	
-//	public Set<String> getIngredients() {
-//		return ingredients;
-//	}
-//	public void setIngredient(Set<String> ingredients) {
-//		this.ingredients = ingredients;
-//	}
-//	
-//	public Set<String> getCategories() {
-//		return categories;
-//	}
-//	public void setCategories(Set<String> categories) {
-//		this.categories = categories;
-//	}
-//	
-//	
-//	@Override
-//	public String toString() {
-//		String str_ing = "[";
-//		String str_cate = "[";
-//		for (String elem : this.ingredients) {
-//            str_ing = str_ing+elem+',';
-//        
-//        }
-//		
-//		for (String elem: this.categories) {
-//			str_cate = str_cate+elem+',';
-//		}
-//		str_ing = str_ing.substring(0, str_ing.length() - 1);
-//		str_ing = str_ing + ']';
-//		
-//		str_cate = str_cate.substring(0, str_cate.length() - 1);
-//		str_cate = str_cate + ']';
-//		
-//		return "Recipe{" + 
-//				"Id=" + recipeID.toString() + '\'' + 
-//				", ingredients=" + str_ing  + '\'' + 
-//				", categories=" + str_cate + '\'' + "}";
-//	}
-	
 
