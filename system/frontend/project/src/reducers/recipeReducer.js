@@ -81,6 +81,8 @@ export default function(state = initialState, action) {
 			}
 		case DELETE_RECIPE:
 			var array = state.user_items.filter((item)=>{return(item['recipeID']!==action.payload)})
+			if(action.status===200)
+				alert("This post was successfully deleted")
 			return {
 				...state, 
 				user_items:  array,

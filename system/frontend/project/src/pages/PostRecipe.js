@@ -39,7 +39,7 @@ class PostRecipe extends Component {
     }
     
     return new File([u8arr], filename, {type:mime});
-}
+  }
 
 
   componentDidMount() {

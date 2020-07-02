@@ -37,22 +37,24 @@ export const fetchUserFavourite = (username)=>dispatch=>{
 }
 
 export const addFavourite = (username, id)=> dispatch => {
-	axios.post(`${apiUrl}/favorite/${username}/add?recipeName=${id}`)
+	axios.get(`${apiUrl}/favorite/user?username=${username}&id=${id}`)
 	.then(response => {
 		dispatch({
 			type: ADD_FAVOURITE, 
-			payload: response.data
+			payload: response.data,
+			status: response.status
 		})
 	})
 }
 
 export const removeFavourite = (username, id) => dispatch => {
-	axios.delete(`${apiUrl}/favorite/${username}/delete?recipeName=${id}`)
+	axios.get(`${apiUrl}/favorite/${username}/delete?recipeName=${id}`)
 	.then(response => {
-		console.log(response)
+		// console.log(response)
 		dispatch({
 			type: REMOVE_FAVOURITE, 
-			payload: id
+			payload: id,
+			status: response.status
 		})
 	})
 }

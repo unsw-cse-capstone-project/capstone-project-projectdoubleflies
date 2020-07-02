@@ -18,6 +18,20 @@ class ViewRecipe extends Component {
 		})
 	}
 
+	dataURLtoFile=(imgData)=>{
+		const filename=imgData.fileName
+		const dataurl=`data:${imgData.fileType};base64,${imgData.data}`
+		var arr = dataurl.split(','),
+		mime = arr[0].match(/:(.*?);/)[1],
+		bstr = atob(arr[1]), 
+		n = bstr.length, 
+		u8arr = new Uint8Array(n);
+		while(n--){
+			u8arr[n] = bstr.charCodeAt(n);
+		}
+		return new File([u8arr], filename, {type:mime});
+	}
+
 	componentDidMount() {
 		console.log('mounted')
 		const path = window.location.pathname
@@ -48,12 +62,13 @@ class ViewRecipe extends Component {
 				<PostRecipe edit={true}/>
 			)
 		}else if(this.state.showEdit===true && this.props.user_recipe!==undefined){
+			console.log(this.props.user_recipe)
 			return(
 				// need to edit to make it pretty
 				<div className="container">
-					<h1>{this.props.user_recipe.title}</h1>
-					{/* <img class="card-img-top" src={URL.createObjectURL(this.props.user_recipe.image)} alt="Card image cap"/> */}
-					<h2>{this.props.user_recipe.description}</h2>
+					<h1>Title: <br/> {this.props.user_recipe.title}</h1>
+					{this.props.user_recipe.img!==undefined&&<img className="img-fluid" src={URL.createObjectURL(this.dataURLtoFile(this.props.user_recipe.img))} alt="Card image cap"/>}
+					<h2>Description: <br/> {this.props.user_recipe.description}</h2>
 					{this.props.user_recipe.ingredients !== undefined && this.props.user_recipe.ingredients.map(item=>{
 						return(
 							<div>
@@ -75,9 +90,9 @@ class ViewRecipe extends Component {
 			console.log(this.props.recipe)
 			return(
 				<div className="container">
-					<h1>{this.props.recipe.title}</h1>
-					{/* <img class="card-img-top" src={URL.createObjectURL(this.props.recipe.image)} alt="Card image cap"/> */}
-					<h2>{this.props.recipe.description}</h2>
+					<h1>Title:{this.props.recipe.title}</h1>
+					{this.props.recipe.img!==undefined&&<img className="img-fluid" src={URL.createObjectURL(this.dataURLtoFile(this.props.recipe.img))} alt="Card image cap"/>}
+					<h2>Description:{this.props.recipe.description}</h2>
 					{this.props.recipe.ingredients !== undefined && this.props.recipe.ingredients.map(item=>{
 						return(
 							<div>

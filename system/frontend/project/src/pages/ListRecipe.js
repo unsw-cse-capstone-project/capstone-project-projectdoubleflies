@@ -21,6 +21,20 @@ class ListRecipe extends Component {
 		}
 	}
 
+	dataURLtoFile=(imgData)=>{
+		const filename=imgData.fileName
+		const dataurl=`data:${imgData.fileType};base64,${imgData.data}`
+		var arr = dataurl.split(','),
+		mime = arr[0].match(/:(.*?);/)[1],
+		bstr = atob(arr[1]), 
+		n = bstr.length, 
+		u8arr = new Uint8Array(n);
+		while(n--){
+			u8arr[n] = bstr.charCodeAt(n);
+		}
+		return new File([u8arr], filename, {type:mime});
+	}
+
 	componentDidMount() {
 		this.props.checkLoggedIn()
 		const path = window.location.href.split("/")
@@ -63,16 +77,18 @@ class ListRecipe extends Component {
 		}else if(this.state.kind==="explorer"){
 			temp = this.props.favs
 		}
+		console.log(temp)
 		let cards
 		if(temp!==undefined){
 			const pathname = this.state.kind==="contributor" ? "/contributor/view/": "/view/";
-			cards = temp.map((item, id) => (
+			
+			cards = temp.map(item => (
 				<div className="card m-2" style={{width: 18 + 'em'}}>
 					<Link to={{ pathname: `${pathname}${item.recipeID}`}}>
 					<div className="card-body">
-					{/* <img class="card-img-top" src={URL.createObjectURL(item.image)} alt="Card image cap"/> */}
-						<h5 className="card-title">{item.title}</h5>
-						<p className="card-text">{item.description}</p>
+					<img className="card-img-top" src={URL.createObjectURL(this.dataURLtoFile(item.img))} alt="Card image cap"/>
+						<h5 className="card-title">Title: <br/> {item.title}</h5>
+						<p className="card-text">Description: <br/> {item.description}</p>
 						
 							{/* <p className="d-block">Check this out</p> */}
 					</div>

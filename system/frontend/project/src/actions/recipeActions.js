@@ -29,7 +29,7 @@ export const createRecipe = (username, postData, image) => dispatch => {
 		console.log(res.data)
 		const data = res.data.split('/')
 		const imageID=data[data.length-1]
-		console.log(postData)
+		console.log(JSON.stringify(postData))
 		axios.post(`${apiUrl}/recipe/${username}/${imageID}`, postData)
     	.then(response=>{
 			dispatch({
@@ -37,7 +37,7 @@ export const createRecipe = (username, postData, image) => dispatch => {
 				payload: response.status
 			})
 		}).catch(error=>{
-			axios.delete(`${apiUrl}/recipe/image/delete/${imageID}`)
+			axios.delete(`${apiUrl}/image/delete/${imageID}`)
 			.then(r=>{
 				alert("Can not submit")
 			}).catch(error=>{
@@ -94,7 +94,7 @@ export const editRecipe = (id, postData, image) => dispatch => {
 				payload: response.status
 			})
 		}).catch(error=>{
-			axios.delete(`${apiUrl}/recipe/image/delete/${imageID}`)
+			axios.delete(`${apiUrl}/image/delete/${imageID}`)
 			.then(r=>{
 				alert("Can not submit")
 			}).catch(error=>{
@@ -123,7 +123,8 @@ export const deleteRecipe = (id) => dispatch => {
 	.then(response => {
 		dispatch({
 			type: DELETE_RECIPE, 
-			payload: id
+			payload: id,
+			status: response.status
 		})
 	})
 	.catch(error=>{
@@ -137,6 +138,7 @@ export const searchRecipes = (ingredients) => dispatch => {
 	console.log(ingredients)
 	axios.post(`${apiUrl}/search`, ingredients)
 	.then(response=>{
+		console.log(response)
 		dispatch({
 			type: SEARCH_RECIPE, 
 			payload: response.data

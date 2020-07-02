@@ -97,6 +97,7 @@ class Ingredients extends Component {
 		// let ingredients={Dairy: ["milk", "egg"], Vegetables:["tomato"], "Baking & Grains": ["bread"], Spices:["tomato"], Meats: ["bread"],Fish:["tomato"], "Baking & Grains": ["bread"], Seafood:["tomato"], "Baking & Grains": ["bread"],  Sauces:["tomato"], Legumes: ["bread"], Beverages:["b"], Nuts:["nuts"], Alcohol:[], Condiments:[], Oils:[]}
 		// console.log(this.props.ingredients)
 		if(this.props.ingredients!==undefined){
+			console.log(this.props.ingredients)
 			checkbox = Object.keys(this.props.ingredients).map((key, id) =>{
 				if(this.state.selected[key]!==undefined){
 					return(

@@ -22,19 +22,22 @@ export default function(state=initialState, action){
 			}
 
 		case ADD_FAVOURITE:
-			let arr = state.favs===[]?[...state.favs]: []
-			console.log(arr)
-			arr.push(action.payload)
-			console.log(arr)
+			// let arr = state.favs===[]?[...state.favs]: []
+			// console.log(arr)
+			// arr.push(action.payload)
+			// console.log(arr)
+			if(action.status===200)
+				alert("Added to My Favourite")
 			return {
 				...state,
-				favs: arr
+				// favs: arr
 			}
 
 		case REMOVE_FAVOURITE:
 			let temp = [...state.favs]
 			temp = temp.filter(item=>item['recipeID']!==action.payload)
-			console.log(temp)
+			if(action.status===200)
+				alert("Removed from My Favourite")
 			return {
 				...state, 
 				favs: temp

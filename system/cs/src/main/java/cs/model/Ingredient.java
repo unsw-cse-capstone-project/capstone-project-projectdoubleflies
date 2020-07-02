@@ -22,8 +22,8 @@ public class Ingredient {
 	private String category;
 	@NotNull
 	@NotEmpty
-	@Min(value = 1, message = "Amount should not be less than 1")
-	@Max(value = 200, message = "Amount should be less than 200")
+	// @Min(value = 1, message = "Amount should not be less than 1")
+	// @Max(value = 200, message = "Amount should be less than 200")
 	@Valid
 	private String amount;
 	
