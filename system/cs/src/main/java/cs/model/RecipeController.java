@@ -67,9 +67,9 @@ public class RecipeController {
 	
 	
 	@GetMapping("/recipe/{id}")
-	public List<Recipe> getRecipe(@PathVariable String id) {
+	public Recipe getRecipe(@PathVariable String id) {
 		int recipeID = Integer.parseInt(id);
-		return recipeInfoRepository.findAllByRecipeID(recipeID);
+		return recipeInfoRepository.findRecipeById(recipeID);
 	}
 	
 	@GetMapping("/recipe")

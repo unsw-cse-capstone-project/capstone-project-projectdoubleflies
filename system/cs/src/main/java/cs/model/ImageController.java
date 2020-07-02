@@ -12,10 +12,11 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import java.io.IOException;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ImageController {
 	private static final Logger logger = LoggerFactory.getLogger(ImageController.class);
 

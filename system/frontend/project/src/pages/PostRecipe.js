@@ -21,6 +21,7 @@ class PostRecipe extends Component {
       selections:["Breakfast", "Lunch", "Snack", "Dinner"],
       display:["Breakfast", "Lunch", "Snack", "Dinner"],
       alertPresent: false,
+      base64: undefined,
       file: undefined,
     })
   }
@@ -227,13 +228,18 @@ class PostRecipe extends Component {
         type: this.state.chosen,
         user: obj
       }
-      this.props.createRecipe(temp)
-      if(!this.state.alertPresent){
-        alert("This recipe was successfully posted.")
-        this.setState({
-          alertPresent:true
-        })
-      }
+      const formData = new FormData();
+      console.log(this.state.file)
+      formData.append('file', this.state.file);
+      console.log(formData.get("file"))
+      console.log(temp)
+      this.props.createRecipe(obj.id, temp, formData)
+      // if(!this.state.alertPresent&&this.props.posted){
+      //   alert("This recipe was successfully posted.")
+      //   this.setState({
+      //     alertPresent:true
+      //   })
+      // }
       // {this.props.posted && alert("Recipe Submit")}
     }
     
@@ -250,6 +256,7 @@ class PostRecipe extends Component {
     obj.id = obj.username;
     delete obj.username;
     var temp ={
+      recipeID: this.state.id,
       title: this.state.title,
       description: this.state.desc,
       ingredients: this.state.ingredient_rows, 
@@ -257,21 +264,29 @@ class PostRecipe extends Component {
       type: this.state.chosen,
       user: obj
     }
-    this.props.editRecipe(this.state.id, temp)
-    if(!this.state.alertPresent){
-      alert("This recipe was successfully saved.")
-      this.setState({
-        alertPresent:true
-      })
-    }
+    const formData = new FormData();
+    formData.append('file', this.state.file);
+    this.props.editRecipe(this.state.id, temp,formData)
+    // if(!this.state.alertPresent&&this.props.saved){
+    //   alert("This recipe was successfully saved.")
+    //   this.setState({
+    //     alertPresent:true
+    //   })
+    // }
   }
 
   onChangeImage=(e)=>{
     e.preventDefault();
     // console.log(URL.createObjectURL(e.target.files[0]))
-    this.setState({
-      file: e.target.files[0]
-    })
+    let file = e.target.files[0];
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        base64: reader.result
+      });
+    };
   }
 
 	render() {
@@ -323,7 +338,7 @@ class PostRecipe extends Component {
       )  
     })
 
-    
+    console.log(this.state.edit)
 		return (
       <div className="container">
         <form onSubmit={ this.state.edit&& this.onSave || !this.state.edit&&this.onSubmit }>
@@ -355,7 +370,7 @@ class PostRecipe extends Component {
             </div>
           </div>
           
-          {this.state.file!==undefined && <img src={URL.createObjectURL(this.state.file)}class="img-thumbnail"></img>}
+          {this.state.file!==undefined && <img src={URL.createObjectURL(this.state.file)}className="img-thumbnail"></img>}
           
           <div className="form-group">
             <textarea id="desc" className="form-control" rows="5" placeholder="Your Recipe Description" value={this.state.desc} onChange={e=>this.onChangeText(e)}/>
@@ -389,7 +404,7 @@ class PostRecipe extends Component {
 
         {this.props.posted&&window.alert("This post was successfully posted.")}
         {this.props.posted&&(window.location.href = "/contributor")} */}
-        {this.state.alertPresent&&(window.location.href = "/contributor")}
+        {this.props.posted&&(window.location.href = "/contributor")}
         {/* {this.props.posted&&<Redirect to="/contributor"/>}
         {this.props.saved&&<Redirect to="/contributor"/>} */}
         {/* {this.state.alertPresent&&(window.location.href = "/contributor")} */}

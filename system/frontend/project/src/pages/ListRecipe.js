@@ -70,7 +70,6 @@ class ListRecipe extends Component {
 				<div className="card m-2" style={{width: 18 + 'em'}}>
 					<Link to={{ pathname: `${pathname}${item.recipeID}`}}>
 					<div className="card-body">
-					//TODO
 					{/* <img class="card-img-top" src={URL.createObjectURL(item.image)} alt="Card image cap"/> */}
 						<h5 className="card-title">{item.title}</h5>
 						<p className="card-text">{item.description}</p>

@@ -52,7 +52,6 @@ class ViewRecipe extends Component {
 				// need to edit to make it pretty
 				<div className="container">
 					<h1>{this.props.user_recipe.title}</h1>
-					//TODO
 					{/* <img class="card-img-top" src={URL.createObjectURL(this.props.user_recipe.image)} alt="Card image cap"/> */}
 					<h2>{this.props.user_recipe.description}</h2>
 					{this.props.user_recipe.ingredients !== undefined && this.props.user_recipe.ingredients.map(item=>{
@@ -77,7 +76,6 @@ class ViewRecipe extends Component {
 			return(
 				<div className="container">
 					<h1>{this.props.recipe.title}</h1>
-					//TODO
 					{/* <img class="card-img-top" src={URL.createObjectURL(this.props.recipe.image)} alt="Card image cap"/> */}
 					<h2>{this.props.recipe.description}</h2>
 					{this.props.recipe.ingredients !== undefined && this.props.recipe.ingredients.map(item=>{
@@ -102,12 +100,6 @@ class ViewRecipe extends Component {
 				<Spinner animation="border" variant="primary" />
 			)
 		}
-		// else{
-		// 	return(
-		// 		<PostRecipe edit={true}/>
-		// 	)
-		// }
-		
 	}
 }
 

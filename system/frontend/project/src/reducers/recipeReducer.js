@@ -39,7 +39,8 @@ export default function(state = initialState, action) {
 		case NEW_RECIPES:
 			console.log(action.payload)
 			let temp=false
-			if(action.payload==200)
+			if(action.payload===200)
+				alert("This recipe was successfully posted.")
 				temp=true
 			return {
 				...state,
@@ -60,6 +61,7 @@ export default function(state = initialState, action) {
 
 		case GET_USER_RECIPE:
 			// const sel = filterById(state.user_items, action.payload)
+			console.log(action.payload)
 			return {
 				...state,
 				user_item: action.payload,
