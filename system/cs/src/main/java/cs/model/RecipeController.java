@@ -65,14 +65,6 @@ public class RecipeController {
 		
 	}
 	
-	@DeleteMapping("recipe/image/delete/{id}")
-	public @ResponseBody String deleteImage(@PathVariable String id) {
-		Image img = imgRepository.findOne(id);
-		String name = img.getFileName();
-		imgRepository.delete(id);
-		return name+" is deleted";
-	}
-	
 	@GetMapping("/recipe/{id}")
 	public Recipe getRecipe(@PathVariable String id) {
 		int recipeID = Integer.parseInt(id);
