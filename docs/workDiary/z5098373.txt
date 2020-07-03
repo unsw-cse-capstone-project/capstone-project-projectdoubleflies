@@ -22,8 +22,10 @@ but it was kind of hard for us. We spent some time to fix the bugs and we finall
 
 
 Week5
-On Friday lab time, we had a offline meeting to show the demo to the tutor, everyone was there. 
+On Friday lab time, we had a offline meeting to show the demo to the tutor, everyone was there.
+We got some feedback from the tutor, he thought our design was overall well but the user interface
+needed to be improved. We would fix that ASAP.
 After that, we discussed about the things in retrospective, such as what went well, things that did not 
-go well and whan can we try to improve our design. And we finishi the report of the 
+go well and whan can we try to improve our design. And we finished the report of the 
 retrospecive A.
 
