@@ -1,5 +1,17 @@
-﻿Week 2:
+﻿﻿Week 2:
 
 Joined the team. Modified some user stories and started to work on System Architechture.
 
 Finished Use Case Diagram.
+
+Week 3:
+
+Modified the final user stories.
+Assign members for the first sprint.
+Created the project plan deadlines envisaged during the term.
+
+Week 4:
+
+Start learning Spring Boot and React
+Finished the Login and Register system
+
