@@ -23,3 +23,6 @@ I have setted private route on contributor page and explorer page so that not lo
 see those pages.
 Public user can only view pick ingredients, public view pages.
 
+Week5
+I have added functionalities that contributor can upload recipe image and explorer can view the images.
+We had demo this week to show our website to tutor and had meeting after that. We need to improve our UI design, add constraint to amount for ingredients that amount cannot be negative number.
