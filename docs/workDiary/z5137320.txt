@@ -9,3 +9,9 @@ Discuss with Shizuka the story board. Start learning reactjs to build frontend. 
 Week3
 Do recipe backend. Recipe can be added, deleted, eidted. Users can choose favorite recipes, can search for favorite reicpes.
 System can recommend recipes which best match ingredients. 
+
+Week 4
+Recipe can search ingredients, pick ingredients, recommend recipes, filter recipes. 
+
+Week 5
+Add recipe with image and upload images for recipes. Check for constraints for ingredients. 
