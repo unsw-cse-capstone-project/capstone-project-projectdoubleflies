@@ -12,4 +12,16 @@ discuss further tasks. I hope everyone having a great time to do this project.
 
 Week 3
 We had a meeting on Sunday, i was assigned to do the show ingredients and pick ingredients. 
-This task is very difficult for me, because everything is relatively new to me, so I spent a long time to learn, it just seems to come up with something but after adding some new code, the program appears a lot Problem,i'm still trying to fix these problems.
+This task is very difficult for me, because everything is relatively new to me, so I spent a long time to learn,
+it just seems to come up with something but after adding some new code, the program appears a lot Problem,
+i'm still trying to fix these problems.
+
+Week4
+We can run the ingredients on the website, but there were still some problems in the webpage, we tried to upload the the images of ingredients
+but it was kind of hard for us. We spent some time to fix the bugs and we finally did it. 
+
+
+Week5
+On Friday lab time, we had a offline meeting to show the demo to the tutor, everyone was there. After that, we discussed about the things in retrospective, such as what went well, things that did not go well and whan can we try to improve our design. And we finishi the report of the 
+retrospecive A.
+
