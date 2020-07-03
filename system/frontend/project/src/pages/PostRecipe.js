@@ -20,6 +20,7 @@ class PostRecipe extends Component {
       chosen: "Choose...",
       selections:["Breakfast", "Lunch", "Snack", "Dinner"],
       display:["Breakfast", "Lunch", "Snack", "Dinner"],
+      units:["g", "kg", "tablespoon", "cup"],
       alertPresent: false,
       base64: undefined,
       file: undefined,
@@ -208,6 +209,18 @@ class PostRecipe extends Component {
     )
   }
 
+  onChangeUnit=(event)=>{
+    console.log(array, event.target.value)
+    event.preventDefault();
+    var temp = event.target.id.split("_");
+    var id = temp[temp.length-1]
+    var array = [...this.state.ingredient_rows];
+    array[id].unit=event.target.value
+    this.setState(
+      {ingredient_rows: array}
+    )
+  }
+
   onChangeAmount=(event)=>{
     event.preventDefault();
     var temp = event.target.id.split("_");
@@ -285,7 +298,6 @@ class PostRecipe extends Component {
 
   onChangeImage=(e)=>{
     e.preventDefault();
-    // console.log(URL.createObjectURL(e.target.files[0]))
     let file = e.target.files[0];
     let reader = new FileReader();
     reader.readAsDataURL(file);
@@ -312,16 +324,20 @@ class PostRecipe extends Component {
         )
     })
 
+    
+
     const ing_rows = this.state.ingredient_rows.map((item, id)=>{
+      const unit_option = this.state.units.map((elem, i)=>{
+        return (
+          <option key={`unit_${id}`}>{elem}</option>
+        )
+      })
       return (
         <div onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }} className="form-row">
           <p>{id+1}:</p>
           <div className="col">
             <input id={`ing_name_${id}`} name="ingredient" type="text" className="form-control" placeholder="Ingredient" value={item.ingredient} onChange={(e)=>this.onChangeIngredient(e)} onBlur={e=>this.onBlurIngredient(e)} onKeyPress={e=>this.onKeyPressIngredient(e)}/>
           </div>
-          {/* <div className="col">
-            <input id={`ing_category_${id}`} name="category" type="text" className="form-control" placeholder="category" value={item.category} onChange={(e)=>this.onChangeCategory(e)} />
-          </div> */}
           <div className="col">
             <select id={`ing_category_${id}`} className="form-control" onChange={(e)=>this.onChangeCategory(e)} value={item.category}>
             <option selected>{item.category}</option>
@@ -335,6 +351,17 @@ class PostRecipe extends Component {
           <div className="col">
             <input id={`ing_amount_${id}`} name="amount" type="text" className="form-control" placeholder="amount" value={item.amount} onChange={(e)=>this.onChangeAmount(e)} />
           </div>
+          <div className="col">
+            <select id={`ing_unit_${id}`} className="form-control" onChange={(e)=>this.onChangeUnit(e)} value={item.unit}>
+              <option selected>{item.unit}</option>
+              
+              {this.state.units.map((unit, id)=>{
+                return (
+                  <option key={id}>{unit}</option>
+                )  
+            })}
+            </select>
+          </div>
           <button type="button" id={`ing_del_${id}`} className="btn btn-danger" onClick={(e)=>this.deleteIngredient(e, id)}>Delete</button>
         </div>
       )
@@ -345,6 +372,8 @@ class PostRecipe extends Component {
         <option key={id}>{item}</option>
       )  
     })
+
+   
 
 		return (
       <div className="container">
