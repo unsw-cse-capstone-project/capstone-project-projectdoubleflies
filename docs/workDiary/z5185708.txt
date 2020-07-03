@@ -13,3 +13,18 @@ However, after struggling for a while, i understand how to use it and finally co
 that need to be recorrect such as grammar error or misunderstanding description of user storie, so I asked my team mates to help me find these
 errors and fix them.Everyone is happy with user stories but i believe we should double check is there anything that need to be done to
 achieve their needs. Therefore, I will lead my team members to review their work and try to make this proposal perfect at next week. 
+
+Week3
+In order to ensure that the project can be tracked normally and communicated in time, we decided to hold an offline meeting every Sunday 
+to summarize the problems and experiences that occurred during the week. At the same time, according to the plan, we started to do some 
+tasks based on the user story, and the first thing that needs to be completed is account management, including login and logout and 
+registration.However, due to limited familiarity with spring boot and css, some difficult bugs were encountered at the beginning, 
+which caused some time wasted but was finally resolved. Next week will continue to do corresponding tasks according to the plan.
+
+Week4
+
+This week's tasks become more difficult than last week, because the tasks to be done are relatively tricky, and there are many functions 
+that need to be implemented. At the same time, due to the different computer configuration and system of each team member, the connection 
+between the front end and the back end is very difficult. Although we already know the corresponding content, it will still take some time 
+for the website to run and successfully implement the function. At the same time, because each team member has a different grasp of spring boot, 
+more time and communication are required to ensure the successful completion of the tasks.
