@@ -22,9 +22,14 @@ registration.However, due to limited familiarity with spring boot and css, some 
 which caused some time wasted but was finally resolved. Next week will continue to do corresponding tasks according to the plan.
 
 Week4
-
 This week's tasks become more difficult than last week, because the tasks to be done are relatively tricky, and there are many functions 
 that need to be implemented. At the same time, due to the different computer configuration and system of each team member, the connection 
 between the front end and the back end is very difficult. Although we already know the corresponding content, it will still take some time 
 for the website to run and successfully implement the function. At the same time, because each team member has a different grasp of spring boot, 
 more time and communication are required to ensure the successful completion of the tasks.
+
+Week5
+We sucessfully showed demo for our tutor, and it seems that everything is fine except that the front-end page is too simple and needs some improvement.
+In addition, because of the active cooperation of the team members, we performed retrospective immediately after the demo. Everyone proposed respectively good things to be done from the beginning of the project to the present and areas that need to be improved. Everyone was very positive. This made the whole process go very smoothly. Next, continue to follow the project plan, hoping to complete more user stories on time.
+
+
