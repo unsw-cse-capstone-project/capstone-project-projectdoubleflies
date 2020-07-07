@@ -179,7 +179,7 @@ public class RecipeController {
         return "deleted";
     }
     
-    @PostMapping("/search")
+    @GetMapping("/search")
     public @ResponseBody List<Recipe> addSearch(@RequestBody List<String> ingredients) {
 	if((wrap.type == null || wrap.type.length() == 0)&&(wrap.ingredients.size() == 0 || wrap.ingredients == null)){
 		return recipeInfoRepository.findAll();
