@@ -195,15 +195,25 @@ public class RecipeController {
     	temp.retainAll(t2);
     	return temp;
     }
-    
-  /*  @GetMapping("/search/map")
-    public  List<SearchHistory> help() {
-    	//SearchHistory s = searchrepo.getSearchHistory(ingredient);
-    	List<String> t = new ArrayList<>();
-    	t.add("egg");
-    	t.add("milk");
-        return searchrepo.getSearchHistory(t);
-    }*/
+    //This is for search history match
+    @PostMapping("/searchHistory")
+    public @ResponseBody String addSearch(@RequestBody List<String> ingredient) {
+    	
+    	Collections.sort(ingredient);
+    	String meal = String.join(",", ingredient);
+    	//return meal;
+    	SearchHistory search=  searchrepo.helpme(meal);
+    	if(search != null) {
+    		int temp = search.getFrequency()+1;
+			search.setFrequency(temp);
+			searchrepo.save(search);
+			return "frequency added 1"+" "+search.getSearchID();
+    	}
+    	SearchHistory refresh = new SearchHistory();
+    	refresh.setIngredients(ingredient);
+    	searchrepo.save(refresh);
+    	return "searched";
+    }
     
     @GetMapping("/test/recipe")
     public List<List<String>> test2(){
