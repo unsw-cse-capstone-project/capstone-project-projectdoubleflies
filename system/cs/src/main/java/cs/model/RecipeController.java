@@ -40,7 +40,11 @@ import com.google.gson.Gson;
 @Transactional
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RecipeController {
-	
+	public static class Wrapper{
+		public String type;
+		public List<String> ingredients;
+		
+	}
 	@Autowired
 	RecipeInfoRepository recipeInfoRepository;
 	@Autowired
@@ -177,22 +181,19 @@ public class RecipeController {
     
     @PostMapping("/search")
     public @ResponseBody List<Recipe> addSearch(@RequestBody List<String> ingredients) {
-		System.out.println(ingredients.toString());
-		return recipeInfoRepository.ing(ingredients);
-    	// Collections.sort(ingredient);
-     	// List<SearchHistory> s = searchrepo.findAll();
-     	// for(SearchHistory h : s) {
-    	// 	if(ingredient.equals(h.getIngredients())) {
-    	// 		int temp = h.getFrequency()+1;
-    	// 		h.setFrequency(temp);
-    	// 		searchrepo.save(h);
-    	// 		return "frequency added"+h.getSearchID();
-    	// 	}
-    	// }
-    	// SearchHistory search = new SearchHistory();
-    	// search.setIngredients(ingredient);
-    	// searchrepo.save(search);
-    	// return "searched";
+	if((wrap.type == null || wrap.type.length() == 0)&&(wrap.ingredients.size() == 0 || wrap.ingredients == null)){
+		return recipeInfoRepository.findAll();
+	}
+    	if(wrap.type == null || wrap.type.length() == 0) {
+    		return recipeInfoRepository.ing(wrap.ingredients);
+    	}else if(wrap.ingredients.size() == 0 || wrap.ingredients == null) {
+    		return recipeInfoRepository.filterbyMeal(wrap.type);
+    	}
+    	List<Recipe> t1 =  recipeInfoRepository.filterbyMeal(wrap.type);
+    	List<Recipe> t2 = recipeInfoRepository.ing(wrap.ingredients);
+    	List<Recipe> temp = t1;
+    	temp.retainAll(t2);
+    	return temp;
     }
     
   /*  @GetMapping("/search/map")
