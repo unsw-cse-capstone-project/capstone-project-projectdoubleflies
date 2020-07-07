@@ -24,6 +24,9 @@ public interface RecipeInfoRepository extends JpaRepository<Recipe, Integer> {
 
     @Query("SELECT r FROM Recipe r WHERE r.user.username=?1")
     List<Recipe> findByUsername(String username);
+ 
+    @Query("select r from Recipe r where r.type=?1")
+    List<Recipe> filterbyMeal(String type);
 
     @Query("SELECT r FROM Recipe r WHERE r.recipeID=?1")
     Recipe findRecipeById(Integer id);
