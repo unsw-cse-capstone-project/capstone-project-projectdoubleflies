@@ -16,4 +16,7 @@ public interface searchRepository extends JpaRepository<SearchHistory, Long>{
     
     @Query(value = "select * from search_history order by frequency desc", nativeQuery=true)
     List<SearchHistory> help();
+	
+    @Query(value ="select * from SearchHistory s where s.meal=?1",nativeQuery=true)
+    SearchHistory helpme(String ingredient);
 }
