@@ -75,6 +75,23 @@ public class RecipeController {
 	public List<Recipe> getAllRecipe(){
 		return recipeInfoRepository.findAll();
 	}
+	// Recipe filtered by recipe type
+	@GetMapping("/recipe/filter/{recipe}")
+        public  List<Recipe> help(@PathVariable String recipe) {
+    	        return recipeInfoRepository.filterbyMeal(recipe);
+    	}
+   
+   	@GetMapping("/recipe/filterAll")
+    	public Map<String, List<Recipe>> filter(){
+    		String[] names = new String[] {"Breakfast", "Lunch","Dinner","Snack"};
+    		Map<String, List<Recipe>> result = new HashMap<>();
+    		for(String type : names) {
+    			List<Recipe> res = recipeInfoRepository.filterbyMeal(type);
+    			result.put(type, res);
+    		}
+    		return result;
+    	
+    	}
 
     @RequestMapping("/recipe/find")
     public List<Recipe> findByname(@RequestParam String username){
