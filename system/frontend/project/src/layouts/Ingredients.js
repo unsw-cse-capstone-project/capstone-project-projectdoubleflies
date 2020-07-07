@@ -11,17 +11,25 @@ class Ingredients extends Component {
 			},
 			// ingredients:{},
 			word: "",
-			result:{}
+			result:{},
+			type: undefined,
+			types: ["Breakfast", "Lunch", "Snack", "Dinner"],
+			selected_type: {"Breakfast": false, "Lunch": false, "Snack": false, "Dinner": false}
 		}
 	}
 
 	componentDidMount() {
 		this.props.fetchIngredients()
-		// const temp={}
-		// Object.assign(temp, this.props.ingredients);
-		// this.setState({
-		// 	ingredients: temp
-		// })
+		const temp=localStorage.getItem("search")
+		const t={}
+		if(localStorage.getItem("map")===null)
+			Object.assign(t, this.state.selected)
+		else 
+			Object.assign(t, localStorage.getItem("map"))
+		this.setState({
+			type: temp["type"],
+			selected: t
+		})
 	}
 
 	onClick=(e)=>{
@@ -44,7 +52,6 @@ class Ingredients extends Component {
 
 	onDelete=(e)=>{
 		e.preventDefault()
-		console.log("delete")
 		const key = e.target.getAttribute('name')
 		const value = e.target.getAttribute('value')
 		const temp={}
@@ -57,6 +64,7 @@ class Ingredients extends Component {
 
 	search=(e)=>{
 		e.preventDefault();
+		localStorage.setItem("map", this.state.selected)
 		const ingredients=[]
 		Object.keys(this.state.selected).map(key=>{
 			Object.keys(this.state.selected[key]).map(elem=>{
@@ -64,7 +72,7 @@ class Ingredients extends Component {
 					ingredients.push(elem)
 			})
 		})
-		this.props.searchRecipes(ingredients)
+		this.props.searchRecipes(ingredients, this.state.type)
 	}
 
 	filterSearch=(e)=>{
@@ -89,6 +97,18 @@ class Ingredients extends Component {
 		e.preventDefault();
 		this.setState({
 			word: e.target.value
+		})
+	}
+
+	onFilter=(e)=>{
+		const cur=this.state.type
+		const selected={}
+		Object.assign(selected, this.state.selected_type);
+		selected[cur]=false;
+		selected[e.target.value]=!this.state.selected_type[e.target.value]
+		this.setState({
+			selected_type: selected, 
+			type: e.target.value
 		})
 	}
 	render() {
@@ -157,6 +177,19 @@ class Ingredients extends Component {
 				})
 			)	
 		})
+
+		
+		const types=this.state.types.map(elem=>{
+			console.log(this.state.type, elem, this.state.selected_type[elem])
+			return(
+				
+				<div className="form-check text-left">
+					<input name={elem} value={elem} type="checkbox" className="form-check-input" checked={this.state.selected_type[elem]} onChange={e=>this.onFilter(e)}/>
+					<label className="form-check-label" >{elem}</label>
+				</div>
+			)	
+		})
+
 		console.log(result)
 		return (
 			<>
@@ -181,22 +214,28 @@ class Ingredients extends Component {
 							</div>
 						</div>
 						<div className="col-md-5">
-						<form className="form-inline">
-							<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
-							<button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
-						</form>
-						<div className="form-check">
-						{result}
+							<form className="form-inline">
+								<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
+								<button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
+							</form>
+							<div className="form-check">
+							{result}
+							</div>
 						</div>
-						</div>
-						<div className="col-md-5 overflow-auto">
-						<p className="font-italic h4">Selected</p>
+						<div className="col-md-6 overflow-auto">
+							<p className="font-italic h4">Selected</p>
 							<ul className="list-group">
 							{selected}
 							</ul>
-							<button type="submit" className="btn btn-primary" onClick={e=>this.search(e)} data-dismiss="modal"> Search </button>
 						</div>
+						<div className="col-md-5 overflow-auto">
+						<p className="font-italic h4">Filter By Meal-Type</p>
+							<ul className="list-group">
+							{types}
+							</ul>
 						</div>
+					</div>
+					<button type="submit" className="btn btn-primary" onClick={e=>this.search(e)} data-dismiss="modal"> Search </button>
 					</div>
 					</div>
 				</div>

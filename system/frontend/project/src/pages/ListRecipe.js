@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchRecipes, fetchUserRecipes, deleteRecipe} from '../actions/recipeActions'
+import { fetchRecipes, fetchUserRecipes, deleteRecipe, searchRecipes} from '../actions/recipeActions'
 
 import { fetchUserFavourite, removeFavourite, addFavourite} from '../actions/explorerActions';
 import { checkLoggedIn } from '../actions/userActions';
@@ -46,8 +46,14 @@ class ListRecipe extends Component {
 			kind: kind
 		})
 		if(kind==="recipes"){
-			console.log("fetching recipes")
-			this.props.fetchRecipes()
+			if(this.props.loggedIn===true){
+				const temp=localStorage.getItem("search")
+				this.props.searchRecipes(temp["ingredients"], temp["type"])
+			}
+				
+			else
+				this.props.fetchRecipes()
+
 		}else if(kind==="contributor"){
 			this.props.fetchUserRecipes(this.props.username);	
 		}else if(kind==="explorer"){
@@ -68,7 +74,7 @@ class ListRecipe extends Component {
 	deleteRecipe = (e, id) => {
 		e.preventDefault();
 		this.props.deleteRecipe(id);
-		{this.props.deleted===true&&alert("Successfully Deleted Recipe")}
+		// {this.props.deleted===true&&alert("Successfully Deleted Recipe")}
 	}
 	render() {
 		let temp
@@ -80,7 +86,7 @@ class ListRecipe extends Component {
 			temp = this.props.favs
 		}
 		console.log(temp)
-		let cards
+		let cards=[]
 		if(temp!==undefined){
 			const pathname = this.state.kind==="contributor" ? "/contributor/view/": "/view/";
 			
@@ -101,14 +107,13 @@ class ListRecipe extends Component {
 				</div>
 			))
 		}
-		
+		console.log(cards)
 		return (
 			<div className="container">	
 			{this.state.kind==="recipes" && <Ingredients/>}
-			
+			{cards.length===0&& <div> No Recipe Found </div>}
 			<Grid container direction="row" justify="center" alignItems="center">
 				{cards}
-
 			</Grid>
 			
 			</div>
@@ -124,4 +129,4 @@ const mapStateToProps = state => ({
 	deleted: state.recipes.deleted
 });
 
-export default connect(mapStateToProps, {fetchRecipes, fetchUserRecipes, checkLoggedIn, deleteRecipe, fetchUserFavourite, removeFavourite, addFavourite})(ListRecipe);
+export default connect(mapStateToProps, {fetchRecipes, fetchUserRecipes, checkLoggedIn, deleteRecipe, fetchUserFavourite, removeFavourite, addFavourite, searchRecipes})(ListRecipe);

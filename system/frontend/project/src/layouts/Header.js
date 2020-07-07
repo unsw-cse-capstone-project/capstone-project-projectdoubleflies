@@ -45,7 +45,6 @@ class Header extends Component {
 	}
 	
 	handleLogout=()=>{
-		console.log("handle logout")
 		this.props.logoutUser();
 	}
 
@@ -55,8 +54,6 @@ class Header extends Component {
 		})
 	)
 	render() {
-		console.log(this.props.isLoggedIn)
-		console.log(this.props.username)
 		return (
 			<nav className="navbar navbar-expand-lg navbar-light bg-light">
 			<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">

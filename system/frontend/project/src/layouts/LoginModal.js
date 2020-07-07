@@ -76,8 +76,6 @@ class LoginModal extends Component {
 		)
 	}
 	render() {
-		console.log("????")
-		console.log(this.props.isLogged && this.state.showSuccess)
 		return (
 			<div>
 				<Button className="ml-1" variant="primary" onClick={this.handleShow}>

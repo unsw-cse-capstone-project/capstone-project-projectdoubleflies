@@ -134,9 +134,19 @@ export const deleteRecipe = (id) => dispatch => {
 	})
 }
 
-export const searchRecipes = (ingredients) => dispatch => {
+export const searchRecipes = (ingredients, type) => dispatch => {
+	let obj=undefined;
 	console.log(ingredients)
-	axios.post(`${apiUrl}/search`, ingredients)
+	// if(ingredients===undefined){
+	// 	const temp=localStorage.getItem("search")
+	// 	obj=JSON.parse(temp)
+	// }else{
+	obj={"ingredients": ingredients, "type": type}
+	const strJson=JSON.stringify(obj)
+	localStorage.setItem("search", strJson)
+	// }
+	console.log(obj)
+	axios.post(`${apiUrl}/search`, obj)
 	.then(response=>{
 		console.log(response)
 		dispatch({
