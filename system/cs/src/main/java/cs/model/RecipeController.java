@@ -215,6 +215,11 @@ public class RecipeController {
     	return "searched";
     }
     
+	
+    @GetMapping("/recipe/MostPopular")
+    public List<String> popular(){
+    	return searchrepo.search_history();
+    }
     @GetMapping("/test/recipe")
     public List<List<String>> test2(){
     	List<List<String>> result = new ArrayList<>();
