@@ -178,13 +178,13 @@ public class RecipeController {
         userRepository.save(user);
         return "deleted";
     }
-    
+    // search with recipe and also store in search history table
     @PostMapping("/search")
-    public @ResponseBody List<Recipe> addSearch(@RequestBody Wrapper wrap) {
-	if((wrap.type == null || wrap.type.length() == 0)&&(wrap.ingredients.size() == 0 || wrap.ingredients == null)){
-		return recipeInfoRepository.findAll();
-	}
+    public @ResponseBody List<Recipe> recipeSearch(@RequestBody Wrapper wrap) {
+    	
+    	if((wrap.type == null || wrap.type.length() == 0)&&(wrap.ingredients.size() == 0 || wrap.ingredients == null)) return recipeInfoRepository.findAll();
     	if(wrap.type == null || wrap.type.length() == 0) {
+    		this.addSearch(wrap.ingredients);
     		return recipeInfoRepository.ing(wrap.ingredients);
     	}else if(wrap.ingredients.size() == 0 || wrap.ingredients == null) {
     		return recipeInfoRepository.filterbyMeal(wrap.type);
@@ -194,25 +194,28 @@ public class RecipeController {
     	List<Recipe> temp = t1;
     	temp.retainAll(t2);
     	return temp;
+    	
     }
-    //This is for search history match
-    @PostMapping("/searchHistory")
-    public @ResponseBody String addSearch(@RequestBody List<String> ingredient) {
+    
+    
+    public void addSearch(List<String> ingredient) {
     	
     	Collections.sort(ingredient);
     	String meal = String.join(",", ingredient);
     	//return meal;
-    	SearchHistory search=  searchrepo.helpme(meal);
-    	if(search != null) {
-    		int temp = search.getFrequency()+1;
-			search.setFrequency(temp);
-			searchrepo.save(search);
-			return "frequency added 1"+" "+search.getSearchID();
+    	SearchHistory searcher=  searchrepo.helpme(meal);
+    	if(searcher != null) {
+    		int temp = searcher.getFrequency()+1;
+			searcher.setFrequency(temp);
+			searchrepo.save(searcher);
+			//return "frequency added 1"+" "+searcher.getSearchID();
     	}
-    	SearchHistory refresh = new SearchHistory();
-    	refresh.setIngredients(ingredient);
-    	searchrepo.save(refresh);
-    	return "searched";
+    	else{
+    		SearchHistory refresh = new SearchHistory();
+    		refresh.setIngredients(ingredient);
+    		searchrepo.save(refresh);
+    	}
+    	//return "searched";
     }
     
 	
