@@ -187,18 +187,17 @@ public class RecipeController {
     @PostMapping("/search")
     public @ResponseBody List<Recipe> recipeSearch(@RequestBody Wrapper wrap) {
     	
-    	if((wrap.type == null || wrap.type.length() == 0)&&(wrap.ingredients.size() == 0 || wrap.ingredients == null)) return recipeInfoRepository.findAll();
-    	if(wrap.type == null || wrap.type.length() == 0) {
+    	if((wrap.type == null || wrap.type.length() == 0)&&(wrap.ingredients == null || wrap.ingredients.size() == 0)) return recipeInfoRepository.findAll();
+    	else if(wrap.type == null || wrap.type.length() == 0) {
     		this.addSearch(wrap.ingredients);
-    		return recipeInfoRepository.ing(wrap.ingredients);
-    	}else if(wrap.ingredients.size() == 0 || wrap.ingredients == null) {
+    		return recipeInfoRepository.filter(wrap.ingredients);
+    	}else if(wrap.ingredients == null||wrap.ingredients.size() == 0) {
     		return recipeInfoRepository.filterbyMeal(wrap.type);
     	}
-    	List<Recipe> t1 =  recipeInfoRepository.filterbyMeal(wrap.type);
-    	List<Recipe> t2 = recipeInfoRepository.ing(wrap.ingredients);
-    	List<Recipe> temp = t1;
-    	temp.retainAll(t2);
-    	return temp;
+    
+    	List<Recipe> result = recipeInfoRepository.ing(wrap.type,wrap.ingredients);
+    	
+    	return result;
     	
     }
     
