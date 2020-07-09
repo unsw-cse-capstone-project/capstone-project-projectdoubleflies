@@ -5,3 +5,16 @@ I start learning spring boot , sql but still long way to go.
 Week 2
 
 Discuss with Shizuka the story board. Start learning reactjs to build frontend. Still, long way to go.
+
+Week3
+Do recipe backend. Recipe can be added, deleted, eidted. Users can choose favorite recipes, can search for favorite reicpes.
+System can recommend recipes which best match ingredients. 
+
+Week 4
+Recipe can search ingredients, pick ingredients, recommend recipes, filter recipes. 
+
+Week 5
+Add recipe with image and upload images for recipes. Check for constraints for ingredients. Work with Shizuka to debug recipe controller functions, fixed problems in search history.
+
+Week 6
+Add "/search" API in recipe controller, build a static class named "wrapper" in recipe controller. It is the option that explorer can choose which includes type and ingredient. Add a String converter in Search History class, which allow every list of string of ingredients to be store in database as a format of string. So evey time a user search a list of words, the data base can update its frequency. Also combine "/search" with searh for recipes and stores in search history table. Start with working on report, including how code implementates in backend. 
