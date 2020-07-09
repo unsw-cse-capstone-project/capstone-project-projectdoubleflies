@@ -1,4 +1,4 @@
-import { FETCH_RECIPES, NEW_RECIPES, GET_RECIPE, DELETE_RECIPE, GIVE_RECOMMENDATION, FETCH_USER_RECIPES, GET_USER_RECIPE, EDIT_RECIPE, SEARCH_RECIPE, GET_IMAGE} from '../actions/types';
+import { FETCH_RECIPES, NEW_RECIPES, GET_RECIPE, DELETE_RECIPE, GIVE_RECOMMENDATION, FETCH_USER_RECIPES, GET_USER_RECIPE, EDIT_RECIPE, SEARCH_RECIPE, GET_IMAGE, SET_INGREDIENTS} from '../actions/types';
 
 const initialState = {
 	items:[],
@@ -9,7 +9,8 @@ const initialState = {
 	deleted: false,
 	posted: false,
 	saved: false,
-	image: {}
+	image: {},
+	set_ing: undefined
 }
 
 
@@ -103,6 +104,11 @@ export default function(state = initialState, action) {
 				image: action.payload
 			}
 
+		case SET_INGREDIENTS:
+			return {
+				...state,
+				set_ing: action.payload
+			}
 		default:
 			return state;
 	}

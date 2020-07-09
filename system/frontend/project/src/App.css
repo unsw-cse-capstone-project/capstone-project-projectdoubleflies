@@ -76,3 +76,12 @@ img.image {
     width: 100%;
     height: 400px;
 }
+
+.btn-margin {
+    margin: 3px !important
+}
+
+.title-margin {
+    margin: 10px !important;
+    margin-top: 20px !important;
+}

@@ -20,7 +20,7 @@ class PostRecipe extends Component {
       chosen: "Choose...",
       selections:["Breakfast", "Lunch", "Snack", "Dinner"],
       display:["Breakfast", "Lunch", "Snack", "Dinner"],
-      units:["g", "kg", "tablespoon", "cup"],
+      units:["piece", "g", "kg", "tablespoon", "cup"],
       alertPresent: false,
       base64: undefined,
       file: undefined,

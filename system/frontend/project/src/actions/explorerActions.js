@@ -27,8 +27,10 @@ export const pickIngredient = (ingredient)=>dispatch => {
 }
 
 export const fetchUserFavourite = (username)=>dispatch=>{
+	console.log(`${apiUrl}/favorite/${username}`)
 	axios.get(`${apiUrl}/favorite/${username}`)
 	.then(response => {
+		console.log("fetch user favourite")
 		dispatch({
 			type: FETCH_USER_FAVOURITES,
 			payload: response.data

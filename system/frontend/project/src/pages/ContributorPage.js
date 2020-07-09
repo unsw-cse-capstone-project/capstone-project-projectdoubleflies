@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { checkLoggedIn } from '../actions/userActions';
+import {setIng} from '../actions/recipeActions'
 import { Redirect } from 'react-router'
 import ListRecipe from './ListRecipe'
 import { PRIVATE } from '../helpers/type';
@@ -19,7 +20,6 @@ class ContributorPage extends Component {
 	}
 	componentDidMount() {
 		this.props.checkLoggedIn();
-		// // TODO 
 		if(this.props.location.state===true){
 			
 			return(
@@ -30,13 +30,42 @@ class ContributorPage extends Component {
 			success:false
 		})
 	}
+
+	onSearch=(e)=>{
+		e.preventDefault();
+		this.props.setIng();
+	}
+
 	render(){
 		return (
 			<div className="container">
+				<div className="ui placeholder segment">
+					<div className="ui icon header">
+						<i className="search icon"></i>
+						Find Frequently Searched Set of Ingredients
+					</div>
+					<div className="inline">
+						<div className="ui primary button" onClick={e=>this.onSearch(e)}>Search</div>
+					</div>
+					{this.props.set_ing!==undefined&&
+					<div className="inline">
+						{Object.keys(this.props.set_ing).map(key=>{
+							return(
+								this.props.set_ing[key].map(elem=>{
+									return(
+										<p>{elem}</p>
+									)
+								})
+							)
+						})}
+					</div>
+					}
+				</div>
+				<h4>My Recipes</h4>
 				<Link to={{ pathname: "/post"}}>
 					<button className="m-2 btn btn-primary" type="button">Create Recipe</button>
 				</Link>
-				<h4>My Recipes Page</h4>
+				
 				<ListRecipe/>
 				{!this.props.loggedIn && <Redirect to="/"/>}
 			</div>
@@ -45,7 +74,9 @@ class ContributorPage extends Component {
 	}
 }
 const mapStateToProps = state => ({
-	loggedIn: state.users.loggedIn
+	loggedIn: state.users.loggedIn,
+	set_ing: state.recipes.set_ing
+
 });
 
-export default connect(mapStateToProps, {checkLoggedIn})(ContributorPage);
+export default connect(mapStateToProps, {checkLoggedIn,setIng})(ContributorPage);

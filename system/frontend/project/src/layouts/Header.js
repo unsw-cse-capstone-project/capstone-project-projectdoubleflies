@@ -65,7 +65,6 @@ class Header extends Component {
 				<li className={`"nav-item" + " " + ${this.state.active===1?'active': null}`}>
 					<a className="nav-link" href="/">Home</a>
 				</li>
-
 				{this.props.isLoggedIn && <li className={`"nav-item" + " " + ${this.state.active===2?'active': null}`}>
 					<a className="nav-link" href="/explorer">Explorer</a>
 				</li>}
@@ -74,7 +73,9 @@ class Header extends Component {
 					<a className="nav-link" href="/contributor">Contributor</a>
 				</li>}
 				</ul>
-				{this.props.isLoggedIn ? <><p>Welcome {this.props.username}</p> <button type="button" className="btn btn-danger" onClick={this.handleLogout}>Logout</button></> : <><LoginModal/><RegisterModal/></>}
+				{this.props.isLoggedIn ? <><blockquote className="font-italic blockquote text-center">
+  <p class="mb-0">Welcome, {this.props.username}</p>
+</blockquote> <button type="button" className="btn btn-danger btn-margin" onClick={this.handleLogout}>Logout</button></> : <><LoginModal/><RegisterModal/></>}
 				
 			</div>
 			</nav>

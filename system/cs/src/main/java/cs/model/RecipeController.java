@@ -34,6 +34,7 @@ import cs.model.RecipeInfoRepository;
 import cs.model.UserRepository;
 import cs.model.ImageRepository;
 import com.google.gson.Gson;
+import java.math.BigInteger;
 
 
 @RestController
@@ -53,8 +54,12 @@ public class RecipeController {
 	searchRepository searchrepo;
 	@Autowired
 	ImageRepository imgRepository;
-	
-	
+
+
+	@GetMapping("/recipeidea")
+	public List<BigInteger> search(){
+		return searchrepo.search_history();
+	}	
 	
 	@GetMapping("/recipe/image/{id}")
 	public ResponseEntity<Resource> getImage(@PathVariable String id) {

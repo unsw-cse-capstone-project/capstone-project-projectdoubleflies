@@ -1,6 +1,7 @@
 package cs.model;
 import java.util.*;
 import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class SearchHistory {

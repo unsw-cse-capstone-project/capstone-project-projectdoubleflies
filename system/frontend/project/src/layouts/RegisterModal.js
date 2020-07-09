@@ -161,7 +161,7 @@ class RegisterModal extends Component {
 		console.log(this.props.isRegistered)
 		return (
 			<>
-				<Button className="ml-1" variant="primary" onClick={this.handleShow}>
+				<Button className="ml-1 btn-margin" variant="primary" onClick={this.handleShow}>
 					Register
 				</Button>
 

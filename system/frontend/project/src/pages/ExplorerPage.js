@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { checkLoggedIn } from '../actions/userActions'
 import { Redirect } from 'react-router-dom';
 
+
 class ExplorerPage extends Component {
 	render() {
 		

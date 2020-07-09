@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { fetchIngredients } from '../actions/explorerActions'
 import { searchRecipes } from '../actions/recipeActions'
+import { Container } from 'semantic-ui-react'
 class Ingredients extends Component {
 	constructor(props) {
 		super(props);
@@ -14,7 +15,8 @@ class Ingredients extends Component {
 			result:{},
 			type: undefined,
 			types: ["Breakfast", "Lunch", "Snack", "Dinner"],
-			selected_type: {"Breakfast": false, "Lunch": false, "Snack": false, "Dinner": false}
+			selected_type: {"Breakfast": false, "Lunch": false, "Snack": false, "Dinner": false},
+			num_selected: 0
 		}
 	}
 
@@ -26,10 +28,16 @@ class Ingredients extends Component {
 			Object.assign(t, this.state.selected)
 		else 
 			Object.assign(t, localStorage.getItem("map"))
-		this.setState({
-			type: temp["type"],
-			selected: t
-		})
+
+		if(temp!==null)
+			this.setState({
+				type: temp["type"],
+				selected: t
+			})
+		else 
+			this.setState({
+				selected: t
+			})
 	}
 
 	onClick=(e)=>{
@@ -37,15 +45,19 @@ class Ingredients extends Component {
 			const temp={}
 			Object.assign(temp, this.state.selected);
 			temp[e.target.name][e.target.value]=true
+			let num=this.state.num_selected
 			this.setState({
-				selected: temp
+				selected: temp,
+				num_selected: num+1
 			})
 		}else{
 			const temp={}
 			Object.assign(temp, this.state.selected);
 			temp[e.target.name][e.target.value]=!this.state.selected[e.target.name][e.target.value]
+			let num=this.state.selected[e.target.name][e.target.value]===false? this.state.num_selected-1: this.state.num_selected+1
 			this.setState({
-				selected: temp
+				selected: temp,
+				num_selected: num
 			})
 		}
 	}
@@ -117,7 +129,6 @@ class Ingredients extends Component {
 		// let ingredients={Dairy: ["milk", "egg"], Vegetables:["tomato"], "Baking & Grains": ["bread"], Spices:["tomato"], Meats: ["bread"],Fish:["tomato"], "Baking & Grains": ["bread"], Seafood:["tomato"], "Baking & Grains": ["bread"],  Sauces:["tomato"], Legumes: ["bread"], Beverages:["b"], Nuts:["nuts"], Alcohol:[], Condiments:[], Oils:[]}
 		// console.log(this.props.ingredients)
 		if(this.props.ingredients!==undefined){
-			console.log(this.props.ingredients)
 			checkbox = Object.keys(this.props.ingredients).map((key, id) =>{
 				if(this.state.selected[key]!==undefined){
 					return(
@@ -148,22 +159,22 @@ class Ingredients extends Component {
 			})
 		}
 		let selected=<div></div>
-		selected = Object.keys(this.state.selected).map(key=> {
-			return(
-				Object.keys(this.state.selected[key]).map(elem=>{
-					if(this.state.selected[key][elem]===true){
-						return(
-							<li className="list-group-item">{key}: {elem}<button type="button" className="close" aria-label="Close" onClick={e=>this.onDelete(e)}>
-							<span aria-hidden="true" name={key} value={elem}>&times;</span>
-						  </button></li>
-						)
-					}
-				})
-			)
-		});
+		if(this.state.num_selected!==0)
+			selected = Object.keys(this.state.selected).map(key=> {
+				return(
+					Object.keys(this.state.selected[key]).map(elem=>{
+						if(this.state.selected[key][elem]===true){
+							return(
+								<li className="list-group-item">{key}: {elem}<button type="button" className="close" aria-label="Close" onClick={e=>this.onDelete(e)}>
+								<span aria-hidden="true" name={key} value={elem}>&times;</span>
+							</button></li>
+							)
+						}
+					})
+				)
+			});
 
 		let result=<div>You can search</div>
-		console.log(this.state.result)
 		result=Object.keys(this.state.result).map(key=>{
 			return(
 				Object.keys(this.state.result[key]).map(elem=>{
@@ -189,11 +200,46 @@ class Ingredients extends Component {
 				</div>
 			)	
 		})
-
-		console.log(result)
+		if(this.state.num_selected===0){
+			selected=<div>No Ingredients Selected</div>
+		}
+		
 		return (
 			<>
-			<button type="button" className="btn btn-primary" data-toggle="modal" data-target="#modal">
+			<div class="container">
+			<div className="row">
+				<div className="col-md-10 overflow-auto">
+				<label className="font-italic h5 d-inline title-margin">Filter By Meal-Type</label>
+				<div class="custom-control custom-checkbox">
+					<ul className="list-group">
+					{types}
+				</ul>
+				</div>
+				<form className="form-inline">
+					<label className="font-italic h5 d-inline title-margin">Choose Ingredients<br/></label>
+					<div className="input-group">
+					
+					<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
+					<button className="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
+					</div>
+				</form>
+				<div className="form-check">
+				{result}
+				</div>
+					<div className="accordion" id="checkboxes">
+					{checkbox}
+					</div>
+				</div>
+				<div className="w-100 title-margin"></div>
+				<div className="col-md-10 overflow-auto">
+					<p className="font-italic h5 d-inline title-margin">Selected</p>
+					<ul className="list-group">
+					{selected}
+					</ul>
+				</div>
+			</div>
+			</div>
+			{/* <button type="button" className="btn btn-primary btn-margin" data-toggle="modal" data-target="#modal">
   				Pick Ingredients
 			</button>
 			<div className="modal fade" id="modal" tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -208,6 +254,91 @@ class Ingredients extends Component {
 					<div className="modal-body">
 					<div className="row">
 						<div className="col-md-6 overflow-auto">
+						<form className="form-inline">
+								<div className="input-group">
+								<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
+								<button className="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
+								</div>
+							</form>
+						<div className="form-check">
+						{result}
+						</div>
+							<div className="accordion" id="checkboxes">
+							{checkbox}
+							</div>
+						</div>
+						<div className="col-md-6 overflow-auto">
+						<p className="font-italic h4">Filter By Meal-Type</p>
+							<ul className="list-group">
+							{types}
+							</ul>
+						
+							<p className="font-italic h4">Selected</p>
+							<ul className="list-group">
+							{selected}
+							</ul>
+							</div>
+						
+					</div> */}
+					{/* <div className="ui grid">
+						<div className="row">
+							<div className="eight wide column overflow-auto">
+								<form className="form-inline">
+									<div className="input-group">
+									<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
+									<button className="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
+									</div>
+								</form>
+								<div className="form-check">
+									{result}
+								</div>
+								<div className="accordion" id="checkboxes">
+									{checkbox}
+								</div>
+							</div>
+							<div className="seven wide column">
+								<div className="input-group">
+								<label className="font-italic h4">Filter By Meal-Type</label>
+								<ul className="list-group">
+								{types}
+								</ul>
+								</div>
+								<p className="font-italic h4">Selected</p>
+								<ul className="list-group">
+								{selected}
+								</ul>
+							</div>
+						</div>
+					</div> */}
+					
+					{/* <div className="col-md-6">
+			
+						<form className="form-inline">
+							<div className="input-group">
+							<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
+							<button className="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
+							</div>
+						</form>
+						<p className="font-italic h4">List of Ingredients</p>
+						<div className="accordion" id="checkboxes">
+						{checkbox}
+						</div>
+					</div>
+					<div className="col-md-5">
+							<div className="form-check">
+							{result}
+							</div>
+								<p className="font-italic h4">Selected</p>
+								<ul className="list-group">
+								{selected}
+								</ul>
+							<p className="font-italic h4">Filter By Meal-Type</p>
+								<ul className="list-group">
+								{types}
+								</ul>
+					</div> */}
+					{/* <div className="row">
+						<div className="col-md-6 overflow-auto">
 						<p className="font-italic h4">List of Ingredients</p>
 							<div className="accordion" id="checkboxes">
 							{checkbox}
@@ -215,8 +346,10 @@ class Ingredients extends Component {
 						</div>
 						<div className="col-md-5">
 							<form className="form-inline">
-								<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
-								<button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
+								<div className="input-group">
+								<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
+								<button className="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
+								</div>
 							</form>
 							<div className="form-check">
 							{result}
@@ -234,12 +367,12 @@ class Ingredients extends Component {
 							{types}
 							</ul>
 						</div>
-					</div>
-					<button type="submit" className="btn btn-primary" onClick={e=>this.search(e)} data-dismiss="modal"> Search </button>
+					</div> */}
+					{/* <button type="submit" className="btn btn-primary" onClick={e=>this.search(e)} data-dismiss="modal"> Search </button>
 					</div>
 					</div>
 				</div>
-			</div>
+			</div> */}
 			</>
 			
 		)

@@ -14,7 +14,7 @@ const initialState = {
 export default function(state = initialState, action) {
 	switch(action.type){
 		case LOGIN_USER:
-			console.log('reducer login')
+			console.log(action.status)
 			if(action.payload){
 				const user = {username: action.username}
 				 localStorage.setItem('username', JSON.stringify(user));
@@ -25,7 +25,7 @@ export default function(state = initialState, action) {
 			}else{
 				alert("Not valid Username or Password")
 			}
-			
+			return
 		case REGISTER_USER:
 			console.log('reducer register')
 			console.log(action.payload)
@@ -41,7 +41,7 @@ export default function(state = initialState, action) {
 			}else{
 				alert("Not valid Username")
 			}
-			
+			return
 
 		case CHECK_USERNAME:
 			console.log("hi")

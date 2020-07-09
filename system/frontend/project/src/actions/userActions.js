@@ -9,7 +9,8 @@ export const loginUser = (username, password) => dispatch => {
 		dispatch({
 			type: LOGIN_USER,
 			payload: response.data,
-			username: username
+			username: username,
+			status: response.status
 		})
 	})
 	.catch(err=> console.log(err))
@@ -44,11 +45,8 @@ export const checkUsername = (username)=>dispatch=>{
 
 
 export const checkLoggedIn = ()=> dispatch=>{
-	console.log("check logged")
-	// const user = localStorage.getItem('username');
 	const user = JSON.parse(localStorage.getItem('username'))
 	var username;
-	// console.log(user.username)
 	if(user!==null){
 		username=user.username;
 	}

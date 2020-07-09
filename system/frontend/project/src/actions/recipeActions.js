@@ -1,4 +1,4 @@
-import { FETCH_RECIPES, NEW_RECIPES, GET_RECIPE, DELETE_RECIPE, GIVE_RECOMMENDATION, FETCH_USER_RECIPES, GET_USER_RECIPE, EDIT_RECIPE, SEARCH_RECIPE, GET_IMAGE} from './types';
+import { FETCH_RECIPES, NEW_RECIPES, GET_RECIPE, DELETE_RECIPE, GIVE_RECOMMENDATION, FETCH_USER_RECIPES, GET_USER_RECIPE, EDIT_RECIPE, SEARCH_RECIPE, GET_IMAGE, SET_INGREDIENTS} from './types';
 import axios from 'axios';
 
 const apiUrl="http://localhost:8080";
@@ -162,6 +162,16 @@ export const getImage = (id) => dispatch => {
 	.then(response => {
 		dispatch({
 			type: GET_IMAGE,
+			payload: response.data
+		})
+	})
+}
+
+export const setIng = ()=>dispatch => {
+	axios.get(`${apiUrl}/recipeidea`)
+	.then(response=> {
+		dispatch({
+			type: SET_INGREDIENTS,
 			payload: response.data
 		})
 	})

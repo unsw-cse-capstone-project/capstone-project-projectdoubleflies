@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchRecipes, fetchUserRecipes, deleteRecipe, searchRecipes} from '../actions/recipeActions'
+import { Button, Icon, Confirm} from 'semantic-ui-react'
 
 import { fetchUserFavourite, removeFavourite, addFavourite} from '../actions/explorerActions';
 import { checkLoggedIn } from '../actions/userActions';
-import { Redirect } from 'react-router'
 import Ingredients from '../layouts/Ingredients'
 import {
 	Grid,
@@ -46,14 +45,14 @@ class ListRecipe extends Component {
 			kind: kind
 		})
 		if(kind==="recipes"){
-			if(this.props.loggedIn===true){
+			if(kind==="recipes"){
 				const temp=localStorage.getItem("search")
-				this.props.searchRecipes(temp["ingredients"], temp["type"])
+				if(temp!==null)
+					this.props.searchRecipes(temp["ingredients"], temp["type"])
+					
+				else
+					this.props.fetchRecipes()
 			}
-				
-			else
-				this.props.fetchRecipes()
-
 		}else if(kind==="contributor"){
 			this.props.fetchUserRecipes(this.props.username);	
 		}else if(kind==="explorer"){
@@ -74,7 +73,6 @@ class ListRecipe extends Component {
 	deleteRecipe = (e, id) => {
 		e.preventDefault();
 		this.props.deleteRecipe(id);
-		// {this.props.deleted===true&&alert("Successfully Deleted Recipe")}
 	}
 	render() {
 		let temp
@@ -85,7 +83,6 @@ class ListRecipe extends Component {
 		}else if(this.state.kind==="explorer"){
 			temp = this.props.favs
 		}
-		console.log(temp)
 		let cards=[]
 		if(temp!==undefined){
 			const pathname = this.state.kind==="contributor" ? "/contributor/view/": "/view/";
@@ -93,24 +90,52 @@ class ListRecipe extends Component {
 			cards = temp.map(item => (
 				<div className="card m-2" style={{width: 18 + 'em'}}>
 					<Link to={{ pathname: `${pathname}${item.recipeID}`}}>
-					<div className="card-body">
+					
 					<img className="card-img-top" src={URL.createObjectURL(this.dataURLtoFile(item.img))} alt="Card image cap"/>
-						<h5 className="card-title">Title: <br/> {item.title}</h5>
-						<p className="card-text">Description: <br/> {item.description}</p>
-						
-							{/* <p className="d-block">Check this out</p> */}
+					<div className="card-body">
+					<h5 className="card-title">{item.title}</h5>
+					<h6 className="card-subtitle mb-2">Description</h6>
+					<p className="card-text">{item.description}</p>
 					</div>
 					</Link>
-					{this.state.kind==="recipes" && this.props.loggedIn && <button className="btn btn-sm btn-danger" onClick={(e)=>this.addFavourite(e, item.recipeID)}>FAVOURITE</button>}
-					{this.state.kind==="contributor" && <button className="btn btn-sm btn-danger" onClick={(e)=>this.deleteRecipe(e, item.recipeID)}>DELETE</button>}
-					{this.state.kind==="explorer" && <button className="btn btn-sm btn-danger" onClick={(e)=>this.removeFavourite(e, item.recipeID)}>Remove</button>}
+					{
+						this.state.kind==="recipes" && this.props.loggedIn &&
+						<div>
+							<Button className="button-margin" as='div' labelPosition='right'/>
+							<Button className="btn-margin" size='mini' color='red' onClick={(e)=>this.addFavourite(e, item.recipeID)}>
+								<Icon name='heart' />
+								Favourite
+							</Button>
+						</div>
+					}
+					
+					{
+						this.state.kind==="contributor" &&
+						<div>
+							<Button className="button-margin" as='div' labelPosition='right'/>
+							<Button className="btn-margin" size='mini' onClick={(e)=>this.deleteRecipe(e, item.recipeID)}>
+								<Icon name='trash' />
+								Delete
+							</Button>
+						</div>
+					}
+					{
+						this.state.kind==="explorer" && 
+						<div>
+							<Button className="button-margin" as='div' labelPosition='right'/>
+							<Button className="btn-margin" size='mini' onClick={(e)=>this.removeFavourite(e, item.recipeID)}>
+								<Icon name='trash' />
+								Remove
+							</Button>
+						</div>
+					// <button className="btn btn-sm btn-danger" onClick={(e)=>this.removeFavourite(e, item.recipeID)}>Remove</button>}
+					}
 				</div>
 			))
 		}
-		console.log(cards)
 		return (
 			<div className="container">	
-			{this.state.kind==="recipes" && <Ingredients/>}
+			
 			{cards.length===0&& <div> No Recipe Found </div>}
 			<Grid container direction="row" justify="center" alignItems="center">
 				{cards}
