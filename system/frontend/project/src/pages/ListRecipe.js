@@ -86,11 +86,11 @@ class ListRecipe extends Component {
 		let cards=[]
 		if(temp!==undefined){
 			const pathname = this.state.kind==="contributor" ? "/contributor/view/": "/view/";
-			
-			cards = temp.map(item => (
-				<div className="card m-2" style={{width: 18 + 'em'}}>
+			cards = temp.map(item => {
+				// console.log(item)
+				return (
+					<div className="card m-2" style={{width: 18 + 'em'}}>
 					<Link to={{ pathname: `${pathname}${item.recipeID}`}}>
-					
 					<img className="card-img-top" src={URL.createObjectURL(this.dataURLtoFile(item.img))} alt="Card image cap"/>
 					<div className="card-body">
 					<h5 className="card-title">{item.title}</h5>
@@ -128,10 +128,56 @@ class ListRecipe extends Component {
 								Remove
 							</Button>
 						</div>
-					// <button className="btn btn-sm btn-danger" onClick={(e)=>this.removeFavourite(e, item.recipeID)}>Remove</button>}
+					
 					}
 				</div>
-			))
+				// 	<div className="card m-2" style={{width: 18 + 'em'}}>
+				// 	<Link to={{ pathname: `${pathname}${item.recipeID}`}}>
+				// 	<div>{item}</div>
+				// 	{/* <img className="card-img-top" src={URL.createObjectURL(this.dataURLtoFile(item.img))} alt="Card image cap"/> */}
+				// 	<div className="card-body">
+				// 	<h5 className="card-title">{item.title}</h5>
+				// 	<h6 className="card-subtitle mb-2">Description</h6>
+				// 	<p className="card-text">{item.description}</p>
+				// 	</div>
+				// 	</Link>
+				// 	{
+				// 		this.state.kind==="recipes" && this.props.loggedIn &&
+				// 		<div>
+				// 			<Button className="button-margin" as='div' labelPosition='right'/>
+				// 			<Button className="btn-margin" size='mini' color='red' onClick={(e)=>this.addFavourite(e, item.recipeID)}>
+				// 				<Icon name='heart' />
+				// 				Favourite
+				// 			</Button>
+				// 		</div>
+				// 	}
+					
+				// 	{
+				// 		this.state.kind==="contributor" &&
+				// 		<div>
+				// 			<Button className="button-margin" as='div' labelPosition='right'/>
+				// 			<Button className="btn-margin" size='mini' onClick={(e)=>this.deleteRecipe(e, item.recipeID)}>
+				// 				<Icon name='trash' />
+				// 				Delete
+				// 			</Button>
+				// 		</div>
+				// 	}
+				// 	{
+				// 		this.state.kind==="explorer" && 
+				// 		<div>
+				// 			<Button className="button-margin" as='div' labelPosition='right'/>
+				// 			<Button className="btn-margin" size='mini' onClick={(e)=>this.removeFavourite(e, item.recipeID)}>
+				// 				<Icon name='trash' />
+				// 				Remove
+				// 			</Button>
+				// 		</div>
+					
+				// 	}
+				// 	// <button className="btn btn-sm btn-danger" onClick={(e)=>this.removeFavourite(e, item.recipeID)}>Remove</button>}
+				// </div>
+				)
+			})
+
 		}
 		return (
 			<div className="container">	

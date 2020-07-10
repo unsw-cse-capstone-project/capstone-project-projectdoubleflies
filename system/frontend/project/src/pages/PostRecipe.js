@@ -377,7 +377,7 @@ class PostRecipe extends Component {
 
 		return (
       <div className="container">
-        <form onSubmit={ this.state.edit&& this.onSave || !this.state.edit&&this.onSubmit }>
+        <form className="form-padding" onSubmit={ this.state.edit&& this.onSave || !this.state.edit&&this.onSubmit }>
           <div className="form-group">
             <h4>Create Your Recipe</h4>
             <label htmlFor="title">Title</label>
@@ -430,7 +430,7 @@ class PostRecipe extends Component {
             </select>
           </div>
           {this.state.edit && <div><a href={`/view/${this.state.id}`}><button type="button" className="btn btn-danger">Cancel</button></a><button type="submit" className="btn btn-primary">Save</button></div>}
-          {this.state.edit===false &&<button type="submit" className="btn btn-primary">Confirm</button>}
+          {this.state.edit===false &&<div><button type="submit" className="btn btn-primary">Confirm</button></div>}
         </form>
         {!this.props.loggedIn && <Redirect to="/"/>}
         {this.props.posted&&(window.location.href = "/contributor")}

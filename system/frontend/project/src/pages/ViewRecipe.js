@@ -64,22 +64,38 @@ class ViewRecipe extends Component {
 				<PostRecipe edit={true}/>
 			)
 		}else if(this.state.showEdit===true && this.props.user_recipe!==undefined){
-			console.log(this.props.user_recipe)
 			return(
 				// need to edit to make it pretty
 				<div className="container">
-					<h1>Title: <br/> {this.props.user_recipe.title}</h1>
-					{this.props.user_recipe.img!==undefined&&<img className="img-fluid" src={URL.createObjectURL(this.dataURLtoFile(this.props.user_recipe.img))} alt="Card image cap"/>}
-					<h2>Description: <br/> {this.props.user_recipe.description}</h2>
+					<h1 className="text-monospace">{this.props.user_recipe.title}</h1>
+					{/* {this.props.user_recipe.img!==undefined&&<img className="img-fluid" src={URL.createObjectURL(this.dataURLtoFile(this.props.user_recipe.img))} alt="Card image cap"/>}
+					<h2>Description: <br/> {this.props.user_recipe.descript
+					ion}</h2> */}
+					{/* {this.props.recipe.img!==undefined&&<div className="card" style={{width: 18 + 'em'}}>
+						<img className="img-fluid" src={URL.createObjectURL(this.dataURLtoFile(this.props.recipe.img))} alt="Card image cap"/>
+						<div class="card-body">
+							<p class="card-text">{this.props.recipe.description}</p>
+						</div>
+					</div>} */}
+					{this.props.user_recipe.img!==undefined && <div className="card mb-4">
+						<img className="img-fluid " src={URL.createObjectURL(this.dataURLtoFile(this.props.user_recipe.img))} alt="Card image cap"/>
+						<div class="card-body">
+							<h4>Description</h4>
+							<p class="card-text">{this.props.user_recipe.description}</p>
+						</div>
+					</div>}
+					<div>
+					<h3>Ingredients</h3>
 					{this.props.user_recipe.ingredients !== undefined && this.props.user_recipe.ingredients.map(item=>{
 						return(
-							<div>
+							
 								<p>{item.ingredient}:{item.category}:{item.amount}</p>
-							</div>
+							
 						)
 					})}
-					{this.props.user_recipe.instructions!== undefined && this.props.user_recipe.instructions.map(item=>{
-						return(<p>{item}</p>)
+					</div>
+					{this.props.user_recipe.instructions!== undefined && this.props.user_recipe.instructions.map((item, index)=>{
+						return(<p>Step {index+1}:{item}</p>)
 					})}
 					
 					{this.state.showEdit===true && <Link to={{ pathname: `/edit/${this.props.user_recipe.recipeID}` }}>
@@ -92,18 +108,26 @@ class ViewRecipe extends Component {
 			console.log(this.props.recipe)
 			return(
 				<div className="container">
-					<h1>Title:{this.props.recipe.title}</h1>
-					{this.props.recipe.img!==undefined&&<img className="img-fluid" src={URL.createObjectURL(this.dataURLtoFile(this.props.recipe.img))} alt="Card image cap"/>}
-					<h2>Description:{this.props.recipe.description}</h2>
+					<h1 className="text-monospace">{this.props.recipe.title}</h1>
+					{this.props.recipe.img!==undefined && <div className="card mb-4">
+						<img className="img-fluid " src={URL.createObjectURL(this.dataURLtoFile(this.props.recipe.img))} alt="Card image cap"/>
+						<div class="card-body">
+							<h4>Description</h4>
+							<p class="card-text">{this.props.recipe.description}</p>
+						</div>
+					</div>}
+					<div>
+					<h3>Ingredients</h3>
 					{this.props.recipe.ingredients !== undefined && this.props.recipe.ingredients.map(item=>{
 						return(
-							<div>
-								<p>{item.ingredient}: {item.category}: {item.amount}</p>
-							</div>
+							
+								<p>{item.ingredient}:{item.category}:{item.amount}</p>
+							
 						)
 					})}
-					{this.props.recipe.instructions!== undefined && this.props.recipe.instructions.map(item=>{
-						return(<p>{item}</p>)
+					</div>
+					{this.props.recipe.instructions!== undefined && this.props.recipe.instructions.map((item, index)=>{
+						return(<p>Step {index+1}:{item}</p>)
 					})}
 					
 					{this.state.showEdit===true && <Link to={{ pathname: `/edit/${this.props.recipe.recipeID}` }}>

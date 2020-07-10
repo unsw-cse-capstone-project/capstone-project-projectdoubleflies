@@ -57,8 +57,14 @@ public class RecipeController {
 
 
 	@GetMapping("/recipeidea")
-	public List<BigInteger> search(){
-		return searchrepo.search_history();
+	public Map<BigInteger, List<String>> search(){
+		List<BigInteger> searchIDs=searchrepo.search_history();
+		Map<BigInteger, List<String>> map=new HashMap<>();
+		for(BigInteger id: searchIDs){
+			List<String> ing=searchrepo.history(id);
+			map.put(id, ing);
+		}
+		return map;
 	}	
 	
 	@GetMapping("/recipe/image/{id}")
@@ -186,7 +192,8 @@ public class RecipeController {
     // search with recipe and also store in search history table
     @PostMapping("/search")
     public @ResponseBody List<Recipe> recipeSearch(@RequestBody Wrapper wrap) {
-    	
+		System.out.println("type");
+		System.out.println(wrap.type);
     	if((wrap.type == null || wrap.type.length() == 0)&&(wrap.ingredients == null || wrap.ingredients.size() == 0)) return recipeInfoRepository.findAll();
     	else if(wrap.type == null || wrap.type.length() == 0) {
     		this.addSearch(wrap.ingredients);
@@ -196,36 +203,32 @@ public class RecipeController {
     	}
     
     	List<Recipe> result = recipeInfoRepository.ing(wrap.type,wrap.ingredients);
-    	
+    	this.addSearch(wrap.ingredients);
     	return result;
     	
     }
 	
-	@PostMapping("/test1")
-    public List<Recipe> test(){
-		List<String> ingredients = new ArrayList<>();
-		ingredients.add("egg");
-		return recipeInfoRepository.ing(ingredients);
+	// @PostMapping("/test1")
+    // public List<Recipe> test(){
+	// 	List<String> ingredients = new ArrayList<>();
+	// 	ingredients.add("egg");
+	// 	return recipeInfoRepository.filter(ingredients);
 
-	}
+	// }
     public void addSearch(List<String> ingredient) {
-    	
-    	Collections.sort(ingredient);
-    	String meal = String.join(",", ingredient);
-    	//return meal;
-    	SearchHistory searcher=  searchrepo.helpme(meal);
-    	if(searcher != null) {
-    		int temp = searcher.getFrequency()+1;
-			searcher.setFrequency(temp);
-			searchrepo.save(searcher);
-			//return "frequency added 1"+" "+searcher.getSearchID();
-    	}
-    	else{
-    		SearchHistory refresh = new SearchHistory();
-    		refresh.setIngredients(ingredient);
-    		searchrepo.save(refresh);
-    	}
-    	//return "searched";
+
+		Collections.sort(ingredient); 
+		String meal = String.join(",", ingredient);
+		SearchHistory searcher=  searchrepo.helpme(meal);
+		if(searcher != null) {    		
+			int temp = searcher.getFrequency()+1;			
+			searcher.setFrequency(temp);			
+			searchrepo.save(searcher);			    	
+			}else{    		
+				SearchHistory refresh = new SearchHistory();    		
+				refresh.setIngredients(ingredient);    		
+				searchrepo.save(refresh);    	
+		}
     }
     
 	
@@ -265,10 +268,10 @@ public class RecipeController {
     // 	return searchrepo.help();
     // }
 
-    @GetMapping("/search/{id}")
-    public List<String> historyResult(@PathVariable Long id){
-        return searchrepo.history(id);
-    }
+    // @GetMapping("/search/{id}")
+    // public List<String> historyResult(@PathVariable Long id){
+    //     return searchrepo.history(id);
+    // }
 
    @GetMapping("/favorite/{username}")
 //     public Set<Recipe> showMyFavorite(@PathVariable String username){

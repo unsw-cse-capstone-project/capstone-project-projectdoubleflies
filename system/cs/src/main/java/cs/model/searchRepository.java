@@ -10,7 +10,7 @@ import java.math.BigInteger;
 @Repository
 public interface searchRepository extends JpaRepository<SearchHistory, Long>{
     @Query(value="SELECT s.ingredient from searchistory_info s WHERE s.searchid=:searchid",nativeQuery=true)
-    List<String> history(@Param("searchid") Long searchid);
+    List<String> history(@Param("searchid") BigInteger searchid);
 	
     @Query("select s from SearchHistory s where s.searchID=?1")
     SearchHistory test(Long id);
@@ -23,6 +23,7 @@ public interface searchRepository extends JpaRepository<SearchHistory, Long>{
 
     @Query(value="select searchID from searchHistory where searchID not in (select distinct(s.searchID) from searchistory_Info s where exists (select recipeID from ingredient_info r join searchistory_Info s1 on s1.ingredient=r.ingredient where s1.searchID=s.searchID group by r.recipeID having count(distinct r.ingredient)=(select count(distinct s2.ingredient) from searchistory_Info s2 where s2.searchID=s.searchID))) ORDER BY frequency DESC", nativeQuery = true)
     List<BigInteger> search_history();
+
 
     //  @Query(value="select searchID from SearchHistory where searchID not in"
     // 		+ " (select distinct(s.searchID) from searchistory_Info s where exists "

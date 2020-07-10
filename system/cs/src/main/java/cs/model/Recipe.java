@@ -84,8 +84,8 @@ public class Recipe{
 	/* Test ----------------------------------------------------------------------*/
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="uuid")
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-	//@JsonBackReference
+	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	// @JsonIgnore
 	private Image img;
 	
 	public Recipe() {}

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { checkLoggedIn } from '../actions/userActions';
-import {setIng} from '../actions/recipeActions'
+import {searchIng} from '../actions/recipeActions'
 import { Redirect } from 'react-router'
 import ListRecipe from './ListRecipe'
 import { PRIVATE } from '../helpers/type';
@@ -33,7 +33,7 @@ class ContributorPage extends Component {
 
 	onSearch=(e)=>{
 		e.preventDefault();
-		this.props.setIng();
+		this.props.searchIng();
 	}
 
 	render(){
@@ -44,22 +44,35 @@ class ContributorPage extends Component {
 						<i className="search icon"></i>
 						Find Frequently Searched Set of Ingredients
 					</div>
-					<div className="inline">
+					{this.props.set_ing!==undefined&&
+						<div className="inline">
+							
+							<h3>Results</h3>
+							<div class="card-group">
+							{Object.keys(this.props.set_ing).map(key=>{
+								
+								return(
+									<div class="card" style={{width: 18 + 'em'}}>
+										<ul class="list-group list-group-flush ">
+										{this.props.set_ing[key].map(elem=>{
+											return(
+												<li class="list-group-item">{elem}</li>
+											)
+										})}
+										</ul>
+									</div>
+								)
+								
+							})}
+							</div>
+							<div className="ui primary button mt-4" onClick={e=>this.onSearch(e)}>Search Again</div>
+						</div>
+					}
+					{
+					this.props.set_ing===undefined&&<div className="inline  mt-4">
 						<div className="ui primary button" onClick={e=>this.onSearch(e)}>Search</div>
 					</div>
-					{this.props.set_ing!==undefined&&
-					<div className="inline">
-						{Object.keys(this.props.set_ing).map(key=>{
-							return(
-								this.props.set_ing[key].map(elem=>{
-									return(
-										<p>{elem}</p>
-									)
-								})
-							)
-						})}
-					</div>
-					}
+					}	
 				</div>
 				<h4>My Recipes</h4>
 				<Link to={{ pathname: "/post"}}>
@@ -79,4 +92,4 @@ const mapStateToProps = state => ({
 
 });
 
-export default connect(mapStateToProps, {checkLoggedIn,setIng})(ContributorPage);
+export default connect(mapStateToProps, {checkLoggedIn,searchIng})(ContributorPage);

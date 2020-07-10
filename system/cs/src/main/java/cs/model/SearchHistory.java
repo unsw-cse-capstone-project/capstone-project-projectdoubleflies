@@ -10,13 +10,15 @@ public class SearchHistory {
 
 		@Override
 		public String convertToDatabaseColumn(List<String> attribute) {
-			// TODO Auto-generated method stub
+			System.out.println("Attribute");
+			System.out.println(attribute.toString());
 			return String.join(",", attribute); 
 		}
 
 		@Override
 		public List<String> convertToEntityAttribute(String dbData) {
-			// TODO Auto-generated method stub
+			System.out.println("dbData");
+			System.out.println(dbData);
 			return new ArrayList<>(Arrays.asList(dbData.split(",")));
 		}
 		
@@ -66,6 +68,7 @@ public class SearchHistory {
 	// if this is first time to search the set of ingredients
 	public void setIngredients(List<String> ingredients) {
 		this.Ingredients = ingredients;
+		this.setMeal(ingredients);
 		this.setFrequency(1);
 	}
     

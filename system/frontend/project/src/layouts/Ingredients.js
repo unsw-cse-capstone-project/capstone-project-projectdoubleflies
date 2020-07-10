@@ -28,7 +28,7 @@ class Ingredients extends Component {
 			Object.assign(t, this.state.selected)
 		else 
 			Object.assign(t, localStorage.getItem("map"))
-
+		console.log(temp)
 		if(temp!==null)
 			this.setState({
 				type: temp["type"],
