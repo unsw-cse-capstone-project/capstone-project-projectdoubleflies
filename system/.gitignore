@@ -11,6 +11,7 @@ ivy-cache
 jxl.log
 jmx.log
 derby.log
+application.properties
 spring-test/test-output/
 .gradle
 argfile*
