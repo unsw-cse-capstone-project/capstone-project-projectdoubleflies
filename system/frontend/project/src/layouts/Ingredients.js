@@ -21,7 +21,9 @@ class Ingredients extends Component {
 
 	componentDidMount() {
 		this.props.fetchIngredients()
-		const temp=JSON.parse(localStorage.getItem("search"))
+		let temp=null
+		if(localStorage.getItem("search")!==null)
+			temp =JSON.parse(localStorage.getItem("search"))
 		const t={}
 		if(localStorage.getItem("map")===null)
 			Object.assign(t, this.state.selected)
