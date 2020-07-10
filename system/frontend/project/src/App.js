@@ -27,9 +27,9 @@ function App() {
               <PrivateRoute path="/edit/:id" component={ViewRecipe}/>
               <PrivateRoute path="/contributor/view/:id" component={ViewRecipe}/>
               <PrivateRoute path="/contributor" component={ContributorPage}/>
-              <Route path="/recipes" component={PublicPage}/>
+              <Route path="/" component={PublicPage}/>
               <Route path="/explorer" component={ExplorerPage}/>
-              <Route path="/" component={HomePage}/>
+              {/* <Route path="/" component={HomePage}/> */}
             </Switch>
           </BrowserRouter>
         </div>
