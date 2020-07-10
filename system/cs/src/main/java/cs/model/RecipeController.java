@@ -201,8 +201,14 @@ public class RecipeController {
     	return temp;
     	
     }
-    
-    
+	
+	@PostMapping("/test1")
+    public List<Recipe> test(){
+		List<String> ingredients = new ArrayList<>();
+		ingredients.add("egg");
+		return recipeInfoRepository.ing(ingredients);
+
+	}
     public void addSearch(List<String> ingredient) {
     	
     	Collections.sort(ingredient);
@@ -225,7 +231,7 @@ public class RecipeController {
     
 	
     @GetMapping("/recipe/MostPopular")
-    public List<String> popular(){
+    public List<BigInteger> popular(){
     	return searchrepo.search_history();
     }
     @GetMapping("/test/recipe")
@@ -254,11 +260,11 @@ public class RecipeController {
     	
     }
     
-    @GetMapping("/test")
-    public List<SearchHistory> helper() {
+    // @GetMapping("/test")
+    // public List<SearchHistory> helper() {
     	
-    	return searchrepo.help();
-    }
+    // 	return searchrepo.help();
+    // }
 
     @GetMapping("/search/{id}")
     public List<String> historyResult(@PathVariable Long id){

@@ -32,12 +32,12 @@ class Ingredients extends Component {
 		if(temp!==null)
 			this.setState({
 				type: temp["type"],
-				selected: t
+				// selected: t
 			})
-		else 
-			this.setState({
-				selected: t
-			})
+		// else 
+		// 	this.setState({
+		// 		selected: t
+		// 	})
 	}
 
 	onClick=(e)=>{
@@ -46,6 +46,7 @@ class Ingredients extends Component {
 			Object.assign(temp, this.state.selected);
 			temp[e.target.name][e.target.value]=true
 			let num=this.state.num_selected
+			console.log(temp)
 			this.setState({
 				selected: temp,
 				num_selected: num+1
@@ -55,6 +56,7 @@ class Ingredients extends Component {
 			Object.assign(temp, this.state.selected);
 			temp[e.target.name][e.target.value]=!this.state.selected[e.target.name][e.target.value]
 			let num=this.state.selected[e.target.name][e.target.value]===false? this.state.num_selected-1: this.state.num_selected+1
+			console.log(temp)
 			this.setState({
 				selected: temp,
 				num_selected: num
@@ -63,12 +65,12 @@ class Ingredients extends Component {
 	}
 
 	onDelete=(e)=>{
-		e.preventDefault()
 		const key = e.target.getAttribute('name')
 		const value = e.target.getAttribute('value')
 		const temp={}
 		Object.assign(temp, this.state.selected);
 		temp[key][value]=!this.state.selected[key][value]
+		console.log(temp)
 		this.setState({
 			selected: temp
 		})
@@ -124,12 +126,15 @@ class Ingredients extends Component {
 		})
 	}
 	render() {
+		console.log(this.props.ingredients)
+		console.log(this.state.selected)
 		let checkbox=<div></div>
 		// if not null:
 		// let ingredients={Dairy: ["milk", "egg"], Vegetables:["tomato"], "Baking & Grains": ["bread"], Spices:["tomato"], Meats: ["bread"],Fish:["tomato"], "Baking & Grains": ["bread"], Seafood:["tomato"], "Baking & Grains": ["bread"],  Sauces:["tomato"], Legumes: ["bread"], Beverages:["b"], Nuts:["nuts"], Alcohol:[], Condiments:[], Oils:[]}
 		// console.log(this.props.ingredients)
 		if(this.props.ingredients!==undefined){
 			checkbox = Object.keys(this.props.ingredients).map((key, id) =>{
+				console.log(this.state.selected[key], key)
 				if(this.state.selected[key]!==undefined){
 					return(
 						<div className="card">
@@ -158,9 +163,10 @@ class Ingredients extends Component {
 				}
 			})
 		}
-		let selected=<div></div>
+		console.log(checkbox)
+		let sel=<div></div>
 		if(this.state.num_selected!==0)
-			selected = Object.keys(this.state.selected).map(key=> {
+			sel = Object.keys(this.state.selected).map(key=> {
 				return(
 					Object.keys(this.state.selected[key]).map(elem=>{
 						if(this.state.selected[key][elem]===true){
@@ -201,7 +207,7 @@ class Ingredients extends Component {
 			)	
 		})
 		if(this.state.num_selected===0){
-			selected=<div>No Ingredients Selected</div>
+			sel=<div>No Ingredients Selected</div>
 		}
 		
 		return (
@@ -234,9 +240,13 @@ class Ingredients extends Component {
 				<div className="col-md-10 overflow-auto">
 					<p className="font-italic h5 d-inline title-margin">Selected</p>
 					<ul className="list-group">
-					{selected}
+					{sel}
 					</ul>
 				</div>
+				
+			</div>
+			<div className="col-md-10 overflow-auto">
+			<button type="submit" className="btn btn-primary" onClick={e=>this.search(e)} data-dismiss="modal"> Search </button>
 			</div>
 			</div>
 			{/* <button type="button" className="btn btn-primary btn-margin" data-toggle="modal" data-target="#modal">
