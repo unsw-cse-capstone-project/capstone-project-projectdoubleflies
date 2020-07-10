@@ -25,4 +25,9 @@ Public user can only view pick ingredients, public view pages.
 
 Week5
 I have added functionalities that contributor can upload recipe image and explorer can view the images.
-We had demo this week to show our website to tutor and had meeting after that. We need to improve our UI design, add constraint to amount for ingredients that amount cannot be negative number.
+We had demo this week to show our website to tutor and had meeting after that. We need to improve our UI design, 
+add constraint to amount for ingredients that amount cannot be negative number.
+
+Week6
+I have added the functionality which notify contributors "most frequently searched set of ingredients which does not have corresponding recipe for it" to 
+give recipe idea for contributors. Updated UI for readability. Changed list of ingredients and instructions UI to table view. changed the select ingredients modal into fixed sidebar in public recipe page. 
