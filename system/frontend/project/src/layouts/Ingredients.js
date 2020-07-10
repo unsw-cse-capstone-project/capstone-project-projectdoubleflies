@@ -30,18 +30,21 @@ class Ingredients extends Component {
 			Object.assign(t, JSON.parse(localStorage.getItem("map")))
 		}
 
-		this.setState({
-			type: temp["type"],
-			selected: t
-		})
+		// this.setState({
+		// 	type: temp["type"],
+		// 	selected: t
+		// })
 			
 		// console.log(temp["type"])
-		// if(temp!==null)
-			
-		// else 
-		// 	this.setState({
-		// 		selected: t
-		// 	})
+		if(temp!==null)
+			this.setState({
+				type: temp["type"],
+				selected: t
+			})
+		else 
+			this.setState({
+				selected: t
+			})
 	}
 
 	onClick=(e)=>{
