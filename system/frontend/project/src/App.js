@@ -26,9 +26,10 @@ function App() {
               <Route path="/view/:id" component={ViewRecipe}/>
               <PrivateRoute path="/edit/:id" component={ViewRecipe}/>
               <PrivateRoute path="/contributor/view/:id" component={ViewRecipe}/>
+              <PrivateRoute path="/explorer" component={ExplorerPage}/>
               <PrivateRoute path="/contributor" component={ContributorPage}/>
               <Route path="/" component={PublicPage}/>
-              <Route path="/explorer" component={ExplorerPage}/>
+              
               {/* <Route path="/" component={HomePage}/> */}
             </Switch>
           </BrowserRouter>

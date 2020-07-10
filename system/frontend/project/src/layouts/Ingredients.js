@@ -16,24 +16,28 @@ class Ingredients extends Component {
 			type: undefined,
 			types: ["Breakfast", "Lunch", "Snack", "Dinner"],
 			selected_type: {"Breakfast": false, "Lunch": false, "Snack": false, "Dinner": false},
-			num_selected: 0
 		}
 	}
 
 	componentDidMount() {
 		this.props.fetchIngredients()
-		const temp=localStorage.getItem("search")
+		const temp=JSON.parse(localStorage.getItem("search"))
 		const t={}
 		if(localStorage.getItem("map")===null)
 			Object.assign(t, this.state.selected)
-		else 
-			Object.assign(t, localStorage.getItem("map"))
-		console.log(temp)
-		if(temp!==null)
-			this.setState({
-				type: temp["type"],
-				// selected: t
-			})
+		else{
+			console.log(localStorage.getItem("map")) 
+			Object.assign(t, JSON.parse(localStorage.getItem("map")))
+		}
+
+		this.setState({
+			type: temp["type"],
+			selected: t
+		})
+			
+		// console.log(temp["type"])
+		// if(temp!==null)
+			
 		// else 
 		// 	this.setState({
 		// 		selected: t
@@ -45,21 +49,17 @@ class Ingredients extends Component {
 			const temp={}
 			Object.assign(temp, this.state.selected);
 			temp[e.target.name][e.target.value]=true
-			let num=this.state.num_selected
 			console.log(temp)
 			this.setState({
 				selected: temp,
-				num_selected: num+1
 			})
 		}else{
 			const temp={}
 			Object.assign(temp, this.state.selected);
 			temp[e.target.name][e.target.value]=!this.state.selected[e.target.name][e.target.value]
-			let num=this.state.selected[e.target.name][e.target.value]===false? this.state.num_selected-1: this.state.num_selected+1
 			console.log(temp)
 			this.setState({
 				selected: temp,
-				num_selected: num
 			})
 		}
 	}
@@ -78,7 +78,7 @@ class Ingredients extends Component {
 
 	search=(e)=>{
 		e.preventDefault();
-		localStorage.setItem("map", this.state.selected)
+		localStorage.setItem("map", JSON.stringify(this.state.selected))
 		const ingredients=[]
 		Object.keys(this.state.selected).map(key=>{
 			Object.keys(this.state.selected[key]).map(elem=>{
@@ -129,9 +129,6 @@ class Ingredients extends Component {
 		console.log(this.props.ingredients)
 		console.log(this.state.selected)
 		let checkbox=<div></div>
-		// if not null:
-		// let ingredients={Dairy: ["milk", "egg"], Vegetables:["tomato"], "Baking & Grains": ["bread"], Spices:["tomato"], Meats: ["bread"],Fish:["tomato"], "Baking & Grains": ["bread"], Seafood:["tomato"], "Baking & Grains": ["bread"],  Sauces:["tomato"], Legumes: ["bread"], Beverages:["b"], Nuts:["nuts"], Alcohol:[], Condiments:[], Oils:[]}
-		// console.log(this.props.ingredients)
 		if(this.props.ingredients!==undefined){
 			checkbox = Object.keys(this.props.ingredients).map((key, id) =>{
 				console.log(this.state.selected[key], key)
@@ -165,20 +162,23 @@ class Ingredients extends Component {
 		}
 		console.log(checkbox)
 		let sel=<div></div>
-		if(this.state.num_selected!==0)
-			sel = Object.keys(this.state.selected).map(key=> {
-				return(
-					Object.keys(this.state.selected[key]).map(elem=>{
-						if(this.state.selected[key][elem]===true){
-							return(
-								<li className="list-group-item">{key}: {elem}<button type="button" className="close" aria-label="Close" onClick={e=>this.onDelete(e)}>
-								<span aria-hidden="true" name={key} value={elem}>&times;</span>
-							</button></li>
-							)
-						}
-					})
-				)
-			});
+		let num=0
+		sel = Object.keys(this.state.selected).map(key=> {
+			return(
+				Object.keys(this.state.selected[key]).map(elem=>{
+					if(this.state.selected[key][elem]===true){
+						num=+1
+						return(
+							<li className="list-group-item">{key}: {elem}<button type="button" className="close" aria-label="Close" onClick={e=>this.onDelete(e)}>
+							<span aria-hidden="true" name={key} value={elem}>&times;</span>
+						</button></li>
+						)
+					}
+				})
+			)
+		});
+		if(num===0)
+			sel=<div>No Ingredients Selected</div>
 
 		let result=<div>You can search</div>
 		result=Object.keys(this.state.result).map(key=>{
@@ -206,17 +206,14 @@ class Ingredients extends Component {
 				</div>
 			)	
 		})
-		if(this.state.num_selected===0){
-			sel=<div>No Ingredients Selected</div>
-		}
 		
 		return (
 			<>
-			<div class="container">
+			<div className="container">
 			<div className="row">
 				<div className="col-md-10 overflow-auto">
 				<label className="font-italic h5 d-inline title-margin">Filter By Meal-Type</label>
-				<div class="custom-control custom-checkbox">
+				<div className="custom-control custom-checkbox">
 					<ul className="list-group">
 					{types}
 				</ul>

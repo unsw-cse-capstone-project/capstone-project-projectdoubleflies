@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchRecipes, fetchUserRecipes, deleteRecipe, searchRecipes} from '../actions/recipeActions'
-import { Button, Icon, Confirm} from 'semantic-ui-react'
+import { Button, Icon} from 'semantic-ui-react'
 
 import { fetchUserFavourite, removeFavourite, addFavourite} from '../actions/explorerActions';
 import { checkLoggedIn } from '../actions/userActions';
@@ -76,7 +76,8 @@ class ListRecipe extends Component {
 	}
 	render() {
 		let temp
-		if(this.state.kind==="recipes"){
+		// console.log(this.state.kind)
+		if(this.state.kind===""){
 			temp = this.props.recipes
 		}else if(this.state.kind==="contributor"){
 			temp = this.props.user_recipes
@@ -99,7 +100,7 @@ class ListRecipe extends Component {
 					</div>
 					</Link>
 					{
-						this.state.kind==="recipes" && this.props.loggedIn &&
+						this.state.kind==="" && this.props.loggedIn &&
 						<div>
 							<Button className="button-margin" as='div' labelPosition='right'/>
 							<Button className="btn-margin" size='mini' color='red' onClick={(e)=>this.addFavourite(e, item.recipeID)}>

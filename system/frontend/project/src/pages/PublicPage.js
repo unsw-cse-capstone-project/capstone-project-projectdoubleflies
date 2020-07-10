@@ -9,13 +9,13 @@ export default class PublicPage extends Component {
 			// <Ingredients/>
 			// <ListRecipe/>
 			// </div>
-			<div class="row py-3">
-				<div class="col-3 sticky-sidebar">
-					<div class="sticky-top">
+			<div className="row py-3">
+				<div className="col-3 sticky-sidebar">
+					<div className="sticky-top">
 					<Ingredients/>
 					</div>
 				</div>
-				<div class="col" id="main">
+				<div className="col" id="main">
 					<ListRecipe/>
 				</div>
 				

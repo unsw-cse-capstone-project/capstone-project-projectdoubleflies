@@ -6,6 +6,7 @@ import { getRecipe, getUserRecipe, fetchRecipes} from '../actions/recipeActions'
 import { checkLoggedIn } from '../actions/userActions'
 import { PropTypes } from 'prop-types'
 import { Spinner } from 'react-bootstrap'
+import { Button, Icon} from 'semantic-ui-react'
 class ViewRecipe extends Component {
 
 	constructor(props) {
@@ -125,9 +126,18 @@ class ViewRecipe extends Component {
 							return(<li class="list-group-item">Step {index+1}:{item}</li>)
 						})}
 					</ul> */}
-					{this.state.showEdit===true && <Link to={{ pathname: `/edit/${data.recipeID}` }}>
-						<button type="button" id={`edit`} className="btn btn-danger" onClick={this.editRecipe}>Edit</button>
-					</Link>}
+					{
+						<div>
+							<Button className="button-margin" as='div' labelPosition='right'/>
+							<Button className="btn-margin" size='mini' onClick={this.editRecipe}>
+							<Icon name='edit' />
+							Edit
+							</Button>
+						</div>
+					// this.state.showEdit===true && <Link to={{ pathname: `/edit/${data.recipeID}` }}>
+					// 	<button type="button" id={`edit`} className="btn btn-danger" onClick={this.editRecipe}>Edit</button>
+					// </Link>
+					}
 					
 				</div>
 			)
