@@ -29,7 +29,17 @@ for the website to run and successfully implement the function. At the same time
 more time and communication are required to ensure the successful completion of the tasks.
 
 Week5
-We sucessfully showed demo for our tutor, and it seems that everything is fine except that the front-end page is too simple and needs some improvement.
-In addition, because of the active cooperation of the team members, we performed retrospective immediately after the demo. Everyone proposed respectively good things to be done from the beginning of the project to the present and areas that need to be improved. Everyone was very positive. This made the whole process go very smoothly. Next, continue to follow the project plan, hoping to complete more user stories on time.
+We sucessfully showed demo for our tutor, and it seems that everything is fine except that the front-end page is too simple and needs some 
+improvement.In addition, because of the active cooperation of the team members, we performed retrospective immediately after the demo. 
+Everyone proposed respectively good things to be done from the beginning of the project to the present and areas that need to be improved. 
+Everyone was very positive. This made the whole process go very smoothly. Next, continue to follow the project plan, hoping to complete more
+user stories on time.
 
+Week6
+This week is a flexibility week, so in order for everyone to have a good rest adjustment in this week, there is no offline meeting, 
+but for the project to continue smoothly, we still follow the project plan we wrote to complete more functionalities. At present, 
+it seems that the overall completion is good, and also submitted retrospective A immediately after the fifth week of meeting, 
+and also sent an email to tutor hoping to have time to check. The next week is the seventh week. Near the end of the period, 
+we need to work harder to complete the task, and we need to conduct an overall inspection during the tenth week to ensure 
+that the website can show perfectly
 
