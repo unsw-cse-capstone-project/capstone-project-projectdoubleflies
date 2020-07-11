@@ -1,4 +1,5 @@
 <#assign base=springMacroRequestContext.getContextUrl("")>
+<#assign base=springMacroRequestContext.getContextUrl("")>
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
 <head>
@@ -62,15 +63,15 @@
                     </a>
                 </div>
 
-            <#if Session.user??>
-                <a href="/logout">
-                    <img src="${base}/images/user2.png" class="user-img">
-                </a>
-            <#else>
-                <a href="/login">
-                    <img src="${base}/images/user.png" class="user-img">
-                </a>
-            </#if>
+                <#if Session.user??>
+                    <a href="/logout">
+                        <img src="${base}/images/user2.png" class="user-img">
+                    </a>
+                <#else>
+                    <a href="/login">
+                        <img src="${base}/images/user.png" class="user-img">
+                    </a>
+                </#if>
 
             </div>
         </div>
@@ -86,21 +87,7 @@
 </nav>
 <!-- /菜单栏 -->
 
-<!-- 轮播图 -->
-<section class="layui-carousel" id="test1">
-    <div carousel-item>
-        <div>
-            <img src="${base}/images/1010.jpg">
-        </div>
-        <div>
-            <img src="${base}/images/1005.jpg">
-        </div>
-        <div>
-            <img src="${base}/images/1006.jpg">
-        </div>
-    </div>
-</section>
-<!-- 轮播图 -->
+
 
 
 <section class="layui-container" id="section0">
@@ -117,14 +104,14 @@
     <div class="layui-row">
         <div class="layui-collapse">
             <#list recipeList as item>
-                    <div class="layui-colla-item">
-                        <h2 class="layui-colla-title" style="font-size: 18px">${item.name}</h2>
-                        <div class="layui-colla-content">
-                            ${item.ingredients}
-                            <br><br>
-                            ${item.steps}
-                        </div>
+                <div class="layui-colla-item">
+                    <h2 class="layui-colla-title" style="font-size: 18px">${item.name}</h2>
+                    <div class="layui-colla-content">
+                        ${item.ingredients}
+                        <br><br>
+                        ${item.steps}
                     </div>
+                </div>
             </#list>
 
         </div>
@@ -259,25 +246,6 @@
         </div>
     </div>
 
-    <div class="layui-container">
-        <div class="layui-row">
-            <div class="layui-carousel" id="test10">
-                <div carousel-item="">
-                    <div>
-                        <img src="${base}/images/1009.jpg">
-                    </div>
-                    <div>
-                        <img src="${base}/images/1011.jpg">
-                    </div>
-                    <div>
-                        <img src="${base}/images/1012.jpg">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- /section3 -->
 
 
 <style type="text/css">
@@ -332,12 +300,7 @@
                     <div class="pull-left">
                         <div class="tuandui" style="margin-top: 25px;">
                             Follow us
-                        </div>
-                        <div class="wb-wx-img" style="margin-top: 90px;">
-                            <img src="${base}/images/微博.png"/>
-                            <img src="${base}/images/微信.png"/>
-                        </div>
-                    </div>
+
 
                     <div class="pull-right" style="margin-top: 25px;">
                         <div class="tuandui">
@@ -401,14 +364,14 @@
         // 建造实例
         carousel.render({
             elem: '#test1'
-            , width: '100%' // 设置容器宽度。 设置100%自动适应宽度
-            , interval: '3000' //自动切换的时间间隔，单位：ms（毫秒），不能低于800
-            , height: '560px' // 设置容器宽度
-            , arrow: 'always' //始终显示箭头
-            //,anim: 'updown' //切换动画方式
+            , width: '100%' 
+            , interval: '3000'
+            , height: '560px' 
+            , arrow: 'always' 
+            //,anim: 'updown' 
         });
 
-        // 图片轮播
+    
         carousel.render({
             elem: '#test10'
             , width: '100%'
@@ -422,4 +385,3 @@
 
 </body>
 </html>
-
