@@ -294,6 +294,13 @@ public class RecipeController {
 		}
 		return map;
 	}
+	
+	@GetMapping("/search/popularNoMatch")
+	public List<String> popularNoMatch(){
+		BigInteger popularNoMatchID = searchrepo.popularSearchNoMatch();
+		List<String> result = searchrepo.history(popularNoMatchID);
+		return result;
+	}
     // public Map<String, List<Ingredient>> test(){
     // 	Set<String> name = new HashSet<>();
     // 	Map<String, List<Ingredient>> map = new HashMap<>();
