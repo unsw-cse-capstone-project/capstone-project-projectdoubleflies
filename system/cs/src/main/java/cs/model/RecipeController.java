@@ -301,6 +301,7 @@ public class RecipeController {
 		List<String> result = searchrepo.history(popularNoMatchID);
 		return result;
 	}
+	
     // public Map<String, List<Ingredient>> test(){
     // 	Set<String> name = new HashSet<>();
     // 	Map<String, List<Ingredient>> map = new HashMap<>();
@@ -322,6 +323,16 @@ public class RecipeController {
     // 	map.put("diary", l);*/
     // 	return map;
     // }
+	
+	@GetMapping("/suggest/ingredient")
+	public String suggestIngredient(@RequestBody List<String> selectedIngredients) {
+		Collections.sort(selectedIngredients);
+		String searchStr = String.join(",%", selectedIngredients);
+		searchStr = "%," + searchStr + ",%";
+		String result = recipeInfoRepository.suggestIngredient(searchStr);
+		return result;
+	}
+	
     @PostMapping("/recommend/recipe")
     public List<Recipe> recommendRecipe(@RequestBody List<String> ingredient){
     	List<Recipe> recipe = recipeInfoRepository.findAll();
