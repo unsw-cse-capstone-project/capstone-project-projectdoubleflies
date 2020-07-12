@@ -50,11 +50,12 @@ public interface RecipeInfoRepository extends JpaRepository<Recipe, Integer> {
     		"select ii.recipeid as rid " + 
     		"from ingredient_info ii " + 
     		"group by ii.recipeid " + 
-    		"having concat(\",\", GROUP_CONCAT(ii.ingredient order by ii.ingredient ASC), \",\") LIKE ?1 " + 
+    		"having GROUP_CONCAT(concat(\",\", trim(ii.ingredient), \",\") order by trim(ii.ingredient) ASC separator '') LIKE ?1 " + 
     		"order by ii.recipeid ASC " + 
     		") " + 
     		"group by ii.ingredient " + 
-    		"having ?1 NOT LIKE concat(\"%,\", ii.ingredient ,\",%\")" +
+    		"having ?1 NOT LIKE concat(\"%,\", trim(ii.ingredient) ,\",%\")" +
+    		"order by COUNT(ii.ingredient) DESC " +
     		") as v3 " +
     		"limit 1", nativeQuery=true)
     String suggestIngredient(String ingredientsSearch);

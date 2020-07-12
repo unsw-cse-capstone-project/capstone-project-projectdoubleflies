@@ -327,7 +327,7 @@ public class RecipeController {
 	@GetMapping("/suggest/ingredient")
 	public String suggestIngredient(@RequestBody List<String> selectedIngredients) {
 		Collections.sort(selectedIngredients);
-		String searchStr = String.join(",%", selectedIngredients);
+		String searchStr = String.join(",%,", selectedIngredients);
 		searchStr = "%," + searchStr + ",%";
 		String result = recipeInfoRepository.suggestIngredient(searchStr);
 		return result;

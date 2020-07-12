@@ -30,18 +30,19 @@ public interface searchRepository extends JpaRepository<SearchHistory, Long>{
     		"( " + 
     		"select v1.sid from " + 
     		"( " + 
-    		"(select si.searchid as sid, GROUP_CONCAT(si.ingredient order by si.ingredient ASC) as in1, sh.frequency as freq1 " + 
+    		"(select si.searchid as sid, GROUP_CONCAT(trim(si.ingredient) order by trim(si.ingredient) ASC) as in1, sh.frequency as freq1 " + 
     		"from searchistory_Info si " + 
     		"join SearchHistory sh on (sh.searchid = si.searchid) " + 
     		"group by si.searchid) as v1," + 
-    		"(select ii.recipeid as rid, GROUP_CONCAT(ii.ingredient order by ii.ingredient ASC) as in2 " + 
+    		"(select ii.recipeid as rid, GROUP_CONCAT(concat(\",\", trim(ii.ingredient), \",\") order by trim(ii.ingredient) ASC separator '') as in2 " + 
     		"from ingredient_info ii " + 
     		"group by ii.recipeid " + 
     		"order by ii.recipeid ASC) as v2 " + 
     		") " + 
-    		"where concat(\",\", v2.in2, \",\") LIKE concat(\"%,\", replace(v1.in1, \",\" , \",%\"), \",%\") " + 
+    		"where v2.in2 LIKE concat(\"%,\", replace(v1.in1, \",\" , \",%,\"), \",%\") " + 
     		") " + 
-    		"order by v1.freq1 DESC;", nativeQuery=true)
+    		"order by v1.freq1 DESC " +
+    		"limit 1", nativeQuery=true)
      BigInteger popularSearchNoMatch();
 
 
