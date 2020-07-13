@@ -324,7 +324,7 @@ public class RecipeController {
     // 	return map;
     // }
 	
-	@GetMapping("/suggest/ingredient")
+	@PostMapping("/suggest/ingredient")
 	public String suggestIngredient(@RequestBody List<String> selectedIngredients) {
 		Collections.sort(selectedIngredients);
 		String searchStr = String.join(",%,", selectedIngredients);

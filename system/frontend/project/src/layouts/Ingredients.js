@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { fetchIngredients } from '../actions/explorerActions'
+import { fetchIngredients, suggestIngredients } from '../actions/explorerActions'
 import { searchRecipes } from '../actions/recipeActions'
 import { Container } from 'semantic-ui-react'
 class Ingredients extends Component {
@@ -16,11 +16,13 @@ class Ingredients extends Component {
 			type: undefined,
 			types: ["Breakfast", "Lunch", "Snack", "Dinner"],
 			selected_type: {"Breakfast": false, "Lunch": false, "Snack": false, "Dinner": false},
+			ingredients: []
 		}
 	}
 
 	componentDidMount() {
 		this.props.fetchIngredients()
+		this.props.suggestIngredients([])
 		let temp=null
 		if(localStorage.getItem("search")!==null)
 			temp =JSON.parse(localStorage.getItem("search"))
@@ -31,13 +33,6 @@ class Ingredients extends Component {
 			console.log(localStorage.getItem("map")) 
 			Object.assign(t, JSON.parse(localStorage.getItem("map")))
 		}
-
-		// this.setState({
-		// 	type: temp["type"],
-		// 	selected: t
-		// })
-			
-		// console.log(temp["type"])
 		if(temp!==null)
 			this.setState({
 				type: temp["type"],
@@ -54,17 +49,27 @@ class Ingredients extends Component {
 			const temp={}
 			Object.assign(temp, this.state.selected);
 			temp[e.target.name][e.target.value]=true
-			console.log(temp)
+			const ing=[...this.state.ingredients]
+			ing.push(e.target.value)
+			this.props.suggestIngredients(ing)
 			this.setState({
 				selected: temp,
+				ingredients: ing
 			})
 		}else{
 			const temp={}
 			Object.assign(temp, this.state.selected);
 			temp[e.target.name][e.target.value]=!this.state.selected[e.target.name][e.target.value]
-			console.log(temp)
+
+			let ing=[...this.state.ingredients]
+			if(temp[e.target.name][e.target.value]===true)
+				ing.push(e.target.value)
+			else 
+				ing=ing.filter(i => i!==e.target.value);
+				this.props.suggestIngredients(ing)
 			this.setState({
 				selected: temp,
+				ingredients: ing
 			})
 		}
 	}
@@ -75,7 +80,6 @@ class Ingredients extends Component {
 		const temp={}
 		Object.assign(temp, this.state.selected);
 		temp[key][value]=!this.state.selected[key][value]
-		console.log(temp)
 		this.setState({
 			selected: temp
 		})
@@ -106,7 +110,6 @@ class Ingredients extends Component {
 				}
 			})
 		})
-		console.log(temp)
 		this.setState({
 			result: temp
 		})
@@ -131,8 +134,6 @@ class Ingredients extends Component {
 		})
 	}
 	render() {
-		console.log(this.props.ingredients)
-		console.log(this.state.selected)
 		let checkbox=<div></div>
 		if(this.props.ingredients!==undefined){
 			checkbox = Object.keys(this.props.ingredients).map((key, id) =>{
@@ -165,7 +166,6 @@ class Ingredients extends Component {
 				}
 			})
 		}
-		console.log(checkbox)
 		let sel=<div></div>
 		let num=0
 		sel = Object.keys(this.state.selected).map(key=> {
@@ -189,7 +189,6 @@ class Ingredients extends Component {
 		result=Object.keys(this.state.result).map(key=>{
 			return(
 				Object.keys(this.state.result[key]).map(elem=>{
-					console.log(key, elem)
 					return(
 						<div className="form-check text-left">
 						<input name={key} value={elem} type="checkbox" className="form-check-input" checked={this.state.selected[key][elem]} onChange={e=>this.onClick(e)}/>
@@ -231,6 +230,12 @@ class Ingredients extends Component {
 					<button className="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
 					</div>
 				</form>
+				{this.props.suggestions!=="" &&<div className="card m-1">
+					<div class="card-body">Suggested Ingredients <br/> {this.props.suggestions}</div>
+				</div>}
+				{this.props.suggestions==="" &&<div className="card m-1">
+					<div class="card-body">No Suggestions</div>
+				</div>}
 				<div className="form-check">
 				{result}
 				</div>
@@ -393,10 +398,11 @@ class Ingredients extends Component {
 
 
 const mapStateToProps = state => ({
-	ingredients: state.explorers.ingredients
+	ingredients: state.explorers.ingredients,
+	suggestions: state.explorers.suggestions
 })
 
-export default connect(mapStateToProps, {fetchIngredients, searchRecipes})(Ingredients)
+export default connect(mapStateToProps, {fetchIngredients, searchRecipes, suggestIngredients})(Ingredients)
 
 
 

@@ -1,9 +1,10 @@
-import { FETCH_INGREDIENTS, PICK_INGREDIENT, ADD_FAVOURITE, FETCH_USER_FAVOURITES, REMOVE_FAVOURITE, SEARCH_RECIPE } from '../actions/types';
+import { FETCH_INGREDIENTS, PICK_INGREDIENT, ADD_FAVOURITE, FETCH_USER_FAVOURITES, REMOVE_FAVOURITE, SEARCH_RECIPE, SUGGEST_INGREDIENTS } from '../actions/types';
 
 const initialState ={
 	ingredients: {},
 	favs:[],
 	picked: [],
+	suggestions: ""
 }
 export default function(state=initialState, action){
 	switch (action.type){
@@ -48,6 +49,12 @@ export default function(state=initialState, action){
 			return {
 				...state, 
 				favs: action.payload
+			}
+		
+		case SUGGEST_INGREDIENTS:
+			return {
+				...state,
+				suggestions: action.payload
 			}
 		default:
 			return state

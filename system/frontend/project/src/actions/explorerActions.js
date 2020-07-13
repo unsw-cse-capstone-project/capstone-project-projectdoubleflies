@@ -1,4 +1,4 @@
-import { FETCH_INGREDIENTS, PICK_INGREDIENT, FETCH_USER_FAVOURITES,  ADD_FAVOURITE, REMOVE_FAVOURITE} from './types'
+import { FETCH_INGREDIENTS, PICK_INGREDIENT, FETCH_USER_FAVOURITES,  ADD_FAVOURITE, REMOVE_FAVOURITE, SUGGEST_INGREDIENTS} from './types'
 import axios from 'axios';
 
 const apiUrl = "http://localhost:8080";
@@ -61,4 +61,16 @@ export const removeFavourite = (username, id) => dispatch => {
 	})
 }
 
+export const suggestIngredients = (ingredients) => dispatch => {
+	console.log("suggestIngredients")
+	console.log(ingredients)
+	axios.post(`${apiUrl}/suggest/ingredient`, ingredients)
+	.then(response => {
+		console.log(response.data)
+		dispatch({
+			type: SUGGEST_INGREDIENTS,
+			payload: response.data
+		})
+	})
+}
 
