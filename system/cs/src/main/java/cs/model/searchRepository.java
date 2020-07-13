@@ -40,9 +40,8 @@ public interface searchRepository extends JpaRepository<SearchHistory, Long>{
     		"order by ii.recipeid ASC) as v2 " + 
     		") " + 
     		"where v2.in2 LIKE concat(\"%,\", replace(v1.in1, \",\" , \",%,\"), \",%\") order by v1.freq1 DESC" + 
-    		") " + 
-    		"limit 1", nativeQuery=true)
-     BigInteger popularSearchNoMatch();
+    		")", nativeQuery=true)
+     List<BigInteger> popularSearchNoMatch();
 
 
     //  @Query(value="select searchID from SearchHistory where searchID not in"

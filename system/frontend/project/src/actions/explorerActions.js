@@ -62,8 +62,6 @@ export const removeFavourite = (username, id) => dispatch => {
 }
 
 export const suggestIngredients = (ingredients) => dispatch => {
-	console.log("suggestIngredients")
-	console.log(ingredients)
 	axios.post(`${apiUrl}/suggest/ingredient`, ingredients)
 	.then(response => {
 		console.log(response.data)

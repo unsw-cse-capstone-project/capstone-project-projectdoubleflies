@@ -161,9 +161,8 @@ export const getImage = (id) => dispatch => {
 }
 
 export const searchIng = ()=>dispatch => {
-	axios.get(`${apiUrl}/recipeidea`)
+	axios.get(`${apiUrl}/search/popularNoMatch`)
 	.then(response=> {
-		console.log(response.data)
 		dispatch({
 			type: SET_INGREDIENTS,
 			payload: response.data
