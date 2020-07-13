@@ -48,18 +48,20 @@ class ContributorPage extends Component {
 						<div className="inline">
 							
 							<h3>Results</h3>
-							<div class="card-group">
-							{Object.keys(this.props.set_ing).map(key=>{
+							<div className="row">
+							{this.props.set_ing.constructor == Object && Object.keys(this.props.set_ing).map(key=>{
 								
 								return(
-									<div class="card" style={{width: 18 + 'em'}}>
-										<ul class="list-group list-group-flush ">
+									<div className="col-sm-6">
+									<div className="card" style={{width: 18 + 'em'}}>
+										<ul className="list-group list-group-flush  ">
 										{this.props.set_ing[key].map(elem=>{
 											return(
-												<li class="list-group-item">{elem}</li>
+												<li className="list-group-item">{elem}</li>
 											)
 										})}
 										</ul>
+									</div>
 									</div>
 								)
 								
