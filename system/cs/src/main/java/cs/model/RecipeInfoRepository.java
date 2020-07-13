@@ -41,6 +41,25 @@ public interface RecipeInfoRepository extends JpaRepository<Recipe, Integer> {
     @Query(value="SELECT  FROM ingredient_info i",nativeQuery=true)
     List<Ingredient> search();
     
+    @Query(value="select ingredient from " +
+    		"( " + 
+    		"select ii.ingredient, COUNT(ii.ingredient) " + 
+    		"from ingredient_info ii " + 
+    		"where ii.recipeid in " + 
+    		"( " + 
+    		"select ii.recipeid as rid " + 
+    		"from ingredient_info ii " + 
+    		"group by ii.recipeid " + 
+    		"having GROUP_CONCAT(concat(\",\", trim(ii.ingredient), \",\") order by trim(ii.ingredient) ASC separator '') LIKE ?1 " + 
+    		"order by ii.recipeid ASC " + 
+    		") " + 
+    		"group by ii.ingredient " + 
+    		"having ?1 NOT LIKE concat(\"%,\", trim(ii.ingredient) ,\",%\")" +
+    		"order by COUNT(ii.ingredient) DESC " +
+    		") as v3 " +
+    		"limit 1", nativeQuery=true)
+    String suggestIngredient(String ingredientsSearch);
+    
   @Query(value="select * from Recipe where recipeid IN (select recipeid from (select r.recipeid, "
     		+ "count(distinct i.ingredient) as ct from Recipe r join ingredient_info i on r.recipeid=i.recipeid "
     		+ "join (select i2.ingredient from ingredient_info i2 where i2.ingredient IN :ingredients) as t "
