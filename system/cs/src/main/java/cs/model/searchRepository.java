@@ -24,9 +24,9 @@ public interface searchRepository extends JpaRepository<SearchHistory, Long>{
     @Query(value="select searchID from searchHistory where searchID not in (select distinct(s.searchID) from searchistory_Info s where exists (select recipeID from ingredient_info r join searchistory_Info s1 on s1.ingredient=r.ingredient where s1.searchID=s.searchID group by r.recipeID having count(distinct r.ingredient)=(select count(distinct s2.ingredient) from searchistory_Info s2 where s2.searchID=s.searchID))) ORDER BY frequency DESC", nativeQuery = true)
     List<BigInteger> search_history();
     
-    @Query(value="select v1.sid " + 
-    		"from v1 " + 
-    		"where v1.sid not in " + 
+    @Query(value="select searchID " + 
+    		"from searchistory_Info " + 
+    		"where searchID not in " + 
     		"( " + 
     		"select v1.sid from " + 
     		"( " + 
@@ -39,9 +39,8 @@ public interface searchRepository extends JpaRepository<SearchHistory, Long>{
     		"group by ii.recipeid " + 
     		"order by ii.recipeid ASC) as v2 " + 
     		") " + 
-    		"where v2.in2 LIKE concat(\"%,\", replace(v1.in1, \",\" , \",%,\"), \",%\") " + 
+    		"where v2.in2 LIKE concat(\"%,\", replace(v1.in1, \",\" , \",%,\"), \",%\") order by v1.freq1 DESC" + 
     		") " + 
-    		"order by v1.freq1 DESC " +
     		"limit 1", nativeQuery=true)
      BigInteger popularSearchNoMatch();
 

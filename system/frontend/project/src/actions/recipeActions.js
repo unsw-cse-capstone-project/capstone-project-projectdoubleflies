@@ -161,8 +161,7 @@ export const getImage = (id) => dispatch => {
 }
 
 export const searchIng = ()=>dispatch => {
-	console.log("ing")
-	axios.get(`${apiUrl}/recipeidea`)
+	axios.get(`${apiUrl}/search/popularNoMatch`)
 	.then(response=> {
 		console.log(response.data)
 		dispatch({

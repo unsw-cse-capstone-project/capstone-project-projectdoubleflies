@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { fetchIngredients, suggestIngredients } from '../actions/explorerActions'
 import { searchRecipes } from '../actions/recipeActions'
-import { Container } from 'semantic-ui-react'
+import { Button, Icon} from 'semantic-ui-react'
 class Ingredients extends Component {
 	constructor(props) {
 		super(props);
@@ -215,6 +215,11 @@ class Ingredients extends Component {
 			<>
 			<div className="container">
 			<div className="row">
+				{/* <Button className="button-margin" as='div' labelPosition='right'/> 
+				<Button className="btn-margin" color='red' size='mini' onClick={(e)=>this.props.popularRecipes()}>
+					<Icon name='hand peace outline'/>
+					See Popular Recipes
+				</Button> */}
 				<div className="col-md-10 overflow-auto">
 				<label className="font-italic h5 d-inline title-margin">Filter By Meal-Type</label>
 				<div className="custom-control custom-checkbox">
