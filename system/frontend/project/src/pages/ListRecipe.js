@@ -44,8 +44,8 @@ class ListRecipe extends Component {
 		this.setState({
 			kind: kind
 		})
-		if(kind==="recipes"){
-			if(kind==="recipes"){
+		if(kind===""){
+			if(kind===""){
 				const temp=localStorage.getItem("search")
 				if(temp!==null)
 					this.props.searchRecipes(temp["ingredients"], temp["type"])
