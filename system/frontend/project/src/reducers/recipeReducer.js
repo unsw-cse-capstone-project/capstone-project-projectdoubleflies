@@ -25,7 +25,8 @@ export default function(state = initialState, action) {
 
 			return {
 				...state, 
-				items: action.payload
+				items: action.payload,
+				set_ing: undefined,
 			}
 
 		case FETCH_USER_RECIPES:
@@ -56,7 +57,7 @@ export default function(state = initialState, action) {
 				item: action.payload,
 				deleted: false,
 				posted: false,
-				saved: false
+				saved: false,
 			}
 
 		case GET_USER_RECIPE:
@@ -91,11 +92,10 @@ export default function(state = initialState, action) {
 			}
 
 		case SEARCH_RECIPE:
-			console.log("search")
-			console.log(action.payload)
 			return {
 				...state,
-				items: action.payload
+				items: action.payload,
+				set_ing:undefined
 			}
 		
 		case GET_IMAGE:
