@@ -98,3 +98,8 @@ img.image {
 .form-padding {
     padding-bottom: 30px;
 }
+
+.img-view {
+    max-width: 1300px;
+    display: inline-block;
+}

@@ -74,8 +74,8 @@ class ViewRecipe extends Component {
 			return(
 				<div className="container pb-5">
 					<h1 className="text-monospace">{data.title}</h1>
-					{this.props.recipe.img!==undefined && <div className="card mb-4">
-						<img className="img-fluid " src={URL.createObjectURL(this.dataURLtoFile(data.img))} alt="Card image cap"/>
+					{this.props.recipe.img!==undefined && <div className="card mb-4 img-view">
+						<img className="img-fluid" src={URL.createObjectURL(this.dataURLtoFile(data.img))} alt="Card image cap"/>
 						<div class="card-body">
 							<h5>Description</h5>
 							<p class="card-text">{data.description}</p>
@@ -126,7 +126,7 @@ class ViewRecipe extends Component {
 							return(<li class="list-group-item">Step {index+1}:{item}</li>)
 						})}
 					</ul> */}
-					{
+					{this.state.showEdit===true && 
 						<div>
 							<Button className="button-margin" as='div' labelPosition='right'/>
 							<Button className="btn-margin" size='mini' onClick={this.editRecipe}>
