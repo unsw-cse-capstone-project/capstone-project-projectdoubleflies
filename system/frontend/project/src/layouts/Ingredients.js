@@ -215,7 +215,7 @@ class Ingredients extends Component {
 		return (
 			<>
 			<div className="container">
-			<div className="row">
+			<div className="row bg-white text-dark">
 				{/* <Button className="button-margin" as='div' labelPosition='right'/> 
 				<Button className="btn-margin" color='red' size='mini' onClick={(e)=>this.props.popularRecipes()}>
 					<Icon name='hand peace outline'/>
@@ -256,11 +256,11 @@ class Ingredients extends Component {
 					{sel}
 					</ul>
 				</div>
-				
+				<div className="col-md-10 m-1">
+				<button type="submit" className="btn btn-primary" onClick={e=>this.search(e)} data-dismiss="modal"> Search </button>
+				</div>
 			</div>
-			<div className="col-md-10 overflow-auto">
-			<button type="submit" className="btn btn-primary" onClick={e=>this.search(e)} data-dismiss="modal"> Search </button>
-			</div>
+			
 			</div>
 			{/* <button type="button" className="btn btn-primary btn-margin" data-toggle="modal" data-target="#modal">
   				Pick Ingredients
