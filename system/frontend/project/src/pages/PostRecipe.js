@@ -88,12 +88,11 @@ class PostRecipe extends Component {
     this.setState(
       {instruction_rows: this.state.instruction_rows.concat(
           [
-            ""
+            undefined
           ]
         ),
       }
     );
-    console.log(this.state.instruction_rows)
   }
 
   deleteInstruction=(e, id)=>{
@@ -122,11 +121,12 @@ class PostRecipe extends Component {
     this.setState(
       {ingredient_rows: this.state.ingredient_rows.concat(
             [
-               {ingredient: "", category:"", amount:""}
+               {ingredient: undefined, category:undefined, amount:undefined, unit: undefined}
             ]
          ),
       }
     )
+    console.log(this.state.ingredient_rows)
   }
 
   deleteIngredient=(e, id)=>{
@@ -236,7 +236,8 @@ class PostRecipe extends Component {
     var array = [...this.state.selections];
     array = array.filter(e=>e!==chosen)
     this.setState(
-      {chosen: event.target.value,
+      {
+        chosen: event.target.value,
         display: array
       }
     )
@@ -291,30 +292,6 @@ class PostRecipe extends Component {
     }
     
   }
-
-  // onSave = (event)=>{
-  //   event.preventDefault();
-  //   var obj = JSON.parse(localStorage.getItem("username"));
-   
-  //   if(obj===null){
-  //     alert("Please Login First")
-  //     return
-  //   }
-  //   obj.id = obj.username;
-  //   delete obj.username;
-  //   var temp ={
-  //     recipeID: this.state.id,
-  //     title: this.state.title,
-  //     description: this.state.desc,
-  //     ingredients: this.state.ingredient_rows, 
-  //     instructions: this.state.instruction_rows,
-  //     type: this.state.chosen,
-  //     user: obj
-  //   }
-  //   const formData = new FormData();
-  //   formData.append('file', this.state.file);
-  //   this.props.editRecipe(this.state.id, temp,formData)
-  // }
 
   onChangeImage=(e)=>{
     e.preventDefault();
@@ -426,14 +403,18 @@ class PostRecipe extends Component {
             <textarea id="desc" className="form-control" rows="5" placeholder="Your Recipe Description" value={this.state.desc} onChange={e=>this.onChangeText(e)}/>
           </div>
           <div className="form-group">
-            <label htmlFor="ingredient">Ingredients</label>
-            <button type="button" onClick={(e)=>this.addIngredient(e)}className="btn btn-outline-success btn-sm">Add Ingredients</button>
-              {ing_rows}
+            <label className="font-italic h5 d-inline title-margin">Ingredients</label>
+            <div className="input-group d-flex justify-content-center">
+              <button type="button" onClick={(e)=>this.addIngredient(e)}className="btn btn-outline-success btn-sm d-inline m-1">Add Ingredients</button>  
+            </div>
+            {ing_rows}
           </div>
           <div className="form-group">
-            <label htmlFor="instructions">Instructions</label>
-            <button type="button" onClick={(e)=>this.addInstruction(e)}className="btn btn-outline-success btn-sm">Add Instructions</button>
-            {ins_rows} 
+            <label className="font-italic h5 d-inline title-margin">Instructions</label>
+            <div className="input-group d-flex justify-content-center">
+              <button type="button" onClick={(e)=>this.addInstruction(e)}className="btn btn-outline-success btn-sm m-1">Add Instructions</button> 
+            </div>
+            {ins_rows}
           </div>
 
           <div className="form-group">
