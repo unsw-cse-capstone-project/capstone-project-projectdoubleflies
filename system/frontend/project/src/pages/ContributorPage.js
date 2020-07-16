@@ -38,7 +38,7 @@ class ContributorPage extends Component {
 
 	render(){
 		return (
-			<div className="container">
+			<div className="container pt-5">
 				<div className="ui placeholder segment">
 					<div className="ui icon header">
 						<i className="search icon"></i>
