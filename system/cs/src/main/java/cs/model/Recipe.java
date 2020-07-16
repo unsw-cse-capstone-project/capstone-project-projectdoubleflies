@@ -68,6 +68,7 @@ public class Recipe{
 	@NotNull
 	@Length(min=2, message="Description length must be at least two!")
 	@Valid
+	@Lob
 	private String description;
 	
 	@NotNull
