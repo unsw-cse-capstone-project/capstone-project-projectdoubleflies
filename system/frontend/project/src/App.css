@@ -105,11 +105,15 @@ img.image {
 }
 
 .card-same {
+    height: 60px;
+    /* height: 50px; */
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
-    line-height: 1.5em;
-    max-height: 3*1.5em;
+    line-height: 20px;
 }
+
+
+/* .card-img-top {} */
