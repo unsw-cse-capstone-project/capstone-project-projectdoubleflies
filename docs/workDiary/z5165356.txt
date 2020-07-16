@@ -30,4 +30,13 @@ add constraint to amount for ingredients that amount cannot be negative number.
 
 Week6
 I have added the functionality which notify contributors "most frequently searched set of ingredients which does not have corresponding recipe for it" to 
-give recipe idea for contributors. Updated UI for readability. Changed list of ingredients and instructions UI to table view. changed the select ingredients modal into fixed sidebar in public recipe page. 
+give recipe idea for contributors. Updated UI for readability. Changed list of ingredients and instructions UI to table view. 
+changed the select ingredients modal into fixed sidebar in public recipe page. 
+
+Week7
+Add background to recipe exploring page so it looks more professional.
+Suggesting next ingredient is added to show list of ingredients that can be added to user chosen set of ingrediets to search for recipes.
+pick ingredient sidebar is modified to align all the element in sidebar to the center (vertically).
+size of the image and description in the card view of recipes are fixed now so all the card will have the same size. 
+The longer description will be cut off (in card view) and be replaced by ellipces.
+
