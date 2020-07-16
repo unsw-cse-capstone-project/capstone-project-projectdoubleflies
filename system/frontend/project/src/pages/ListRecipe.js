@@ -184,9 +184,14 @@ class ListRecipe extends Component {
 			<div className="container">	
 			
 			{cards.length===0&& <div> No Recipe Found </div>}
-			<Grid container direction="row" justify="center" alignItems="center">
+			{/* <Grid container direction="row" justify="center" alignItems="center"> */}
+			<div className="row">
 				{cards}
-			</Grid>
+			</div>
+    
+				
+			
+			{/* </Grid> */}
 			
 			</div>
 		)
