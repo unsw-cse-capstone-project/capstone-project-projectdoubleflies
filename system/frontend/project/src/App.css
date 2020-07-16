@@ -103,3 +103,13 @@ img.image {
     max-width: 1300px;
     display: inline-block;
 }
+
+.card-same {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 1.5em;
+    max-height: 3*1.5em;
+}
