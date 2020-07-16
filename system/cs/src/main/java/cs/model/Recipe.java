@@ -83,7 +83,7 @@ public class Recipe{
 	@JsonIgnore
 	private byte[] data;
 	/* Test ----------------------------------------------------------------------*/
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="uuid")
 	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 	// @JsonIgnore
