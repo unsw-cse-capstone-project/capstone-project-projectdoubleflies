@@ -201,40 +201,45 @@ class Ingredients extends Component {
 		})
 
 		
-		const types=this.state.types.map(elem=>{
-			console.log(this.state.type, elem, this.state.selected_type[elem])
-			return(
+		// const types=this.state.types.map(elem=>{
+		// 	console.log(this.state.type, elem, this.state.selected_type[elem])
+		// 	return(
 				
-				<div className="form-check text-left">
-					<input name={elem} value={elem} type="checkbox" className="form-check-input" checked={this.state.selected_type[elem]} onChange={e=>this.onFilter(e)}/>
-					<label className="form-check-label" >{elem}</label>
-				</div>
-			)	
+		// 		<div className="form-check text-left">
+		// 			<input name={elem} value={elem} type="checkbox" className="form-check-input" checked={this.state.selected_type[elem]} onChange={e=>this.onFilter(e)}/>
+		// 			<label className="form-check-label" >{elem}</label>
+		// 		</div>
+		// 	)	
+		// })
+
+		const types = this.state.types.map((elem, id)=>{
+			return (
+			  <option key={`type_${id}`}>{elem}</option>
+			)
 		})
 		
 		return (
 			<>
 			<div className="container">
-			<div className="row bg-white text-dark">
-				{/* <Button className="button-margin" as='div' labelPosition='right'/> 
-				<Button className="btn-margin" color='red' size='mini' onClick={(e)=>this.props.popularRecipes()}>
-					<Icon name='hand peace outline'/>
-					See Popular Recipes
-				</Button> */}
-				<div className="col-md-10 overflow-auto">
-				<label className="font-italic h5 d-inline title-margin">Filter By Meal-Type</label>
-				<div className="custom-control custom-checkbox">
+				{/* <label className="font-italic h5 d-inline title-margin">Filter By Meal-Type</label>
+				<div className="custom-control custom-checkbox d-flex justify-content-center">
 					<ul className="list-group">
 					{types}
 				</ul>
-				</div>
-				<form className="form-inline">
-					<label className="font-italic h5 d-inline title-margin">Choose Ingredients<br/></label>
-					<div className="input-group">
-					
-					<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
-					<button className="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
-					</div>
+				</div> */}
+				<div className="form-group m-1">
+				<label className="font-italic h5 d-inline title-margin">Filter By Meal-Type</label>
+            		<select id="inputType" className="form-control m-1" onChange={e=>this.onFilter(e)} value={this.state.type}>
+            		<option selected>{this.state.type}</option>
+            		{types}
+            	</select>
+          		</div>
+				<form className="form-inline d-flex justify-content-center">
+						<label className="font-italic h5 d-inline title-margin">Choose Ingredients<br/></label>
+						<div className="input-group">
+							<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
+							<button className="btn btn-primary my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
+						</div>
 				</form>
 				{this.props.suggestions!=="" &&<div className="card m-1">
 					<div class="card-body">Suggested Ingredients <br/> {this.props.suggestions}</div>
@@ -243,25 +248,22 @@ class Ingredients extends Component {
 					<div class="card-body">No Suggestions</div>
 				</div>}
 				<div className="form-check">
-				{result}
+					{result}
 				</div>
 					<div className="accordion" id="checkboxes">
 					{checkbox}
 					</div>
-				</div>
-				<div className="w-100 title-margin"></div>
-				<div className="col-md-10 overflow-auto">
+					<div className="overflow-auto m-1">
 					<p className="font-italic h5 d-inline title-margin">Selected</p>
 					<ul className="list-group">
 					{sel}
 					</ul>
-				</div>
-				<div className="col-md-10 m-1">
-				<button type="submit" className="btn btn-primary" onClick={e=>this.search(e)} data-dismiss="modal"> Search </button>
+					<div className="m-1">
+					<button type="submit" className="btn btn-primary" onClick={e=>this.search(e)} data-dismiss="modal"> Search </button>
+					</div>
 				</div>
 			</div>
 			
-			</div>
 			{/* <button type="button" className="btn btn-primary btn-margin" data-toggle="modal" data-target="#modal">
   				Pick Ingredients
 			</button>

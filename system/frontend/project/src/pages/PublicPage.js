@@ -12,8 +12,8 @@ export default class PublicPage extends Component {
 			// </div>
 			<div className="row py-3">
 				<img src={Background} alt="" className="bg"/>
-				<div className="col-3 sticky-sidebar">
-					<div className="sticky-top">
+				<div className="col-2 sticky-sidebar">
+					<div className="sticky-top justify-content-center">
 					<Ingredients/>
 					</div>
 				</div>

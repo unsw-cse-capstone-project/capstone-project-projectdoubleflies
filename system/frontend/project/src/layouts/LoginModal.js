@@ -78,7 +78,7 @@ class LoginModal extends Component {
 	render() {
 		return (
 			<div>
-				<Button className="ml-1 btn-margin" variant="primary" onClick={this.handleShow}>
+				<Button className="ml-1 btn-margin btn-secondary" variant="primary" onClick={this.handleShow}>
 					Login
 				</Button>
 
