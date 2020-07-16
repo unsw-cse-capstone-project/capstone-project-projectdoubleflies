@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
-// import Card from '../layouts/Card'
-// import axios from "axios";
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { checkLoggedIn } from '../actions/userActions';
 import {searchIng} from '../actions/recipeActions'
 import { Redirect } from 'react-router'
 import ListRecipe from './ListRecipe'
-import { PRIVATE } from '../helpers/type';
 
 class ContributorPage extends Component {
 
@@ -49,7 +45,7 @@ class ContributorPage extends Component {
 							
 							<h3>Results</h3>
 							<div className="row">
-							{this.props.set_ing.constructor == Object && Object.keys(this.props.set_ing).map(key=>{
+							{this.props.set_ing.constructor=== Object && Object.keys(this.props.set_ing).map(key=>{
 								
 								return(
 									<div className="col-sm-6">

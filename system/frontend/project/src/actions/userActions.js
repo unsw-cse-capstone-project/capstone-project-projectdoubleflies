@@ -1,4 +1,4 @@
-import { LOGIN_USER, LOGOUT_USER, REGISTER_USER, CHECK_USERNAME, CHECK_LOGGEDIN, GET_LOGGEDIN} from './types';
+import { LOGIN_USER, LOGOUT_USER, REGISTER_USER, CHECK_USERNAME, CHECK_LOGGEDIN} from './types';
 import axios from 'axios';
 
 const apiUrl="http://localhost:8080/";

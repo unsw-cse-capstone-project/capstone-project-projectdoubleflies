@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PostRecipe from './PostRecipe';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import { getRecipe, getUserRecipe, fetchRecipes} from '../actions/recipeActions'
 import { checkLoggedIn } from '../actions/userActions'
@@ -70,12 +69,12 @@ class ViewRecipe extends Component {
 			)
 		}
 
-		if(data!=undefined){
+		if(data!==undefined){
 			return(
 				<div className="container pb-5 pt-5">
 					<h1 className="text-monospace">{data.title}</h1>
 					{this.props.recipe.img!==undefined && <div className="card mb-4 img-view">
-						<img className="img-fluid" src={URL.createObjectURL(this.dataURLtoFile(data.img))} alt="Card image cap"/>
+						<img className="img-fluid" src={URL.createObjectURL(this.dataURLtoFile(data.img))} alt=""/>
 						<div class="card-body">
 							<h5>Description</h5>
 							<p class="card-text">{data.description}</p>
@@ -114,7 +113,7 @@ class ViewRecipe extends Component {
 						{data.ingredients!== undefined && data.instructions.map((item, index)=>{
 							return(
 								<tr>
-									<td scope="row">Step {index+1}</td>
+									<td>Step {index+1}</td>
 									<td>{item}</td>
 								</tr>
 							)

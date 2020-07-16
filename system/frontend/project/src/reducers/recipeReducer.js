@@ -15,11 +15,6 @@ const initialState = {
 
 
 export default function(state = initialState, action) {
-	const filterById = (jsonObject, id) => {
-		return jsonObject.filter(
-			(jsonObject)=>{return (jsonObject['recipeID'] === id);
-		})[0];
-	}
 	switch(action.type){
 		case FETCH_RECIPES:
 

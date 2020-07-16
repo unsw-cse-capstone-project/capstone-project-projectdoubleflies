@@ -16,8 +16,8 @@ public interface RecipeInfoRepository extends JpaRepository<Recipe, Integer> {
     int deleteByRecipeID(Integer recipeID);
     
     @Query(value="SELECT r.category from ingredient_info r where r.ingredient=:ingredient group by r.ingredient, r.category having count(r.ingredient)="
-    		+ "(SELECT count(r1.ingredient) as ct from ingredient_info r1 where r1.ingredient=:ingredient group by r1.ingredient, r1.category ORDER BY ct DESC limit 1);", nativeQuery=true)
-    String getSuggestion(@Param("ingredient") String ingredient);
+    + "(SELECT count(r1.ingredient) as ct from ingredient_info r1 where r1.ingredient=:ingredient group by r1.ingredient, r1.category ORDER BY ct DESC limit 1)", nativeQuery=true)
+    List<String> getSuggestion(@Param("ingredient") String ingredient);
     
     @Query(value="SELECT * from ingredient_info", nativeQuery=true)
     String getIngredients();

@@ -1,5 +1,4 @@
-import { LOGIN_USER, LOGOUT_USER, REGISTER_USER, CHECK_USERNAME, CHECK_LOGGEDIN, GET_LOGGEDIN } from '../actions/types';
-import { bindActionCreators } from 'redux';
+import { LOGIN_USER, LOGOUT_USER, REGISTER_USER, CHECK_USERNAME, CHECK_LOGGEDIN} from '../actions/types';
 
 const initialState = {
 	user: {},

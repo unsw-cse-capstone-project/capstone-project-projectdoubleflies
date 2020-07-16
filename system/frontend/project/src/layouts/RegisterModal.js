@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {Button, Modal, Form} from 'react-bootstrap'
-// import { MDBIcon } from "mdbreact";
 import { checkUsername, registerUser, checkLoggedIn} from '../actions/userActions'
 import { connect } from 'react-redux';
+
 class RegisterModal extends Component {
 
 	constructor(props) {

@@ -165,7 +165,11 @@ public class RecipeController {
 
 	@GetMapping("/recipe/ingredient/{ingredient}")
 	public String getSuggestion(@PathVariable String ingredient) {
-		return recipeInfoRepository.getSuggestion(ingredient);
+		List<String> temp = recipeInfoRepository.getSuggestion(ingredient);
+		if(temp.size()!=0)
+			return recipeInfoRepository.getSuggestion(ingredient).get(0);
+		else
+			return null;
 	}
 
    @GetMapping("/favorite/user")

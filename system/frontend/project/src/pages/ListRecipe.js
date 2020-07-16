@@ -5,11 +5,7 @@ import { fetchRecipes, fetchUserRecipes, deleteRecipe, searchRecipes} from '../a
 import { Button, Icon} from 'semantic-ui-react'
 
 import { fetchUserFavourite, removeFavourite, addFavourite} from '../actions/explorerActions';
-import { checkLoggedIn } from '../actions/userActions';
-import Ingredients from '../layouts/Ingredients'
-import {
-	Grid,
-} from '@material-ui/core/'
+import { checkLoggedIn } from '../actions/userActions'
 
 class ListRecipe extends Component {
 	constructor(props) {
@@ -92,7 +88,7 @@ class ListRecipe extends Component {
 				return (
 					<div className="card m-2" style={{width: 18 + 'em'}}>
 					<Link to={{ pathname: `${pathname}${item.recipeID}`}}>
-					<img className="card-img-top" src={URL.createObjectURL(this.dataURLtoFile(item.img))} alt="Card image cap"/>
+					<img className="card-img-top" src={URL.createObjectURL(this.dataURLtoFile(item.img))} alt="..."/>
 					<div className="card-body">
 					<h5 className="card-title">{item.title}</h5>
 					<h6 className="card-subtitle mb-2">Description</h6>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from "axios";
 import { connect } from 'react-redux'
 import { getRecipe, giveRecommendation, createRecipe, editRecipe} from '../actions/recipeActions';
 import { checkLoggedIn } from '../actions/userActions';
@@ -20,7 +19,7 @@ class PostRecipe extends Component {
       chosen: "Choose...",
       selections:["Breads", "Breakfast", "Cakes", "Casseroles", "Cookies", "Desserts", "Dinner", "Dips", "Drinks", "Fish recipes", "Grilling & BBQ", "Kid Friendly", "Meat recipes", "Poultry recipes", "Quick & Easy", "Salad Dressings", "Salads", "Sandwiches", "Sauces", "Seafood recipes", "Slow Cooker", "Soups", "Vegetarian recipes", "Vegan recipes", "Gluten free recipes", "Lactose free recipes", "Lunch"],
       display:["Breads", "Breakfast", "Cakes", "Casseroles", "Cookies", "Desserts", "Dinner", "Dips", "Drinks", "Fish recipes", "Grilling & BBQ", "Kid Friendly", "Meat recipes", "Poultry recipes", "Quick & Easy", "Salad Dressings", "Salads", "Sandwiches", "Sauces", "Seafood recipes", "Slow Cooker", "Soups", "Vegetarian recipes", "Vegan recipes", "Gluten free recipes", "Lactose free recipes", "Lunch"],
-      units:["cup","cm", "mm", "m", "mg", "g", "kg", "teaspoon", "tablespoon", "ml", "l", "dl", "gallon", "gill", ,"package","piece", "pint","pound", "fluid ounce", "inch", "quart", "ounce"],
+      units:["cup","cm", "mm", "m", "mg", "g", "kg", "teaspoon", "tablespoon", "ml", "l", "dl", "gallon", "gill", "package","piece", "pint","pound", "fluid ounce", "inch", "quart", "ounce"],
       alertPresent: false,
       base64: undefined,
       file: undefined,
@@ -210,7 +209,6 @@ class PostRecipe extends Component {
   }
 
   onChangeUnit=(event)=>{
-    console.log(array, event.target.value)
     event.preventDefault();
     var temp = event.target.id.split("_");
     var id = temp[temp.length-1]
@@ -246,15 +244,17 @@ class PostRecipe extends Component {
   
   onSubmit = (event) => {
     event.preventDefault();
+    const obj = JSON.parse(localStorage.getItem("username"));
+    var temp
     if(this.state.edit===false){
-      var obj = JSON.parse(localStorage.getItem("username"));
+      
       if(obj===null){
         alert("Please Login First")
         return
       }
       obj.id = obj.username;
       delete obj.username;
-      var temp ={
+      temp ={
         title: this.state.title,
         description: this.state.desc,
         ingredients: this.state.ingredient_rows, 
@@ -268,33 +268,53 @@ class PostRecipe extends Component {
       console.log(formData.get("file"))
       console.log(temp)
       this.props.createRecipe(obj.id, temp, formData)
+    }else{
+   
+      if(obj===null){
+        alert("Please Login First")
+        return
+      }
+      obj.id = obj.username;
+      delete obj.username;
+      temp ={
+        recipeID: this.state.id,
+        title: this.state.title,
+        description: this.state.desc,
+        ingredients: this.state.ingredient_rows, 
+        instructions: this.state.instruction_rows,
+        type: this.state.chosen,
+        user: obj
+      }
+      const formData = new FormData();
+      formData.append('file', this.state.file);
+      this.props.editRecipe(this.state.id, temp,formData)
     }
     
   }
 
-  onSave = (event)=>{
-    event.preventDefault();
-    var obj = JSON.parse(localStorage.getItem("username"));
+  // onSave = (event)=>{
+  //   event.preventDefault();
+  //   var obj = JSON.parse(localStorage.getItem("username"));
    
-    if(obj===null){
-      alert("Please Login First")
-      return
-    }
-    obj.id = obj.username;
-    delete obj.username;
-    var temp ={
-      recipeID: this.state.id,
-      title: this.state.title,
-      description: this.state.desc,
-      ingredients: this.state.ingredient_rows, 
-      instructions: this.state.instruction_rows,
-      type: this.state.chosen,
-      user: obj
-    }
-    const formData = new FormData();
-    formData.append('file', this.state.file);
-    this.props.editRecipe(this.state.id, temp,formData)
-  }
+  //   if(obj===null){
+  //     alert("Please Login First")
+  //     return
+  //   }
+  //   obj.id = obj.username;
+  //   delete obj.username;
+  //   var temp ={
+  //     recipeID: this.state.id,
+  //     title: this.state.title,
+  //     description: this.state.desc,
+  //     ingredients: this.state.ingredient_rows, 
+  //     instructions: this.state.instruction_rows,
+  //     type: this.state.chosen,
+  //     user: obj
+  //   }
+  //   const formData = new FormData();
+  //   formData.append('file', this.state.file);
+  //   this.props.editRecipe(this.state.id, temp,formData)
+  // }
 
   onChangeImage=(e)=>{
     e.preventDefault();
@@ -310,7 +330,6 @@ class PostRecipe extends Component {
   }
 
 	render() {
-    console.log(this.state.file)
     this.props.checkLoggedIn()
     const ins_rows = this.state.instruction_rows.map((item, id)=>{
         return (
@@ -327,11 +346,6 @@ class PostRecipe extends Component {
     
 
     const ing_rows = this.state.ingredient_rows.map((item, id)=>{
-      const unit_option = this.state.units.map((elem, i)=>{
-        return (
-          <option key={`unit_${id}`}>{elem}</option>
-        )
-      })
       return (
         <div onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }} className="form-row">
           <p>{id+1}:</p>
@@ -376,8 +390,8 @@ class PostRecipe extends Component {
    
 
 		return (
-      <div className="container">
-        <form className="form-padding" onSubmit={ this.state.edit&& this.onSave || !this.state.edit&&this.onSubmit }>
+      <div className="container pt-5">
+        <form className="form-padding" onSubmit={ this.onSubmit }>
           <div className="form-group">
             <h4>Create Your Recipe</h4>
             <label htmlFor="title">Title</label>
@@ -406,7 +420,7 @@ class PostRecipe extends Component {
             </div>
           </div>
           
-          {this.state.file!==undefined && <img src={URL.createObjectURL(this.state.file)}className="img-thumbnail"></img>}
+          {this.state.file!==undefined && <img src={URL.createObjectURL(this.state.file)} className="img-thumbnail" alt="..."></img>}
           
           <div className="form-group">
             <textarea id="desc" className="form-control" rows="5" placeholder="Your Recipe Description" value={this.state.desc} onChange={e=>this.onChangeText(e)}/>

@@ -79,7 +79,7 @@ export const giveRecommendation = (ingredient) => dispatch => {
 }
 
 export const editRecipe = (id, postData, image) => dispatch => {
-	axios.post(`${apiUrl}/uploadFile`, image,{
+	axios.post(`${apiUrl}/imagechange`, image,{
 		headers: {
 		  'Content-Type': 'multipart/form-data'
 		}

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import ListRecipe from './ListRecipe'
-import { FAVOURITE } from '../helpers/type'
 import { connect } from 'react-redux';
 import { checkLoggedIn } from '../actions/userActions'
 import { Redirect } from 'react-router-dom'; 

@@ -74,7 +74,7 @@ class Header extends Component {
 					</li>}
 					</ul>
 					{this.props.isLoggedIn ? <>
-						<a className="nav-link">Welcome, {this.props.username}</a>
+						<a className="nav-link" href="/explorer">Welcome, {this.props.username}</a>
 					<button type="button" className="btn btn-danger btn-margin" onClick={this.handleLogout}>Logout</button></> : <><LoginModal/><RegisterModal/></>}
 				</div>
 			</nav>

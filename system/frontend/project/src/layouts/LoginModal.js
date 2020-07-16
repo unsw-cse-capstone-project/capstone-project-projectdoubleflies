@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {Button, Modal, Form} from 'react-bootstrap'
 import {loginUser, checkLoggedIn} from  '../actions/userActions'
 import {connect} from 'react-redux';
-import {PropTypes} from 'prop-types'
 
 class LoginModal extends Component {
 

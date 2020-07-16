@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { fetchIngredients, suggestIngredients } from '../actions/explorerActions'
 import { searchRecipes } from '../actions/recipeActions'
-import { Button, Icon} from 'semantic-ui-react'
+
 class Ingredients extends Component {
 	constructor(props) {
 		super(props);
@@ -89,10 +89,11 @@ class Ingredients extends Component {
 		e.preventDefault();
 		localStorage.setItem("map", JSON.stringify(this.state.selected))
 		const ingredients=[]
-		Object.keys(this.state.selected).map(key=>{
-			Object.keys(this.state.selected[key]).map(elem=>{
+		Object.keys(this.state.selected).forEach(key=>{
+			Object.keys(this.state.selected[key]).forEach(elem=>{
 				if(this.state.selected[key][elem]===true)
 					ingredients.push(elem)
+				return
 			})
 		})
 		this.props.searchRecipes(ingredients, this.state.type)
@@ -102,9 +103,9 @@ class Ingredients extends Component {
 		e.preventDefault();
 		console.log(this.state.word)
 		const temp = {}
-		Object.keys(this.props.ingredients).map(key=>{
+		Object.keys(this.props.ingredients).forEach(key=>{
 			temp[key]={}
-			this.props.ingredients[key].map(elem=>{
+			this.props.ingredients[key].forEach(elem=>{
 				if(elem===this.state.word){
 					temp[key][elem]=true
 				}
@@ -137,7 +138,6 @@ class Ingredients extends Component {
 		let checkbox=<div></div>
 		if(this.props.ingredients!==undefined){
 			checkbox = Object.keys(this.props.ingredients).map((key, id) =>{
-				console.log(this.state.selected[key], key)
 				if(this.state.selected[key]!==undefined){
 					return(
 						<div className="card">
@@ -241,10 +241,10 @@ class Ingredients extends Component {
 						</div>
 				</form>
 				{this.props.suggestions!=="" &&<div className="card m-1">
-					<div class="card-body">Suggested Ingredients <br/> {this.props.suggestions}</div>
+					<div className="card-body">Suggested Ingredients <br/> {this.props.suggestions}</div>
 				</div>}
 				{this.props.suggestions==="" &&<div className="card m-1">
-					<div class="card-body">No Suggestions</div>
+					<div className="card-body">No Suggestions</div>
 				</div>}
 				<div className="form-check">
 					{result}

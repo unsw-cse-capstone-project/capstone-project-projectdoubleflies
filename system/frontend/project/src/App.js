@@ -9,11 +9,9 @@ import ContributorPage from './pages/ContributorPage';
 import { PersistGate } from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
 import { store, persistor } from './store.js';
-import HomePage from './pages/HomePage';
 import PublicPage from './pages/PublicPage'
 import {PrivateRoute} from './helpers/PrivateRoute';
 import ExplorerPage from './pages/ExplorerPage';
-import Ingredients from './layouts/Ingredients';
 function App() {
     return ( 
       <Provider store={store}>
