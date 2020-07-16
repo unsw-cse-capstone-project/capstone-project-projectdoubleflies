@@ -130,7 +130,7 @@ public class RecipeController {
      public @ResponseBody String changeImage(@PathVariable String id, @PathVariable String imgID) {
 		Integer recipeId = Integer.parseInt(id);
 		Recipe recipe = recipeInfoRepository.findRecipeById(recipeId);
-	        Image origin = recipe.getImg();
+	    Image origin = recipe.getImg();
 		if(origin != null) imgRepository.delete(origin.getId());
 		Image img = imgRepository.findOne(imgID);
 		recipe.setImg(img);
