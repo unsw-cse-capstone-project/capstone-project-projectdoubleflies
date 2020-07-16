@@ -158,9 +158,7 @@ public class RecipeController {
 	public @ResponseBody String deleteRecipe(@PathVariable String id){
 		int recipeID = Integer.parseInt(id);
 		Recipe recipe = recipeInfoRepository.findOne(recipeID);
-		Image img = recipe.getImg();
 		recipeInfoRepository.deleteByRecipeID(recipeID);
-		imgRepository.delete(img.getId());
 		return "recipe and image deleted";
 	}
 
