@@ -39,4 +39,6 @@ Suggesting next ingredient is added to show list of ingredients that can be adde
 pick ingredient sidebar is modified to align all the element in sidebar to the center (vertically).
 size of the image and description in the card view of recipes are fixed now so all the card will have the same size. 
 The longer description will be cut off (in card view) and be replaced by ellipces.
+The cardview was restricted to 3 columns before but now it fits to the size of the window.
+Added confirmation modal to confirm deletion, removing and saving operations.
 
