@@ -120,11 +120,6 @@ class ViewRecipe extends Component {
 						})}			
 					</tbody>
 					</table>
-					{/* <ul class="list-group list-group-flush">
-						{data.instructions!== undefined && data.instructions.map((item, index)=>{
-							return(<li class="list-group-item">Step {index+1}:{item}</li>)
-						})}
-					</ul> */}
 					{this.state.showEdit===true && 
 						<div>
 							<Button className="button-margin" as='div' labelPosition='right'/>
@@ -133,9 +128,6 @@ class ViewRecipe extends Component {
 							Edit
 							</Button>
 						</div>
-					// this.state.showEdit===true && <Link to={{ pathname: `/edit/${data.recipeID}` }}>
-					// 	<button type="button" id={`edit`} className="btn btn-danger" onClick={this.editRecipe}>Edit</button>
-					// </Link>
 					}
 					
 				</div>
@@ -145,115 +137,6 @@ class ViewRecipe extends Component {
 				<Spinner animation="border" variant="primary" />
 			)
 		}
-		
-		
-		// else if(this.state.showEdit===true && this.props.user_recipe!==undefined){
-		// 	return(
-		// 		// need to edit to make it pretty
-		// 		<div className="container">
-		// 			<h1 className="text-monospace">{this.props.user_recipe.title}</h1>
-		// 			{/* {this.props.user_recipe.img!==undefined&&<img className="img-fluid" src={URL.createObjectURL(this.dataURLtoFile(this.props.user_recipe.img))} alt="Card image cap"/>}
-		// 			<h2>Description: <br/> {this.props.user_recipe.descript
-		// 			ion}</h2> */}
-		// 			{/* {this.props.recipe.img!==undefined&&<div className="card" style={{width: 18 + 'em'}}>
-		// 				<img className="img-fluid" src={URL.createObjectURL(this.dataURLtoFile(this.props.recipe.img))} alt="Card image cap"/>
-		// 				<div class="card-body">
-		// 					<p class="card-text">{this.props.recipe.description}</p>
-		// 				</div>
-		// 			</div>} */}
-		// 			{this.props.user_recipe.img!==undefined && <div className="card mb-4">
-		// 				<img className="img-fluid " src={URL.createObjectURL(this.dataURLtoFile(this.props.user_recipe.img))} alt="Card image cap"/>
-		// 				<div class="card-body">
-		// 					<h5>Description</h5>
-		// 					<p class="card-text">{this.props.user_recipe.description}</p>
-		// 				</div>
-		// 			</div>}
-		// 			<h3>Ingredients</h3>
-		// 			{/* <ul class="list-group list-group-flush">
-		// 			{this.props.user_recipe.ingredients !== undefined && this.props.user_recipe.ingredients.map(item=>{
-		// 				return(
-							
-		// 					<li class="list-group-item">{item.ingredient}:{item.amount}</li>
-							
-		// 				)
-		// 			})}
-		// 			</ul> */}
-		// 			<table class="table">
-		// 			<thead>
-		// 				<tr>
-		// 				<th scope="col">Ingredient</th>
-		// 				<th scope="col">Amount</th>
-		// 				</tr>
-		// 			</thead>
-		// 			<tbody>
-						
-		// 				{this.props.user_recipe.ingredients !== undefined && this.props.user_recipe.ingredients.map(item=>{
-		// 					return(
-		// 						<tr>
-		// 							<td>{item.ingredient}</td>
-		// 							<td>{item.amount}</td>
-		// 						</tr>
-		// 					)
-		// 				})}			
-		// 			</tbody>
-		// 			</table>
-		// 			{this.props.user_recipe.instructions!== undefined && this.props.user_recipe.instructions.map((item, index)=>{
-		// 				return(<p>Step {index+1}:{item}</p>)
-		// 			})}
-					
-		// 			{this.state.showEdit===true && <Link to={{ pathname: `/edit/${this.props.user_recipe.recipeID}` }}>
-		// 				<button type="button" id={`edit`} className="btn btn-danger" onClick={this.editRecipe}>Edit</button>
-		// 			</Link>}
-		// 		</div>
-		// 	)
-		// }
-		// else if(this.props.recipe!==undefined){
-		// 	console.log(this.props.recipe)
-		// 	return(
-		// 		<div className="container">
-		// 			<h1 className="text-monospace">{this.props.recipe.title}</h1>
-		// 			{this.props.recipe.img!==undefined && <div className="card mb-4">
-		// 				<img className="img-fluid " src={URL.createObjectURL(this.dataURLtoFile(this.props.recipe.img))} alt="Card image cap"/>
-		// 				<div class="card-body">
-		// 					<h5>Description</h5>
-		// 					<p class="card-text">{this.props.recipe.description}</p>
-		// 				</div>
-		// 			</div>}
-		// 			<h3>Ingredients</h3>
-		// 			<table class="table">
-		// 			<thead>
-		// 				<tr>
-		// 				<th scope="col">Ingredient</th>
-		// 				<th scope="col">Amount</th>
-		// 				</tr>
-		// 			</thead>
-		// 			<tbody>
-						
-		// 				{this.props.recipe.ingredients !== undefined && this.props.recipe.ingredients.map(item=>{
-		// 					return(
-		// 						<tr>
-		// 							<td>{item.ingredient}</td>
-		// 							<td>{item.amount}</td>
-		// 						</tr>
-		// 					)
-		// 				})}			
-		// 			</tbody>
-		// 			</table>
-		// 			{this.props.recipe.instructions!== undefined && this.props.recipe.instructions.map((item, index)=>{
-		// 				return(<p>Step {index+1}:{item}</p>)
-		// 			})}
-					
-		// 			{this.state.showEdit===true && <Link to={{ pathname: `/edit/${this.props.recipe.recipeID}` }}>
-		// 				<button type="button" id={`edit`} className="btn btn-danger" onClick={this.editRecipe}>Edit</button>
-		// 			</Link>}
-		// 		</div>
-		// 	)
-
-		// }else{
-		// 	return(
-		// 		<Spinner animation="border" variant="primary" />
-		// 	)
-		// }
 	}
 }
 

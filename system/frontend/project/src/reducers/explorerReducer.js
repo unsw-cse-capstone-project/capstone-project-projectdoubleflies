@@ -23,15 +23,10 @@ export default function(state=initialState, action){
 			}
 
 		case ADD_FAVOURITE:
-			// let arr = state.favs===[]?[...state.favs]: []
-			// console.log(arr)
-			// arr.push(action.payload)
-			// console.log(arr)
 			if(action.status===200)
 				alert("Added to My Favourite")
 			return {
 				...state,
-				// favs: arr
 			}
 
 		case REMOVE_FAVOURITE:

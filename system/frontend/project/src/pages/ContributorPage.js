@@ -34,7 +34,8 @@ class ContributorPage extends Component {
 
 	render(){
 		return (
-			<div className="container pt-5">
+			<div className="container-fluid">
+				<div className="container p-5">
 				<div className="ui placeholder segment">
 					<div className="ui icon header">
 						<i className="search icon"></i>
@@ -71,6 +72,7 @@ class ContributorPage extends Component {
 						<div className="ui primary button" onClick={e=>this.onSearch(e)}>Search</div>
 					</div>
 					}	
+				</div>
 				</div>
 				<h4>My Recipes</h4>
 				<Link to={{ pathname: "/post"}}>

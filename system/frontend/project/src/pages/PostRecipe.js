@@ -397,7 +397,7 @@ class PostRecipe extends Component {
             </div>
           </div>
           
-          {this.state.file!==undefined && <img src={URL.createObjectURL(this.state.file)} className="img-thumbnail" alt="..."></img>}
+          {this.state.file!==undefined && <img src={URL.createObjectURL(this.state.file)} className="img-thumbnail mb-" alt="..."></img>}
           
           <div className="form-group">
             <textarea id="desc" className="form-control" rows="5" placeholder="Your Recipe Description" value={this.state.desc} onChange={e=>this.onChangeText(e)}/>
@@ -424,7 +424,7 @@ class PostRecipe extends Component {
             {options}
             </select>
           </div>
-          {this.state.edit && <div><a href={`/view/${this.state.id}`}><button type="button" className="btn btn-danger">Cancel</button></a><button type="submit" className="btn btn-primary">Save</button></div>}
+          {this.state.edit && <div><a href={`/view/${this.state.id}`}><button type="button" className="btn btn-danger mr-3">Cancel</button></a><button type="submit" className="btn btn-primary">Save</button></div>}
           {this.state.edit===false &&<div><button type="submit" className="btn btn-primary">Confirm</button></div>}
         </form>
         {!this.props.loggedIn && <Redirect to="/"/>}

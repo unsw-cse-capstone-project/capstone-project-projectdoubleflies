@@ -5,11 +5,7 @@ import Background from '../new_background.jpg'
 export default class PublicPage extends Component {
 	render() {
 		return (
-			// <div>
-			// <Ingredients/>
-			// <ListRecipe/>
-			// </div>
-			<div className="row py-3">
+			<div className="row container-fluid py-3">
 				<img src={Background} alt="" className="bg"/>
 				<div className="col-2 sticky-sidebar">
 					<div className="sticky-top justify-content-center">

@@ -10,7 +10,7 @@ class ExplorerPage extends Component {
 	render() {
 		
 		return (
-			<div className="container pt-5">
+			<div className="container-fluid pt-5">
 			<img src={Background} alt="" className="bg"/>
 			<h4>Favourite Recipes</h4>
 			{this.props.loggedIn && <ListRecipe/>}

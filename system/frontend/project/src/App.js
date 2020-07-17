@@ -27,8 +27,6 @@ function App() {
               <PrivateRoute path="/explorer" component={ExplorerPage}/>
               <PrivateRoute path="/contributor" component={ContributorPage}/>
               <Route path="/" component={PublicPage}/>
-              
-              {/* <Route path="/" component={HomePage}/> */}
             </Switch>
           </BrowserRouter>
         </div>

@@ -6,6 +6,7 @@ import { Button, Icon} from 'semantic-ui-react'
 
 import { fetchUserFavourite, removeFavourite, addFavourite} from '../actions/explorerActions';
 import { checkLoggedIn } from '../actions/userActions'
+import ConfirmationModal from '../layouts/ConfirmationModal';
 
 class ListRecipe extends Component {
 	constructor(props) {
@@ -72,7 +73,6 @@ class ListRecipe extends Component {
 	}
 	render() {
 		let temp
-		// console.log(this.state.kind)
 		if(this.state.kind===""){
 			temp = this.props.recipes
 		}else if(this.state.kind==="contributor"){
@@ -84,7 +84,6 @@ class ListRecipe extends Component {
 		if(temp!==undefined){
 			const pathname = this.state.kind==="contributor" ? "/contributor/view/": "/view/";
 			cards = temp.map(item => {
-				// console.log(item)
 				return (
 					<div className="card m-2" style={{width: 18 + 'em'}}>
 					<Link to={{ pathname: `${pathname}${item.recipeID}`}}>
@@ -109,86 +108,28 @@ class ListRecipe extends Component {
 					{
 						this.state.kind==="contributor" &&
 						<div>
-							<Button className="button-margin" as='div' labelPosition='right'/>
-							<Button className="btn-margin" size='mini' onClick={(e)=>this.deleteRecipe(e, item.recipeID)}>
-								<Icon name='trash' />
-								Delete
-							</Button>
+							<ConfirmationModal message={"Delete"} func={this.deleteRecipe} param={item.recipeID}/>
 						</div>
 					}
 					{
 						this.state.kind==="explorer" && 
 						<div>
-							<Button className="button-margin" as='div' labelPosition='right'/>
-							<Button className="btn-margin" size='mini' onClick={(e)=>this.removeFavourite(e, item.recipeID)}>
-								<Icon name='trash' />
-								Remove
-							</Button>
+							<ConfirmationModal message={"Remove"} func={this.removeFavourite} param={item.recipeID}/>
 						</div>
 					
 					}
 				</div>
-				// 	<div className="card m-2" style={{width: 18 + 'em'}}>
-				// 	<Link to={{ pathname: `${pathname}${item.recipeID}`}}>
-				// 	<div>{item}</div>
-				// 	{/* <img className="card-img-top" src={URL.createObjectURL(this.dataURLtoFile(item.img))} alt="Card image cap"/> */}
-				// 	<div className="card-body">
-				// 	<h5 className="card-title">{item.title}</h5>
-				// 	<h6 className="card-subtitle mb-2">Description</h6>
-				// 	<p className="card-text">{item.description}</p>
-				// 	</div>
-				// 	</Link>
-				// 	{
-				// 		this.state.kind==="recipes" && this.props.loggedIn &&
-				// 		<div>
-				// 			<Button className="button-margin" as='div' labelPosition='right'/>
-				// 			<Button className="btn-margin" size='mini' color='red' onClick={(e)=>this.addFavourite(e, item.recipeID)}>
-				// 				<Icon name='heart' />
-				// 				Favourite
-				// 			</Button>
-				// 		</div>
-				// 	}
-					
-				// 	{
-				// 		this.state.kind==="contributor" &&
-				// 		<div>
-				// 			<Button className="button-margin" as='div' labelPosition='right'/>
-				// 			<Button className="btn-margin" size='mini' onClick={(e)=>this.deleteRecipe(e, item.recipeID)}>
-				// 				<Icon name='trash' />
-				// 				Delete
-				// 			</Button>
-				// 		</div>
-				// 	}
-				// 	{
-				// 		this.state.kind==="explorer" && 
-				// 		<div>
-				// 			<Button className="button-margin" as='div' labelPosition='right'/>
-				// 			<Button className="btn-margin" size='mini' onClick={(e)=>this.removeFavourite(e, item.recipeID)}>
-				// 				<Icon name='trash' />
-				// 				Remove
-				// 			</Button>
-				// 		</div>
-					
-				// 	}
-				// 	// <button className="btn btn-sm btn-danger" onClick={(e)=>this.removeFavourite(e, item.recipeID)}>Remove</button>}
-				// </div>
 				)
 			})
 
 		}
 		return (
-			<div className="container">	
+			<div className="container-fluid">	
 			
 			{cards.length===0&& <div> No Recipe Found </div>}
-			{/* <Grid container direction="row" justify="center" alignItems="center"> */}
-			<div className="row">
+			<div className="row d-flex justify-content-center">
 				{cards}
 			</div>
-    
-				
-			
-			{/* </Grid> */}
-			
 			</div>
 		)
 	}
