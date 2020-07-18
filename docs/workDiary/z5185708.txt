@@ -43,3 +43,11 @@ and also sent an email to tutor hoping to have time to check. The next week is t
 we need to work harder to complete the task, and we need to conduct an overall inspection during the tenth week to ensure 
 that the website can show perfectly
 
+Week7
+This week we continue to follow the project plan for further progress of the project, and the next week needs a demo. 
+According to the demo given by the tutor last week, we are adding more recipes to make our website more like a real recipe website. 
+And due to the diversity of users' choices of recipes, we decided to make the number of recipes for each category be about ten, 
+so that users have a lot of choices. And we found some bugs when testing the website, such as unable to modify the recipe image, 
+too few units, etc. So we have made improvements and hope that the demo will achieve good results next week
+
+
