@@ -153,7 +153,7 @@ class Ingredients extends Component {
 								{this.props.ingredients[key].map(elem=>{
 									return(
 										<div className="form-check">
-											<input name={key} value={elem} type="checkbox" className="form-check-input" checked={this.state.selected[key][elem]} onChange={e=>this.onClick(e)}/>
+											<input id={`check-${key}`} name={key} value={elem} type="checkbox" className="form-check-input" checked={this.state.selected[key][elem]} onChange={e=>this.onClick(e)}/>
 											<label className="form-check-label" >{elem}</label>
 										</div>
 									)
@@ -183,7 +183,7 @@ class Ingredients extends Component {
 			)
 		});
 		if(num===0)
-			sel=<div>No Ingredients Selected</div>
+			sel=<p>No Ingredients Selected</p>
 
 		let result=<div>You can search</div>
 		result=Object.keys(this.state.result).map(key=>{
@@ -199,18 +199,6 @@ class Ingredients extends Component {
 			)	
 		})
 
-		
-		// const types=this.state.types.map(elem=>{
-		// 	console.log(this.state.type, elem, this.state.selected_type[elem])
-		// 	return(
-				
-		// 		<div className="form-check text-left">
-		// 			<input name={elem} value={elem} type="checkbox" className="form-check-input" checked={this.state.selected_type[elem]} onChange={e=>this.onFilter(e)}/>
-		// 			<label className="form-check-label" >{elem}</label>
-		// 		</div>
-		// 	)	
-		// })
-
 		const types = this.state.types.map((elem, id)=>{
 			return (
 			  <option key={`type_${id}`}>{elem}</option>
@@ -218,23 +206,16 @@ class Ingredients extends Component {
 		})
 		
 		return (
-			<>
 			<div className="container">
-				{/* <label className="font-italic h5 d-inline title-margin">Filter By Meal-Type</label>
-				<div className="custom-control custom-checkbox d-flex justify-content-center">
-					<ul className="list-group">
-					{types}
-				</ul>
-				</div> */}
 				<div className="form-group m-1">
-				<label className="font-italic h5 d-inline title-margin">Filter By Meal-Type</label>
+				<label className="font-weight-bold font-italic h5 d-inline title-margin">Filter By Meal-Type</label>
             		<select id="inputType" className="form-control m-1" onChange={e=>this.onFilter(e)} value={this.state.type}>
             		<option selected>{this.state.type}</option>
             		{types}
             	</select>
           		</div>
 				<form className="form-inline d-flex justify-content-center">
-						<label className="font-italic h5 d-inline title-margin">Choose Ingredients<br/></label>
+						<label className="font-weight-bold font-italic h5 d-inline title-margin">Choose Ingredients<br/></label>
 						<div className="input-group">
 							<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
 							<button className="btn btn-primary my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
@@ -253,7 +234,7 @@ class Ingredients extends Component {
 					{checkbox}
 					</div>
 					<div className="overflow-auto m-1">
-					<p className="font-italic h5 d-inline title-margin">Selected</p>
+					<label className="font-weight-bold font-italic h5 d-inline title-margin">Selected</label>
 					<ul className="list-group">
 					{sel}
 					</ul>
@@ -262,142 +243,6 @@ class Ingredients extends Component {
 					</div>
 				</div>
 			</div>
-			
-			{/* <button type="button" className="btn btn-primary btn-margin" data-toggle="modal" data-target="#modal">
-  				Pick Ingredients
-			</button>
-			<div className="modal fade" id="modal" tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-				<div className="modal-dialog modal-lg" role="document">
-					<div className="modal-content">
-					<div className="modal-header">
-						<h5 className="modal-title">Pick Ingredients</h5>
-						<button type="button" className="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div className="modal-body">
-					<div className="row">
-						<div className="col-md-6 overflow-auto">
-						<form className="form-inline">
-								<div className="input-group">
-								<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
-								<button className="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
-								</div>
-							</form>
-						<div className="form-check">
-						{result}
-						</div>
-							<div className="accordion" id="checkboxes">
-							{checkbox}
-							</div>
-						</div>
-						<div className="col-md-6 overflow-auto">
-						<p className="font-italic h4">Filter By Meal-Type</p>
-							<ul className="list-group">
-							{types}
-							</ul>
-						
-							<p className="font-italic h4">Selected</p>
-							<ul className="list-group">
-							{selected}
-							</ul>
-							</div>
-						
-					</div> */}
-					{/* <div className="ui grid">
-						<div className="row">
-							<div className="eight wide column overflow-auto">
-								<form className="form-inline">
-									<div className="input-group">
-									<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
-									<button className="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
-									</div>
-								</form>
-								<div className="form-check">
-									{result}
-								</div>
-								<div className="accordion" id="checkboxes">
-									{checkbox}
-								</div>
-							</div>
-							<div className="seven wide column">
-								<div className="input-group">
-								<label className="font-italic h4">Filter By Meal-Type</label>
-								<ul className="list-group">
-								{types}
-								</ul>
-								</div>
-								<p className="font-italic h4">Selected</p>
-								<ul className="list-group">
-								{selected}
-								</ul>
-							</div>
-						</div>
-					</div> */}
-					
-					{/* <div className="col-md-6">
-			
-						<form className="form-inline">
-							<div className="input-group">
-							<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
-							<button className="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
-							</div>
-						</form>
-						<p className="font-italic h4">List of Ingredients</p>
-						<div className="accordion" id="checkboxes">
-						{checkbox}
-						</div>
-					</div>
-					<div className="col-md-5">
-							<div className="form-check">
-							{result}
-							</div>
-								<p className="font-italic h4">Selected</p>
-								<ul className="list-group">
-								{selected}
-								</ul>
-							<p className="font-italic h4">Filter By Meal-Type</p>
-								<ul className="list-group">
-								{types}
-								</ul>
-					</div> */}
-					{/* <div className="row">
-						<div className="col-md-6 overflow-auto">
-						<p className="font-italic h4">List of Ingredients</p>
-							<div className="accordion" id="checkboxes">
-							{checkbox}
-							</div>
-						</div>
-						<div className="col-md-5">
-							<form className="form-inline">
-								<div className="input-group">
-								<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
-								<button className="btn btn-outline-success my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
-								</div>
-							</form>
-							<div className="form-check">
-							{result}
-							</div>
-						</div>
-						<div className="col-md-6 overflow-auto">
-							<p className="font-italic h4">Selected</p>
-							<ul className="list-group">
-							{selected}
-							</ul>
-						</div>
-						<div className="col-md-5 overflow-auto">
-						<p className="font-italic h4">Filter By Meal-Type</p>
-							<ul className="list-group">
-							{types}
-							</ul>
-						</div>
-					</div> */}
-					{/* <button type="submit" className="btn btn-primary" onClick={e=>this.search(e)} data-dismiss="modal"> Search </button>
-					</div>
-					</div>
-				</div>
-			</div> */}
-			</>
 			
 		)
 	}

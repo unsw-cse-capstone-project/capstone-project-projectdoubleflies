@@ -84,7 +84,6 @@ export const editRecipe = (id, postData, image) => dispatch => {
 		  'Content-Type': 'multipart/form-data'
 		}
 	}).then(res=>{
-		console.log(res.data)
 		const data = res.data.split('/')
 		const imageID=data[data.length-1]
 		axios.post(`${apiUrl}/${id}/imagechange/${imageID}`,{
@@ -94,7 +93,6 @@ export const editRecipe = (id, postData, image) => dispatch => {
 		}).then(res=>{
 			const data = res.data.split('/')
 			const imageID=data[data.length-1]
-			console.log(postData)
 			axios.put(`${apiUrl}/recipe/${id}`, postData)
 			.then(response=>{
 				dispatch({

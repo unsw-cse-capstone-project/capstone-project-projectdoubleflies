@@ -424,7 +424,7 @@ class PostRecipe extends Component {
             {options}
             </select>
           </div>
-          {this.state.edit && <div><a href={`/view/${this.state.id}`}><button type="button" className="btn btn-danger mr-3">Cancel</button></a><button type="submit" className="btn btn-primary">Save</button></div>}
+          {this.state.edit && <div><a href={`/contributor/view/${this.state.id}`}><button type="button" className="btn btn-danger mr-3">Cancel</button></a><button type="submit" className="btn btn-primary">Save</button></div>}
           {this.state.edit===false &&<div><button type="submit" className="btn btn-primary">Confirm</button></div>}
         </form>
         {!this.props.loggedIn && <Redirect to="/"/>}

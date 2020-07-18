@@ -12,7 +12,7 @@ class ExplorerPage extends Component {
 		return (
 			<div className="container-fluid pt-5">
 			<img src={Background} alt="" className="bg"/>
-			<h4>Favourite Recipes</h4>
+			<h3 className="font-weight-bold font-italic">Favourite Recipes</h3>
 			{this.props.loggedIn && <ListRecipe/>}
 			{!this.props.loggedIn && <Redirect to="/"/>}
 			</div>

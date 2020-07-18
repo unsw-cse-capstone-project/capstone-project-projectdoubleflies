@@ -5,7 +5,7 @@ import { checkLoggedIn } from '../actions/userActions';
 import {searchIng} from '../actions/recipeActions'
 import { Redirect } from 'react-router'
 import ListRecipe from './ListRecipe'
-
+import Background from '../new_background.jpg'
 class ContributorPage extends Component {
 
 	constructor(props) {
@@ -34,7 +34,8 @@ class ContributorPage extends Component {
 
 	render(){
 		return (
-			<div className="container-fluid">
+			<div className="container-fluid pb-5">
+				<img src={Background} alt="" className="bg"/>
 				<div className="container p-5">
 				<div className="ui placeholder segment">
 					<div className="ui icon header">
@@ -74,7 +75,7 @@ class ContributorPage extends Component {
 					}	
 				</div>
 				</div>
-				<h4>My Recipes</h4>
+				<h3 className="font-weight-bold font-italic">My Recipes</h3>
 				<Link to={{ pathname: "/post"}}>
 					<button className="m-2 btn btn-primary" type="button">Create Recipe</button>
 				</Link>
