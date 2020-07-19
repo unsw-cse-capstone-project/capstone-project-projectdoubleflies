@@ -26,7 +26,6 @@ export const createRecipe = (username, postData, image) => dispatch => {
 		  'Content-Type': 'multipart/form-data'
 		}
 	}).then(res=>{
-		console.log(res.data)
 		const data = res.data.split('/')
 		const imageID=data[data.length-1]
 		console.log(JSON.stringify(postData))
@@ -91,8 +90,7 @@ export const editRecipe = (id, postData, image) => dispatch => {
 			  'Content-Type': 'multipart/form-data'
 			}
 		}).then(res=>{
-			const data = res.data.split('/')
-			const imageID=data[data.length-1]
+			console.log(JSON.stringify(postData))
 			axios.put(`${apiUrl}/recipe/${id}`, postData)
 			.then(response=>{
 				dispatch({
@@ -100,12 +98,12 @@ export const editRecipe = (id, postData, image) => dispatch => {
 					payload: response.status
 				})
 			}).catch(error=>{
-				axios.delete(`${apiUrl}/image/delete/${imageID}`)
-				.then(r=>{
-					alert("Can not submit")
-				}).catch(error=>{
-					alert("something wrong")
-				})
+				// axios.delete(`${apiUrl}/image/delete/${imageID}`)
+				// .then(r=>{
+				// 	alert("Can not submit")
+				// }).catch(error=>{
+				// 	alert("something wrong")
+				// })
 			})
 		}).catch(error=>{
 			alert("Cannot submit image")

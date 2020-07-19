@@ -74,7 +74,7 @@ class ViewRecipe extends Component {
 				<div className="container pb-5 pt-5">
 					<h1 className="text-monospace">{data.title}</h1>
 					{this.props.recipe.img!==undefined && <div className="card mb-4 img-view">
-						<img className="img-fluid" src={URL.createObjectURL(this.dataURLtoFile(data.img))} alt=""/>
+						<img className="img-fluid img-view" src={URL.createObjectURL(this.dataURLtoFile(data.img))} alt=""/>
 						<div class="card-body">
 							<h5>Description</h5>
 							<p class="card-text">{data.description}</p>

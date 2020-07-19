@@ -278,7 +278,6 @@ class PostRecipe extends Component {
       obj.id = obj.username;
       delete obj.username;
       temp ={
-        recipeID: this.state.id,
         title: this.state.title,
         description: this.state.desc,
         ingredients: this.state.ingredient_rows, 

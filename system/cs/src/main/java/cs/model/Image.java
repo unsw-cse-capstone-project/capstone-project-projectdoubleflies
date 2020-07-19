@@ -18,7 +18,7 @@ public class Image {
 
     private String fileType;
     
-    @OneToOne(mappedBy = "img",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "img")
     private Recipe recipe;
     
     @Lob

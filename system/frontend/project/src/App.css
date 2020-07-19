@@ -121,5 +121,6 @@ img.image {
     object-fit: cover;
 }
 
-
-/* .card-img-top {} */
+.img-view {
+    width: 100%;
+}

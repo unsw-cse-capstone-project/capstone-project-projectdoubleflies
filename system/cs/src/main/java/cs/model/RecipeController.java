@@ -140,7 +140,9 @@ public class RecipeController {
     @PutMapping("/recipe/{id}")
     public Recipe editRecipe(@RequestBody Recipe newRecipe, @PathVariable String id){
            Integer recipeID = Integer.parseInt(id);
-           Recipe recipe = recipeInfoRepository.findRecipeById(recipeID);
+		   Recipe recipe = recipeInfoRepository.findRecipeById(recipeID);
+		   System.out.println(newRecipe.getIngredients());
+		   System.out.println(newRecipe.getInstructions());
            if(recipe == null){
              newRecipe.setRecipeID(recipeID);
              return recipeInfoRepository.save(newRecipe);
@@ -161,6 +163,15 @@ public class RecipeController {
 		recipeInfoRepository.deleteByRecipeID(recipeID);
 		return "recipe and image deleted";
 	}
+	// @DeleteMapping("/recipe/{id}")
+	// public @ResponseBody String deleteRecipe(@PathVariable String id){
+	// 	int recipeID = Integer.parseInt(id);
+	// 	Recipe recipe = recipeInfoRepository.findOne(recipeID);
+	// 	Image img = recipe.getImg();
+	// 	recipeInfoRepository.deleteByRecipeID(recipeID);
+	// 	imgRepository.delete(img.getId());
+	// 	return "recipe and image deleted";
+	// }
 
 
 	@GetMapping("/recipe/ingredient/{ingredient}")

@@ -209,7 +209,7 @@ class RegisterModal extends Component {
 					</Modal.Header>
 
 					<Modal.Body>
-						<p>success</p>
+						<p>Welcome {this.state.username}!</p>
 					</Modal.Body>
 
 					<Modal.Footer>
