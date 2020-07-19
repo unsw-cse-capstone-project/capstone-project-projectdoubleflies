@@ -90,7 +90,6 @@ export const editRecipe = (id, postData, image) => dispatch => {
 			  'Content-Type': 'multipart/form-data'
 			}
 		}).then(res=>{
-			console.log(JSON.stringify(postData))
 			axios.put(`${apiUrl}/recipe/${id}`, postData)
 			.then(response=>{
 				dispatch({
