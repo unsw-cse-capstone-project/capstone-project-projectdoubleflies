@@ -29,3 +29,13 @@ After that, we discussed about the things in retrospective, such as what went we
 go well and whan can we try to improve our design. And we finished the report of the 
 retrospecive A.
 
+
+Week6 
+This week is mid break, we were still working on the project and the website was looking good 
+overall. We tried to develop our website by following the retrospective A.
+
+Week7
+The website looks empty as we did not upload the Ingredients and recipes on it, Kyrie and I was working on it, kept updating ingredients and 
+recipes. Also added more meal-type to the website. Other than that, we were working on css to make the website beautiful. 
+I think everything is going well.
+
