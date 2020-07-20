@@ -33,7 +33,8 @@ retrospecive A.
 
 Week6 
 This week is mid break, we were still working on the project and the website was looking good 
-overall. We tried to develop our website by following the retrospective A.
+overall. We tried to develop our website by following the retrospective A. I started to learn
+css.
 
 Week7
 The website looks empty as we did not upload the Ingredients and recipes on it, Kyrie and I was working on it, kept updating ingredients and 
