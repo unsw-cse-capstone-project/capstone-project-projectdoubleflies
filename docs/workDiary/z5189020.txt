@@ -15,3 +15,23 @@ Week 4:
 Start learning Spring Boot and React
 Finished the Login and Register system
 
+Week 5:
+
+Create the SQL query for the user story find the most frequently search set of ingredients with no matching recipe.
+Create the backend API for that query and run some testings using Postman.
+The meetings went well and most of the main features are being implemented.
+
+Week 6:
+
+Implement the query for the user story suggest the next ingredient given the running list of selected ingredients.
+Create the API for that query and helped modify other endpoints.
+
+Week 7:
+
+Redecorate the front-end and started working on the final report.
+Start to rigorously test the website from user perspective.
+
+Week 8:
+
+Work on setting up MYSQL cloud database on AWS and user mannual.
+Prepare for progressive demo 2
