@@ -13,8 +13,8 @@ class PostRecipe extends Component {
       id: "",
       title: "",
       desc: "",
-      ingredient_rows:[],
-      instruction_rows:[],
+      ingredient_rows:[{ingredient: undefined, category:undefined, amount:undefined, unit: undefined}],
+      instruction_rows:[undefined],
       categories: ["Dairy", "Vegetables", "Fruites", "Baking & Grains", "Added Sweeteners", "Spices", "Meats", "Fish", "Seafood", "Condiments", "Oils", "Seasonings", "Sauces", "Legumes", "Alcohol", "Soup", "Nuts", "Dairy Alternative", "Desserts & Snacks", "Beverages"],
       chosen: "Choose...",
       selections:["Breads", "Breakfast", "Cakes", "Casseroles", "Cookies", "Desserts", "Dinner", "Dips", "Drinks", "Fish recipes", "Grilling & BBQ", "Kid Friendly", "Meat recipes", "Poultry recipes", "Quick & Easy", "Salad Dressings", "Salads", "Sandwiches", "Sauces", "Seafood recipes", "Slow Cooker", "Soups", "Vegetarian recipes", "Vegan recipes", "Gluten free recipes", "Lactose free recipes", "Lunch"],
@@ -64,8 +64,8 @@ class PostRecipe extends Component {
           title: this.props.recipe.title ? this.props.recipe.title: "",
           id: id,
           desc: this.props.recipe.description ? this.props.recipe.description: "",
-          ingredient_rows: this.props.recipe.ingredients ? this.props.recipe.ingredients: [],
-          instruction_rows: this.props.recipe.instructions ? this.props.recipe.instructions: [],
+          ingredient_rows: this.props.recipe.ingredients ? this.props.recipe.ingredients: [{ingredient: undefined, category:undefined, amount:undefined, unit: undefined}],
+          instruction_rows: this.props.recipe.instructions ? this.props.recipe.instructions: [undefined],
           file: imgFile,
           chosen: this.props.recipe.type ? this.props.recipe.type: "Chosen ...",
           display: array,
@@ -370,10 +370,11 @@ class PostRecipe extends Component {
         <form className="form-padding" onSubmit={ this.onSubmit }>
           <div className="form-group">
             <h4>Create Your Recipe</h4>
-            <label htmlFor="title">Title</label>
+            <label className="font-italic h5 d-inline title-margin">Title</label>
             <input type="text" className="form-control" id="title" placeholder="Your Recipe Title" onKeyPress={(e) => { e.key === 'Enter' && e.preventDefault(); }} value={this.state.title} onChange={e=>this.onChangeText(e)}/>
           </div>
           <div className="form-group">
+          <label className="font-italic h5 d-inline title-margin">Upload Image</label>
             <div className="input-group">
               <div className="input-group-prepend">
                 <span className="input-group-text" id="inputGroupFileAddon01">
@@ -399,6 +400,7 @@ class PostRecipe extends Component {
           {this.state.file!==undefined && <img src={URL.createObjectURL(this.state.file)} className="img-thumbnail mb-" alt="..."></img>}
           
           <div className="form-group">
+            <label className="font-italic h5 d-inline title-margin">Description</label>
             <textarea id="desc" className="form-control" rows="5" placeholder="Your Recipe Description" value={this.state.desc} onChange={e=>this.onChangeText(e)}/>
           </div>
           <div className="form-group">
@@ -417,7 +419,7 @@ class PostRecipe extends Component {
           </div>
 
           <div className="form-group">
-            <label htmlFor="inputType">Type</label>
+            <label className="font-italic h5 d-inline title-margin">Meal-Type</label>
             <select id="inputType" className="form-control" onChange={(e)=>this.onChangeType(e)} value={this.state.chosen}>
             <option selected>{this.state.chosen}</option>
             {options}

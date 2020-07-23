@@ -87,7 +87,7 @@ class ListRecipe extends Component {
 				return (
 					<div className="card m-2" style={{width: 18 + 'em'}}>
 					<Link to={{ pathname: `${pathname}${item.recipeID}`}}>
-					<img className="card-img-top" src={URL.createObjectURL(this.dataURLtoFile(item.img))} alt="..."/>
+					{item.img && <img className="card-img-top" src={URL.createObjectURL(this.dataURLtoFile(item.img))} alt="..."/>}
 					<div className="card-body">
 					<h5 className="card-title">{item.title}</h5>
 					<h6 className="card-subtitle mb-2">Description</h6>
