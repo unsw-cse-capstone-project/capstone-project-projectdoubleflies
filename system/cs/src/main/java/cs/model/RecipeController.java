@@ -87,8 +87,8 @@ public class RecipeController {
 	}
 	
 	@GetMapping("/recipe")
-	public List<Recipe> getAllRecipe(){
-		return recipeInfoRepository.findAll();
+	public List<Recipe> getAllRecipe(int offset){
+		return recipeInfoRepository.findAllOffset(offset);
 	}
 	// Recipe filtered by recipe type
 	@GetMapping("/recipe/filter/{recipe}")
