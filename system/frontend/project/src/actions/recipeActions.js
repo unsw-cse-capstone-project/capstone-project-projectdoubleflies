@@ -3,8 +3,9 @@ import axios from 'axios';
 
 const apiUrl="http://localhost:8080";
 
-export const fetchRecipes = () => dispatch => {
-	axios.get(`${apiUrl}/recipe?offset=0`)
+export const fetchRecipes = (offset) => dispatch => {
+	console.log(offset)
+	axios.get(`${apiUrl}/recipe?offset=${offset}`)
 	.then(response => dispatch({
 		type: FETCH_RECIPES,
 		payload: response.data

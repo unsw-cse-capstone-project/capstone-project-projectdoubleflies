@@ -10,18 +10,22 @@ const initialState = {
 	posted: false,
 	saved: false,
 	image: {},
-	set_ing: undefined
+	set_ing: undefined,
+	offset:[]
 }
 
 
 export default function(state = initialState, action) {
 	switch(action.type){
 		case FETCH_RECIPES:
-
+			const arr=[...state.items]
+			const new_arr=arr.concat(action.payload)
+			console.log(new_arr)
 			return {
 				...state, 
-				items: action.payload,
+				items: new_arr,
 				set_ing: undefined,
+				offset: action.payload
 			}
 
 		case FETCH_USER_RECIPES:

@@ -14,7 +14,9 @@ class ListRecipe extends Component {
 		this.state = {
 			kind: "",
 			deleted: false,
-			size: 15
+			size: 15,
+			offset: 0,
+			prev: 0
 		}
 	}
 
@@ -50,20 +52,34 @@ class ListRecipe extends Component {
 		}else if(kind==="explorer"){
 			this.props.fetchUserFavourite(this.props.username);
 		}else{
+			localStorage.clear();
 			const temp=localStorage.getItem("search")
 			if(temp!==null)
 				this.props.searchRecipes(temp["ingredients"], temp["type"])
-				
 			else
-				this.props.fetchRecipes()
+				this.props.fetchRecipes(0)
 		}
 	}
 
 	handleScroll=()=>{
-		const size=this.state.size;
-		this.setState({
-			size: size+10
-		})
+		if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight-5) {
+			const offset=this.state.offset+15;
+			const size=this.state.size+15;
+			// let temp
+			// if(this.state.kind==="contributor"){
+			// 	temp = this.props.user_recipes
+			// }else if(this.state.kind==="explorer"){
+			// 	temp = this.props.favs
+			// }else{
+			// 	temp = this.props.recipes
+			// }
+			this.setState({
+				offset: offset,
+				size: size,
+				// prev: temp.length
+			})
+			this.props.fetchRecipes(offset)
+		}
 	}
 	addFavourite = (e, id)=>{
 		e.preventDefault();
@@ -88,49 +104,60 @@ class ListRecipe extends Component {
 		}else{
 			temp = this.props.recipes
 		}
-
+		
 		let cards=[]
+		let loading=null
 		if(Array.isArray(temp)){
-			
+			loading=<div className="spinner-border text-primary" role="status">
+  				<span className="sr-only">Loading...</span>
+			</div>
+			if(this.props.offset.length===0){
+				loading=<div className="card">
+				<div className="card-body">
+    			<p className="card-text">No More Recipes</p>
+  				</div>
+			  </div>
+			}
 			const pathname = this.state.kind==="contributor" ? "/contributor/view/": "/view/";
-			cards = temp.slice(0, this.state.size).map(item => {
-				return (
-					<div className="card m-2" style={{width: 18 + 'em'}}>
-					<Link to={{ pathname: `${pathname}${item.recipeID}`}}>
-					{item.img && <img className="card-img-top" src={URL.createObjectURL(this.dataURLtoFile(item.img))} alt="..."/>}
-					<div className="card-body">
-					<h5 className="card-title">{item.title}</h5>
-					<h6 className="card-subtitle mb-2">Description</h6>
-					<p className="card-text card-same">{item.description}</p>
+				cards = temp.slice(0, this.state.size).map(item => {
+					return (
+						<div className="card m-2" style={{width: 18 + 'em'}}>
+						<Link to={{ pathname: `${pathname}${item.recipeID}`}}>
+						{item.img && <img className="card-img-top" src={URL.createObjectURL(this.dataURLtoFile(item.img))} alt="..."/>}
+						<div className="card-body">
+						<h5 className="card-title">{item.title}</h5>
+						<h6 className="card-subtitle mb-2">Description</h6>
+						<p className="card-text card-same">{item.description}</p>
+						</div>
+						</Link>
+						{
+							this.state.kind==="" && this.props.loggedIn &&
+							<div>
+								<Button className="button-margin" as='div' labelPosition='right'/>
+								<Button className="btn-margin" size='mini' color='red' onClick={(e)=>this.addFavourite(e, item.recipeID)}>
+									<Icon name='heart' />
+									Favourite
+								</Button>
+							</div>
+						}
+						
+						{
+							this.state.kind==="contributor" &&
+							<div>
+								<ConfirmationModal message={"Delete"} func={this.deleteRecipe} param={item.recipeID}/>
+							</div>
+						}
+						{
+							this.state.kind==="explorer" && 
+							<div>
+								<ConfirmationModal message={"Remove"} func={this.removeFavourite} param={item.recipeID}/>
+							</div>
+						
+						}
 					</div>
-					</Link>
-					{
-						this.state.kind==="" && this.props.loggedIn &&
-						<div>
-							<Button className="button-margin" as='div' labelPosition='right'/>
-							<Button className="btn-margin" size='mini' color='red' onClick={(e)=>this.addFavourite(e, item.recipeID)}>
-								<Icon name='heart' />
-								Favourite
-							</Button>
-						</div>
-					}
-					
-					{
-						this.state.kind==="contributor" &&
-						<div>
-							<ConfirmationModal message={"Delete"} func={this.deleteRecipe} param={item.recipeID}/>
-						</div>
-					}
-					{
-						this.state.kind==="explorer" && 
-						<div>
-							<ConfirmationModal message={"Remove"} func={this.removeFavourite} param={item.recipeID}/>
-						</div>
-					
-					}
-				</div>
-				)
-			})
+					)
+				})
+			
 
 		}
 		return (
@@ -139,6 +166,9 @@ class ListRecipe extends Component {
 			{cards.length===0&& <div> No Recipe Found </div>}
 			<div className="row d-flex justify-content-center">
 				{cards}
+			</div>
+			<div className="row d-flex justify-content-center">
+				{loading}
 			</div>
 			</div>
 		)
@@ -150,7 +180,8 @@ const mapStateToProps = state => ({
 	recipes: state.recipes.items,
 	username: state.users.username,
 	loggedIn: state.users.loggedIn,
-	deleted: state.recipes.deleted
+	deleted: state.recipes.deleted,
+	offset:state.recipes.offset
 });
 
 export default connect(mapStateToProps, {fetchRecipes, fetchUserRecipes, checkLoggedIn, deleteRecipe, fetchUserFavourite, removeFavourite, addFavourite, searchRecipes})(ListRecipe);

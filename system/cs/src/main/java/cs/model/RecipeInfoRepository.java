@@ -15,7 +15,7 @@ public interface RecipeInfoRepository extends JpaRepository<Recipe, Integer> {
 	
     int deleteByRecipeID(Integer recipeID);
     
-    @Query(value="SELECT * from Recipe limit 8 offset ?1", nativeQuery=true)
+    @Query(value="SELECT * from Recipe limit 15 offset ?1", nativeQuery=true)
     List<Recipe> findAllOffset(int offset);
     
     @Query(value="SELECT r.category from ingredient_info r where r.ingredient=:ingredient group by r.ingredient, r.category having count(r.ingredient)="
