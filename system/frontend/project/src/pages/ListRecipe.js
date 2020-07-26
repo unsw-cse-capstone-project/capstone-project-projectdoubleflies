@@ -90,7 +90,8 @@ class ListRecipe extends Component {
 		}
 
 		let cards=[]
-		if(temp!==undefined){
+		if(Array.isArray(temp)){
+			
 			const pathname = this.state.kind==="contributor" ? "/contributor/view/": "/view/";
 			cards = temp.slice(0, this.state.size).map(item => {
 				return (
