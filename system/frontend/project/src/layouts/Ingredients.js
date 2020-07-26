@@ -45,7 +45,10 @@ class Ingredients extends Component {
 	}
 
 	onClick=(e)=>{
-		if(this.state.selected[e.target.name][e.target.value]===undefined){
+		console.log(this.state.selected)
+		if(!e.target.name && !e.target.name){
+			this.props.suggestIngredients([])
+		}else if(this.state.selected[e.target.name][e.target.value]===undefined){
 			const temp={}
 			Object.assign(temp, this.state.selected);
 			temp[e.target.name][e.target.value]=true
@@ -97,6 +100,25 @@ class Ingredients extends Component {
 			})
 		})
 		this.props.searchRecipes(ingredients, this.state.type)
+		
+	}
+
+	clearSearch=(e)=>{
+		e.preventDefault();
+		this.setState({
+			selected: {
+				Dairy:{}, Vegetables:{}, Fruites:{}, "Baking & Grains":{}, "Added Sweeteners":{}, Spices:{}, Meats:{}, Fish:{}, Seafood:{}, Condiments:{}, Oils:{}, Seasonings:{}, Sauces:{}, Legumes:{}, Alcohol:{}, Soup:{}, Nuts:{}, "Dairy Alternative":{}, "Desserts & Snackes":{}, Beverages:{}
+			},
+			// ingredients:{},
+			word: "",
+			result:{},
+			type: undefined,
+			types: ["Breads", "Breakfast", "Cakes", "Casseroles", "Cookies", "Desserts", "Dinner", "Dips", "Drinks", "Fish recipes", "Grilling & BBQ", "Kid Friendly", "Meat recipes", "Poultry recipes", "Quick & Easy", "Salad Dressings", "Salads", "Sandwiches", "Sauces", "Seafood recipes", "Slow Cooker", "Soups", "Vegetarian recipes", "Vegan recipes", "Gluten free recipes", "Lactose free recipes", "Lunch"],
+			selected_type: {"Breads": false, "Breakfast": false,"Cakes": false, "Casseroles": false, "Cookies": false, "Desserts": false, "Dinner": false, "Dips": false, "Drinks": false, "Fish recipes": false, "Grilling & BBQ": false, "Kid Friendly": false, "Meat recipes": false, "Poultry recipes": false, "Quick & Easy": false, "Salad Dressings": false, "Salads": false, "Sandwiches": false, "Sauces": false, "Seafood recipes": false, "Slow Cooker": false, "Soups": false, "Vegetarian recipes": false, "Vegan recipes": false, "Gluten free recipes": false, "Lactose free recipes": false, "Lunch": false},
+			ingredients: []
+		})
+		localStorage.removeItem("map")
+		this.onClick(e)
 	}
 
 	filterSearch=(e)=>{
@@ -214,6 +236,9 @@ class Ingredients extends Component {
             		{types}
             	</select>
           		</div>
+				<div className="m-1">
+					<button type="button" className="btn btn-primary" onClick={e=>this.clearSearch(e)}> Clear Search </button>
+				</div>
 				<form className="form-inline d-flex justify-content-center">
 						<label className="font-weight-bold font-italic h5 d-inline title-margin">Choose Ingredients<br/></label>
 						<div className="input-group">
