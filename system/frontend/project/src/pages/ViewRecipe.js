@@ -80,46 +80,51 @@ class ViewRecipe extends Component {
 							<p class="card-text">{data.description}</p>
 						</div>
 					</div>}
-					<h4>Ingredients</h4>
-					<table class="table">
-					<thead>
-						<tr>
-						<th scope="col">Ingredient</th>
-						<th scope="col">Amount</th>
-						</tr>
-					</thead>
-					<tbody>
-						
-						{data.ingredients !== undefined && data.ingredients.map(item=>{
-							return(
-								<tr>
-									<td>{item.ingredient}</td>
-									<td>{item.amount}</td>
-								</tr>
-							)
-						})}			
-					</tbody>
-					</table>
+					<div className="p-2">
+					<h4>Meal-Type: {data.type}</h4>
+					</div>
+					<div className="p-2">
+						<h4>Ingredients</h4>
+						<table class="table">
+						<thead>
+							<tr>
+							<th scope="col">Ingredient</th>
+							<th scope="col">Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+							{data.ingredients !== undefined && data.ingredients.map(item=>{
+								return(
+									<tr>
+										<td>{item.ingredient}</td>
+										<td>{item.amount}</td>
+									</tr>
+								)
+							})}			
+						</tbody>
+						</table>
+					</div>
+					<div className="p-2">
 					<h3>Instructions</h3>
-					<table class="table">
-					<thead>
-						<tr>
-						<th scope="col">#</th>
-						<th scope="col">Instructions</th>
-						</tr>
-					</thead>
-					<tbody>
-						
-						{data.ingredients!== undefined && data.instructions.map((item, index)=>{
-							return(
-								<tr>
-									<td>Step {index+1}</td>
-									<td>{item}</td>
-								</tr>
-							)
-						})}			
-					</tbody>
-					</table>
+						<table class="table">
+						<thead>
+							<tr>
+							</tr>
+						</thead>
+						<tbody>
+							
+							{data.ingredients!== undefined && data.instructions.map((item, index)=>{
+								return(
+									<tr>
+										<td>Step {index+1}</td>
+										<td>{item}</td>
+									</tr>
+								)
+							})}			
+						</tbody>
+						</table>
+					</div>
 					{this.state.showEdit===true && 
 						<div>
 							<Button className="button-margin" as='div' labelPosition='right'/>

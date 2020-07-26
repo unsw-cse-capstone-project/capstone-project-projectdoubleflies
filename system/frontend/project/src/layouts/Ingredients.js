@@ -206,7 +206,7 @@ class Ingredients extends Component {
 		})
 		
 		return (
-			<div className="container">
+			<div className="sidebar container">
 				<div className="form-group m-1">
 				<label className="font-weight-bold font-italic h5 d-inline title-margin">Filter By Meal-Type</label>
             		<select id="inputType" className="form-control m-1" onChange={e=>this.onFilter(e)} value={this.state.type}>
@@ -238,9 +238,10 @@ class Ingredients extends Component {
 					<ul className="list-group">
 					{sel}
 					</ul>
-					<div className="m-1">
+					
+				</div>
+				<div className="m-1">
 					<button type="submit" className="btn btn-primary" onClick={e=>this.search(e)} data-dismiss="modal"> Search </button>
-					</div>
 				</div>
 			</div>
 			

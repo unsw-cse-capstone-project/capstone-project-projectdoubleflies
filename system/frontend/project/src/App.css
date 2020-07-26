@@ -124,3 +124,9 @@ img.image {
 .img-view {
     width: 100%;
 }
+
+.sticky-sidebar {
+    height: 85%;
+    position: relative;
+    overflow-y: scroll;
+}

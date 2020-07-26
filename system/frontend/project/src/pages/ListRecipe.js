@@ -13,7 +13,8 @@ class ListRecipe extends Component {
 		super(props)
 		this.state = {
 			kind: "",
-			deleted: false
+			deleted: false,
+			size: 15
 		}
 	}
 
@@ -34,29 +35,36 @@ class ListRecipe extends Component {
 	}
 
 	componentDidMount() {
+		window.addEventListener('scroll', this.handleScroll) 
 		this.props.checkLoggedIn()
 		const path = window.location.href.split("/")
-		const kind= path[path.length-1]
-		console.log(kind)
+		let kind= path[path.length-1]
+		if(kind=="?"){
+			kind=""	
+		}
 		this.setState({
 			kind: kind
 		})
-		if(kind===""){
-			if(kind===""){
-				const temp=localStorage.getItem("search")
-				if(temp!==null)
-					this.props.searchRecipes(temp["ingredients"], temp["type"])
-					
-				else
-					this.props.fetchRecipes()
-			}
-		}else if(kind==="contributor"){
+		if(kind==="contributor"){
 			this.props.fetchUserRecipes(this.props.username);	
 		}else if(kind==="explorer"){
 			this.props.fetchUserFavourite(this.props.username);
+		}else{
+			const temp=localStorage.getItem("search")
+			if(temp!==null)
+				this.props.searchRecipes(temp["ingredients"], temp["type"])
+				
+			else
+				this.props.fetchRecipes()
 		}
 	}
 
+	handleScroll=()=>{
+		const size=this.state.size;
+		this.setState({
+			size: size+10
+		})
+	}
 	addFavourite = (e, id)=>{
 		e.preventDefault();
 		this.props.addFavourite(this.props.username, id)
@@ -73,17 +81,18 @@ class ListRecipe extends Component {
 	}
 	render() {
 		let temp
-		if(this.state.kind===""){
-			temp = this.props.recipes
-		}else if(this.state.kind==="contributor"){
+		if(this.state.kind==="contributor"){
 			temp = this.props.user_recipes
 		}else if(this.state.kind==="explorer"){
 			temp = this.props.favs
+		}else{
+			temp = this.props.recipes
 		}
+
 		let cards=[]
 		if(temp!==undefined){
 			const pathname = this.state.kind==="contributor" ? "/contributor/view/": "/view/";
-			cards = temp.map(item => {
+			cards = temp.slice(0, this.state.size).map(item => {
 				return (
 					<div className="card m-2" style={{width: 18 + 'em'}}>
 					<Link to={{ pathname: `${pathname}${item.recipeID}`}}>
