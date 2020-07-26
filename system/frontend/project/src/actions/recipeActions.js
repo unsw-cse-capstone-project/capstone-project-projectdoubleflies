@@ -4,7 +4,7 @@ import axios from 'axios';
 const apiUrl="http://localhost:8080";
 
 export const fetchRecipes = () => dispatch => {
-	axios.get(`${apiUrl}/recipe`)
+	axios.get(`${apiUrl}/recipe?offset=0`)
 	.then(response => dispatch({
 		type: FETCH_RECIPES,
 		payload: response.data
