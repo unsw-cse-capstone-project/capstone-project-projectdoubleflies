@@ -42,3 +42,10 @@ The longer description will be cut off (in card view) and be replaced by ellipce
 The cardview was restricted to 3 columns before but now it fits to the size of the window.
 Added confirmation modal to confirm deletion, removing and saving operations.
 
+Week8
+The functionalities of the website is mostly done and tested. 
+I added load on scroll function in frontend so that the website's loading speed is faster than before.
+I have written functionalities and implementation challenges for frontend for the report.
+
+Week9
+I wrote the description and justification on all third parties I have used for the frontend.
