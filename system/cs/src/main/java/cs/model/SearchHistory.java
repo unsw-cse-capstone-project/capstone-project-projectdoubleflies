@@ -32,12 +32,9 @@ public class SearchHistory {
     @Column(name="ingredient")
     private List<String> Ingredients;
     
-   // @ElementCollection
-   // @CollectionTable(name= "history_frequency1")
-  //  @MapKeyJoinColumn(name="searchID2")
-    //@Column(name="frequency3")
+  
     private Integer frequency;
-    /*-------------------Test---------------------------------------------------*/
+  
     @Column
     @Convert(converter = StringListConverter.class)
     @JsonIgnore
@@ -65,7 +62,6 @@ public class SearchHistory {
 		return this.Ingredients;
 	}
    
-	// if this is first time to search the set of ingredients
 	public void setIngredients(List<String> ingredients) {
 		this.Ingredients = ingredients;
 		this.setMeal(ingredients);

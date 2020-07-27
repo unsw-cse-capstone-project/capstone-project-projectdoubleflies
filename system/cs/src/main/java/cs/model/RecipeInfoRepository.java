@@ -40,7 +40,6 @@ public interface RecipeInfoRepository extends JpaRepository<Recipe, Integer> {
     @Query(value="SELECT distinct(i.ingredient) from ingredient_info i WHERE i.category=:category", nativeQuery = true)
     List<String> test1(@Param("category") String category);
     
-    //@Query("SELECT i FROM Recipe r INNER JOIN r.ingredients i WHERE i.category=")
     @Query(value="SELECT  FROM ingredient_info i",nativeQuery=true)
     List<Ingredient> search();
     

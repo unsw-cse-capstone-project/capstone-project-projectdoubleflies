@@ -1,5 +1,4 @@
 package cs.model;
-
 import javax.persistence.Embeddable;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;

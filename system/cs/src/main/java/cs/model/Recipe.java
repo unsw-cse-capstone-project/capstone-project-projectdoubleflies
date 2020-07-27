@@ -16,8 +16,6 @@ import lombok.EqualsAndHashCode;
 
 
 @Entity
-// @Table(name="recipe_info")
-// @Embeddable
 @EqualsAndHashCode(callSuper = false)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "likes"})
 public class Recipe{
@@ -37,32 +35,32 @@ public class Recipe{
 	@Column(nullable=false)
 	private List<Ingredient> ingredients;
 	
-    @NotEmpty
+   	@NotEmpty
 	@ElementCollection
 	@CollectionTable(
 			name="instruction_info", 
 			joinColumns=@JoinColumn(name="recipeID")
 	)
 	@Column(name="instruction", nullable=false)
-    @Size(min=1 , message="You must enter at least one instruction!")
-    @Valid
+    	@Size(min=1 , message="You must enter at least one instruction!")
+   	 @Valid
 	private List<@Size(min=1) String> instructions;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="username")
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+   	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 	@JsonBackReference
 	private User user;
 	
    
 	@ManyToMany(mappedBy="favorite_recipe")
 	@JsonIgnore
-    private Set<User> likes = new HashSet<>();
+   	private Set<User> likes = new HashSet<>();
 	
 	
-    @NotNull
+    	@NotNull
 	@Length(min=2, message="Title length must be at least two!")
-    @Valid
+   	 @Valid
 	private String title;
 
 	@NotNull
@@ -77,16 +75,9 @@ public class Recipe{
 	private String type;
 	
 	
-	/* Test ----------------------------------------------------------------------
-	@Lob
-	@Column(name="picture")
-	@JsonIgnore
-	private byte[] data;
-	/* Test ----------------------------------------------------------------------*/
 	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="uuid")
 	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-	// @JsonIgnore
 	private Image img;
 	
 	public Recipe() {}
@@ -99,7 +90,6 @@ public class Recipe{
 		this.ingredients = ingredients;
 		this.instructions = instructions;
 		this.type = type;
-	//	this.user = user;
 	}
 	
 	public Integer getRecipeID() {
@@ -199,21 +189,6 @@ public class Recipe{
 	public void setImg(Image img) {
 		this.img = img;
 	}
-
-/*
-    @JsonIgnore
-	public byte[] getData() {
-		return data;
-	}
-
-
-
-	public void setData(byte[] data) {
-		this.data = data;
-	}
-
-*/
-    
 	
 }
 
