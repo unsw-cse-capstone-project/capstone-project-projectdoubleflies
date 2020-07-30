@@ -41,7 +41,7 @@ public class User{
     @ManyToMany
     @JoinTable(
         name="Explorer_Info",
-        joinColumns = @JoinColumn(name="username"),
+        joinColumns = @JoinColumn(name="username",foreignKey = @javax.persistence.ForeignKey(name = "none")),
         inverseJoinColumns = @JoinColumn(name="favorite_recipe"))
     @JsonIgnore
     private Set<Recipe> favorite_recipe = new HashSet<>();

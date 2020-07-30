@@ -64,11 +64,11 @@ class Header extends Component {
 						<a className="nav-link" href="/">Home</a>
 					</li>
 					{this.props.isLoggedIn && <li className={`"nav-item "+${this.state.active===2?'active': null}`}>
-						<a className="nav-link" href="/explorer">Explorer</a>
+						<a className="nav-link" href="/explorer">My Favorites</a>
 					</li>}
 					
 					{this.props.isLoggedIn && <li className={`"nav-item " + ${this.state.active===3?'active': null}`}>
-						<a className="nav-link" href="/contributor">Contributor</a>
+						<a className="nav-link" href="/contributor">My Recipes</a>
 					</li>}
 					</ul>
 					{this.props.isLoggedIn ? <>

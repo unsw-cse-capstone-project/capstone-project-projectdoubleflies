@@ -22,10 +22,12 @@ export default function(state = initialState, action) {
 				}
 			}else{
 				alert("Not valid Username or Password")
+   		                 
+
 			}
-			return
+			return state
 		case REGISTER_USER:
-			if(action.payload){
+			if(action.payloadsasa){
 				const user = {username: action.username}
 				localStorage.setItem('username', JSON.stringify(user));
 				return {
@@ -35,7 +37,7 @@ export default function(state = initialState, action) {
 			}else{
 				alert("Not valid Username")
 			}
-			return
+			return state
 
 		case CHECK_USERNAME:
 			return {
@@ -60,4 +62,5 @@ export default function(state = initialState, action) {
 		default:
 			return state;
 	}
+	
 }

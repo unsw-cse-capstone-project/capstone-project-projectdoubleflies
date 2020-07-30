@@ -171,14 +171,15 @@ public class RecipeController {
 	}
 
    	@GetMapping("/favorite/user")
-    	public @ResponseBody String addFavorite(@RequestParam String id, @RequestParam String username){
+    	public Boolean addFavorite(@RequestParam String id, @RequestParam String username){
         	Integer recipeID = Integer.parseInt(id);
         	User user = userRepository.findByUsername(username);
         	Recipe recipe = recipeInfoRepository.findRecipeById(recipeID);
+		User contributor = recipe.getUser();
+		if(contributor.getID().equals(username)) return false;
        		user.addFavorite(recipe);
        		userRepository.save(user);
-        
-        	return "saved";
+        	return true;
 	}
 	
     	@GetMapping("/favorite/{id}/delete")
