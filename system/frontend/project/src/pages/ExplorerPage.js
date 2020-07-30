@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ListRecipe from './ListRecipe'
+import ListRecipe from '../layouts/ListRecipe'
 import { connect } from 'react-redux';
 import { checkLoggedIn } from '../actions/userActions'
 import { Redirect } from 'react-router-dom'; 

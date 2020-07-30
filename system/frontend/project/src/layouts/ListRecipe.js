@@ -6,7 +6,7 @@ import { Button, Icon} from 'semantic-ui-react'
 
 import { fetchUserFavourite, removeFavourite, addFavourite} from '../actions/explorerActions';
 import { checkLoggedIn } from '../actions/userActions'
-import ConfirmationModal from '../layouts/ConfirmationModal';
+import ConfirmationModal from './ConfirmationModal';
 
 class ListRecipe extends Component {
 	constructor(props) {
@@ -52,7 +52,6 @@ class ListRecipe extends Component {
 		}else if(kind==="explorer"){
 			this.props.fetchUserFavourite(this.props.username);
 		}else{
-			localStorage.clear();
 			const temp=localStorage.getItem("search")
 			if(temp!==null)
 				this.props.searchRecipes(temp["ingredients"], temp["type"])

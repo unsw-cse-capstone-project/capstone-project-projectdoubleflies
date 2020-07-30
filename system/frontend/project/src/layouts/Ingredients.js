@@ -247,7 +247,10 @@ class Ingredients extends Component {
 						</div>
 				</form>
 				{this.props.suggestions!=="" &&<div className="card m-1">
-					<div className="card-body">Suggested Ingredients <br/> {this.props.suggestions}</div>
+					<div class="card-body">
+					<h6  className="card-title font-italic font-weight-bold">Suggested Ingredients</h6>
+					<p className="card-text font-weight-bold">{this.props.suggestions}</p>
+					</div>
 				</div>}
 				{this.props.suggestions==="" &&<div className="card m-1">
 					<div className="card-body">No Suggestions</div>

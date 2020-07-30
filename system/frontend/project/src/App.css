@@ -128,5 +128,4 @@ img.image {
 .sticky-sidebar {
     height: 85%;
     position: relative;
-    overflow-y: scroll;
 }

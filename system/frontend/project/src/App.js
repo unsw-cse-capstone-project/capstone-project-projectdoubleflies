@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from './layouts/Header';
 import PostRecipe from './pages/PostRecipe';
-import ViewRecipe from './pages/ViewRecipe';
+import ViewRecipe from './layouts/ViewRecipe';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ContributorPage from './pages/ContributorPage';
 

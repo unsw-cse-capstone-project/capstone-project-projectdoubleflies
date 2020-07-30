@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PostRecipe from './PostRecipe';
+import PostRecipe from '../pages/PostRecipe';
 import { connect } from 'react-redux'
 import { getRecipe, getUserRecipe, fetchRecipes} from '../actions/recipeActions'
 import { checkLoggedIn } from '../actions/userActions'

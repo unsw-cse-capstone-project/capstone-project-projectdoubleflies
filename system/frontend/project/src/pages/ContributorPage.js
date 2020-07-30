@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { checkLoggedIn } from '../actions/userActions';
 import {searchIng} from '../actions/recipeActions'
 import { Redirect } from 'react-router'
-import ListRecipe from './ListRecipe'
+import ListRecipe from '../layouts/ListRecipe'
 import Background from '../new_background.jpg'
 class ContributorPage extends Component {
 
