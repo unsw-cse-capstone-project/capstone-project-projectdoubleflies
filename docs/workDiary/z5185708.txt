@@ -50,4 +50,13 @@ And due to the diversity of users' choices of recipes, we decided to make the nu
 so that users have a lot of choices. And we found some bugs when testing the website, such as unable to modify the recipe image, 
 too few units, etc. So we have made improvements and hope that the demo will achieve good results next week
 
+Week8
+This week we need to carry out presentations, so we first decided on Wednesday in what order to carry out presentations. 
+At the same time, we are completing the functionalities that need to be completed in the plan, and due to the continuous 
+improvement of the website, we found that there are some previously proposed functionalities do not need to be used anymore, 
+such as viee the history of recipes and we have also optimized some existing functions, such as changing the way 
+of notifying contributors through email to contributors can be directly viewed on the page which ingredients do not have matching recipes
+
+
+
 
