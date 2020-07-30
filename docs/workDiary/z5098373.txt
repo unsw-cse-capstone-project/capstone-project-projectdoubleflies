@@ -48,4 +48,4 @@ write the report.
 
 Week9 
 Still working on the test all functionalities completed so far including mysql database, frontend and backend as this week was the week that need
-to submit our code.
+to submit our code. Report was almost finished and needed remaining team members to check my part.
