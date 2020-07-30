@@ -120,12 +120,18 @@ class Ingredients extends Component {
 	filterSearch=(e)=>{
 		e.preventDefault();
 		const temp = {}
+		if(this.state.word.length < 1){
+			this.setState({
+				result: {}
+			})
+			return
+		}
 		Object.keys(this.props.ingredients).forEach(key=>{
 			temp[key]={}
 			this.props.ingredients[key].forEach(elem=>{
-				if(elem===this.state.word){
+				var r = new RegExp(this.state.word.toLowerCase());
+				if(r.test(elem.toLowerCase())===true)
 					temp[key][elem]=true
-				}
 			})
 		})
 		this.setState({
@@ -209,10 +215,12 @@ class Ingredients extends Component {
 			return(
 				Object.keys(this.state.result[key]).map(elem=>{
 					return(
-						<div className="form-check text-left">
-						<input name={key} value={elem} type="checkbox" className="form-check-input" checked={this.state.selected[key][elem]} onChange={e=>this.onClick(e)}/>
-						<label className="form-check-label" >{key}:{elem}</label>
-						</div>
+						<li class="list-group-item">
+							<div className="form-check text-left">
+							<input name={key} value={elem} type="checkbox" className="form-check-input" checked={this.state.selected[key][elem]} onChange={e=>this.onClick(e)}/>
+							<label className="form-check-label" >{key}:{elem}</label>
+							</div>
+						</li>
 					)	
 				})
 			)	
@@ -235,13 +243,14 @@ class Ingredients extends Component {
             	</select>
           		</div>
 				
-				<div className="overflow-auto m-2">
+				{num!==0 && <div className="overflow-auto m-2">
 					<label className="font-weight-bold font-italic h5 d-inline title-margin">Selected</label>
 					<ul className="list-group">
 					{sel}
 					</ul>
 					
 				</div>
+				}
 				<div className="row justify-content-center">
 					<Button className="button-margin" as='div' labelPosition='right'/>
 					<Button className="btn-margin" onClick={e=>this.clearSearch(e)} size='mini'>
@@ -258,22 +267,35 @@ class Ingredients extends Component {
 				<form className="form-inline d-flex justify-content-center">
 						<label className="font-weight-bold font-italic h5 d-inline title-margin">Choose Ingredients<br/></label>
 						<div className="input-group">
-							<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
-							<button className="btn btn-primary my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
+							<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Find Ingredients" aria-label="Search" value={this.state.word} onChange={e=>this.onChange(e)}/>
+							<button className="btn btn-primary my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Find</button>
+							
 						</div>
+						{result.length!==0 &&<div className="p-2">
+								<h5 className="font-weight-bold">Found Ingredients</h5>
+								<ul class="list-group">
+									{result}
+								</ul>
+							</div>}
+						
 				</form>
-				{this.props.suggestions!=="" &&<div className="card m-1">
-					<div class="card-body">
-					<h6  className="card-title font-italic font-weight-bold">Suggested Ingredients</h6>
-					<p className="card-text font-weight-bold">{this.props.suggestions}</p>
-					</div>
+				{this.props.suggestions!=="" &&
+				<div className="p-2">
+					<h5 className="font-italic font-weight-bold">
+						Suggested Ingredients
+					</h5>
+					<ul className="list-group">
+						<li className="list-group-item">
+							<p className="card-text">
+								{this.props.suggestions}
+							</p>
+						</li>
+					</ul>
 				</div>}
 				{this.props.suggestions==="" &&<div className="card m-1">
 					<div className="card-body">No Suggestions</div>
 				</div>}
-				<div className="form-check">
-					{result}
-				</div>
+				
 				<div className="accordion" id="checkboxes">
 					{checkbox}
 				</div>

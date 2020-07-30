@@ -92,12 +92,12 @@ export const editRecipe = (id, postData, image) => dispatch => {
 					payload: response.status
 				})
 			}).catch(error=>{
-				axios.delete(`${apiUrl}/image/delete/${imageID}`)
-				.then(r=>{
-					alert("Can not submit")
-				}).catch(error=>{
-					alert("something wrong")
-				})
+				// axios.delete(`${apiUrl}/image/delete/${imageID}`)
+				// .then(r=>{
+				// 	alert("Can not submit")
+				// }).catch(error=>{
+				// 	alert("something wrong")
+				// })
 			})
 		}).catch(error=>{
 			alert("Cannot submit image")

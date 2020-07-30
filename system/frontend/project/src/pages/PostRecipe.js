@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { getRecipe, giveRecommendation, createRecipe, editRecipe} from '../actions/recipeActions';
 import { checkLoggedIn } from '../actions/userActions';
 import { Redirect } from 'react-router-dom';
+import { Button, Icon} from 'semantic-ui-react'
 
 class PostRecipe extends Component {
 
@@ -305,7 +306,10 @@ class PostRecipe extends Component {
               <div className="col">
               <input id={`ins_step_${id}`} name="instruction" type="text" className="form-control" placeholder="Instruction" value={item} onChange={(e)=>this.onChangeInstruction(e)}/>
             </div>
-            <button type="button" id={`ins_del_${id}`} className="btn btn-danger" onClick={(e)=>this.deleteInstruction(e, id)}>Delete</button>
+            <Button className="button-margin" as='div' labelPosition='right'/>
+				    <Button className="btn-margin" id={`ins_del_${id}`} onClick={(e)=>this.deleteInstruction(e, id)} size='mini'>
+					    <Icon name='trash' />
+				    </Button>
           </div>
         )
     })
@@ -343,7 +347,10 @@ class PostRecipe extends Component {
             })}
             </select>
           </div>
-          <button type="button" id={`ing_del_${id}`} className="btn btn-danger" onClick={(e)=>this.deleteIngredient(e, id)}>Delete</button>
+          <Button className="button-margin" as='div' labelPosition='right'/>
+				  <Button className="btn-margin" id={`ing_del_${id}`} onClick={(e)=>this.deleteIngredient(e, id)} size='mini'>
+					  <Icon name='trash' />
+				  </Button>
         </div>
       )
     })
@@ -358,7 +365,7 @@ class PostRecipe extends Component {
 
 		return (
       <div className="container pt-5">
-        <form className="form-padding" onSubmit={ this.onSubmit }>
+        <form className="form-padding">
           <div className="form-group">
             <h4>Create Your Recipe</h4>
             <label className="font-italic h5 d-inline title-margin">Title</label>
@@ -416,8 +423,8 @@ class PostRecipe extends Component {
             {options}
             </select>
           </div>
-          {this.state.edit && <div><a href={`/contributor/view/${this.state.id}`}><button type="button" className="btn btn-danger mr-3">Cancel</button></a><button type="submit" className="btn btn-primary">Save</button></div>}
-          {this.state.edit===false &&<div><button type="submit" className="btn btn-primary">Confirm</button></div>}
+          {this.state.edit && <div><a href={`/contributor/view/${this.state.id}`}><button type="button" className="btn btn-danger mr-3">Cancel</button></a><button type="button" className="btn btn-primary" onClick={e=>this.onSubmit(e)}>Save</button></div>}
+          {this.state.edit===false &&<div><button type="button" className="btn btn-primary" onClick={e=>this.onSubmit(e)}>Confirm</button></div>}
         </form>
         {!this.props.loggedIn && <Redirect to="/"/>}
         {this.props.posted&&(window.location.href = "/contributor")}

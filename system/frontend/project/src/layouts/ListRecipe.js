@@ -126,12 +126,23 @@ class ListRecipe extends Component {
 			if(this.props.offset){
 				if(this.props.offset.length===0){
 					loading=
+					<ul className="list-group">
+						<li className="list-group-item">
+							<p className="card-text">No More Recipes</p>
+						</li>
+					</ul>
+				}
+			}
+
+			if(this.state.searching===true||this.state.kind==="contributor"||this.state.kind==="explorer")
+				loading=
+				<ul className="list-group">
 					<li className="list-group-item">
 						<p className="card-text">No More Recipes</p>
 					</li>
-				}
-			}
-			
+				</ul>
+
+
 			const pathname = this.state.kind==="contributor" ? "/contributor/view/": "/view/";
 				cards = temp.slice(0, this.state.size).map(item => {
 					return (
