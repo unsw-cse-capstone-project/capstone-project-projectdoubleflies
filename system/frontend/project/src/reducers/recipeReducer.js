@@ -20,7 +20,6 @@ export default function(state = initialState, action) {
 		case FETCH_RECIPES:
 			const arr=[...state.items]
 			const new_arr=arr.concat(action.payload)
-			console.log(new_arr)
 			return {
 				...state, 
 				items: new_arr,
@@ -60,7 +59,6 @@ export default function(state = initialState, action) {
 			}
 
 		case GET_USER_RECIPE:
-			console.log(action.payload)
 			return {
 				...state,
 				user_item: action.payload,

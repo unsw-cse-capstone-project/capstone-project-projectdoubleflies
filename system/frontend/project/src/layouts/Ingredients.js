@@ -30,7 +30,6 @@ class Ingredients extends Component {
 		if(localStorage.getItem("map")===null)
 			Object.assign(t, this.state.selected)
 		else{
-			console.log(localStorage.getItem("map")) 
 			Object.assign(t, JSON.parse(localStorage.getItem("map")))
 		}
 		if(temp!==null)
@@ -45,7 +44,6 @@ class Ingredients extends Component {
 	}
 
 	onClick=(e)=>{
-		console.log(this.state.selected)
 		if(!e.target.name && !e.target.name){
 			this.props.suggestIngredients([])
 		}else if(this.state.selected[e.target.name][e.target.value]===undefined){
@@ -96,12 +94,10 @@ class Ingredients extends Component {
 			Object.keys(this.state.selected[key]).forEach(elem=>{
 				if(this.state.selected[key][elem]===true)
 					ingredients.push(elem)
-				return
 			})
 		})
-		console.log(ingredients, this.state.type)
 		this.props.searchRecipes(ingredients, this.state.type)
-		
+		window.location.href = "/"
 	}
 
 	clearSearch=(e)=>{
@@ -124,7 +120,6 @@ class Ingredients extends Component {
 
 	filterSearch=(e)=>{
 		e.preventDefault();
-		console.log(this.state.word)
 		const temp = {}
 		Object.keys(this.props.ingredients).forEach(key=>{
 			temp[key]={}

@@ -27,10 +27,8 @@ export const pickIngredient = (ingredient)=>dispatch => {
 }
 
 export const fetchUserFavourite = (username)=>dispatch=>{
-	console.log(`${apiUrl}/favorite/${username}`)
 	axios.get(`${apiUrl}/favorite/${username}`)
 	.then(response => {
-		console.log("fetch user favourite")
 		dispatch({
 			type: FETCH_USER_FAVOURITES,
 			payload: response.data
@@ -52,7 +50,6 @@ export const addFavourite = (username, id)=> dispatch => {
 export const removeFavourite = (username, id) => dispatch => {
 	axios.get(`${apiUrl}/favorite/${username}/delete?recipeName=${id}`)
 	.then(response => {
-		// console.log(response)
 		dispatch({
 			type: REMOVE_FAVOURITE, 
 			payload: id,
@@ -64,7 +61,6 @@ export const removeFavourite = (username, id) => dispatch => {
 export const suggestIngredients = (ingredients) => dispatch => {
 	axios.post(`${apiUrl}/suggest/ingredient`, ingredients)
 	.then(response => {
-		console.log(response.data)
 		dispatch({
 			type: SUGGEST_INGREDIENTS,
 			payload: response.data

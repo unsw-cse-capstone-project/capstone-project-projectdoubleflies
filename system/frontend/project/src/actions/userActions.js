@@ -13,7 +13,7 @@ export const loginUser = (username, password) => dispatch => {
 			status: response.status
 		})
 	})
-	.catch(err=> console.log(err))
+	.catch(err=> alert("Can not Login"))
 }
 
 export const registerUser = (username, password) => dispatch => {
@@ -36,7 +36,6 @@ export const registerUser = (username, password) => dispatch => {
 
 
 export const checkUsername = (username)=>dispatch=>{
-	console.log("check")
 	dispatch({
 		type: CHECK_USERNAME,
 		payload: true // replace with axios.get

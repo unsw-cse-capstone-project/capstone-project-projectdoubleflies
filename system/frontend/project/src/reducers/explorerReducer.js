@@ -40,7 +40,6 @@ export default function(state=initialState, action){
 			}
 
 		case FETCH_USER_FAVOURITES:
-			console.log(action.payload)
 			return {
 				...state, 
 				favs: action.payload

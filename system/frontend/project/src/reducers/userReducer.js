@@ -13,7 +13,6 @@ const initialState = {
 export default function(state = initialState, action) {
 	switch(action.type){
 		case LOGIN_USER:
-			console.log(action.status)
 			if(action.payload){
 				const user = {username: action.username}
 				 localStorage.setItem('username', JSON.stringify(user));
@@ -26,13 +25,9 @@ export default function(state = initialState, action) {
 			}
 			return
 		case REGISTER_USER:
-			console.log('reducer register')
-			console.log(action.payload)
 			if(action.payload){
 				const user = {username: action.username}
 				localStorage.setItem('username', JSON.stringify(user));
-				const temp= JSON.parse(localStorage.getItem('username'));
-				console.log(`temp ${JSON.stringify(temp)}`)
 				return {
 					...state,
 					registered: action.payload
@@ -43,8 +38,6 @@ export default function(state = initialState, action) {
 			return
 
 		case CHECK_USERNAME:
-			console.log("hi")
-			console.log(action.payload)
 			return {
 				...state,
 				valid:action.payload

@@ -43,34 +43,19 @@ class RegisterModal extends Component {
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("register")
 		this.props.registerUser(this.state.username, this.state.password)
-		
-		// if(this.props.isRegistered===true){
-		// 	console.log("yes")
-		// 	this.handleClose()
-		// }else{
-		// 	console.log(this.props.isRegistered)
-		// 	console.log("no")
-		// }
 	}
 
 	onChangeUser=(e)=>{
-		console.log(e.target.name, e.target.value)
 		this.setState(
 			{username: e.target.value}
 		)
-		// console.log("onchange")
 		this.check(e.target.value);
 	}
 	checkPassword=(e)=>{
-		console.log("checkPassword")
 		const pass = e.target.value
 		const regex = RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/)
-		console.log(regex.test(pass))
-		console.log("checkPassword")
 		if(regex.test(pass)===true){
-			console.log("d-block")
 			this.setState(
 				{
 					password: pass,
@@ -108,12 +93,9 @@ class RegisterModal extends Component {
 				}
 			)
 		}
-		
-		console.log(`password ${regex.test(pass) && (pass===this.state.password)}`)
 	}
 
 	onKeyDown=(e)=>{
-		// console.log(e.key)
 		if(e.key==='Backspace'){
 			var str = this.state.username;
 			str = str.substring(0, str.length - 1)
@@ -135,12 +117,7 @@ class RegisterModal extends Component {
 		}
 		else{
 			this.props.checkUsername()
-			console.log("check if exists")
-			// check if exist
-			console.log(this.props.isValid)
-			
 			if(this.props.isValid===true){
-				console.log("valid")
 				this.setState({
 					invalid_user: "d-none",
 					valid_user: "d-block"
@@ -158,7 +135,6 @@ class RegisterModal extends Component {
 		})
 	}
 	render() {
-		console.log(this.props.isRegistered)
 		return (
 			<>
 				<Button className="ml-1 btn-margin btn-secondary" variant="primary" onClick={this.handleShow}>

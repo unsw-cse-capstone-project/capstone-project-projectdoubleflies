@@ -54,23 +54,27 @@ class ListRecipe extends Component {
 			this.props.fetchUserFavourite(this.props.username);
 		}else{
 			const temp=JSON.parse(localStorage.getItem("search"))
-			
+			console.log(temp)
 			if(temp===null){
+				console.log(temp)
 				this.props.fetchRecipes(0)
 				this.setState({
 					searching: false
 				})
 			}else if(Object.keys(temp).length === 0 ){
+				console.log(temp)
 				this.props.fetchRecipes(0)
 				this.setState({
 					searching: false
 				})
 			}else if(temp["ingredients"].length===0){
+				console.log(temp)
 				this.props.fetchRecipes(0)
 				this.setState({
 					searching: false
 				})
 			}else{
+				console.log(temp)
 				this.props.searchRecipes(temp["ingredients"], temp["type"])
 				this.setState({
 					searching: true
@@ -81,7 +85,6 @@ class ListRecipe extends Component {
 
 	handleScroll=()=>{
 		if(this.state.searching===true){
-			console.log("?????")
 			return
 		}
 			

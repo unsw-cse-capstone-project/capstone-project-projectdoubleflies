@@ -4,21 +4,19 @@ import axios from 'axios';
 const apiUrl="http://localhost:8080";
 
 export const fetchRecipes = (offset) => dispatch => {
-	console.log(offset)
 	axios.get(`${apiUrl}/recipe?offset=${offset}`)
 	.then(response => dispatch({
 		type: FETCH_RECIPES,
 		payload: response.data
-	})).catch(err=> console.log(err))
+	})).catch(err=> alert("Can not get recipe information"))
 }
 
 export const fetchUserRecipes = (username) => dispatch => {
-	console.log("fetch user", username)
 	axios.get(`${apiUrl}/recipe/find?username=${username}`)
 	.then(response => dispatch({
 		type: FETCH_USER_RECIPES,
 		payload: response.data
-	})).catch(err=> console.log(err))
+	})).catch(err=> alert("Can not get your recipe information"))
 }
 
 export const createRecipe = (username, postData, image) => dispatch => {
@@ -29,7 +27,6 @@ export const createRecipe = (username, postData, image) => dispatch => {
 	}).then(res=>{
 		const data = res.data.split('/')
 		const imageID=data[data.length-1]
-		console.log(JSON.stringify(postData))
 		axios.post(`${apiUrl}/recipe/${username}/${imageID}`, postData)
     	.then(response=>{
 			dispatch({
@@ -51,7 +48,6 @@ export const createRecipe = (username, postData, image) => dispatch => {
 	
 }
 export const getRecipe = (id) => dispatch => {
-	console.log(id)
 	axios.get(`${apiUrl}/recipe/${id}`)
 	.then(response => dispatch({
 		type: GET_RECIPE,
@@ -60,7 +56,6 @@ export const getRecipe = (id) => dispatch => {
 }
 
 export const getUserRecipe = (id) => dispatch => {
-	console.log("id", id)
 	axios.get(`${apiUrl}/recipe/${id}`)
 	.then(response => dispatch({
 		type: GET_USER_RECIPE,
@@ -147,7 +142,6 @@ export const searchRecipes = (ingredients, type) => dispatch => {
 	localStorage.setItem("search", strJson)
 	axios.post(`${apiUrl}/search`, obj)
 	.then(response=>{
-		console.log(response)
 		dispatch({
 			type: SEARCH_RECIPE, 
 			payload: response.data

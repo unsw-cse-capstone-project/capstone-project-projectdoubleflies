@@ -15,8 +15,6 @@ class Header extends Component {
 
 	componentDidMount() {
 		const path = window.location.href
-		console.log(path)
-		console.log(path)
 		const temp = path.split('/')
 		const check = temp[temp.length-1]
 		switch(check){

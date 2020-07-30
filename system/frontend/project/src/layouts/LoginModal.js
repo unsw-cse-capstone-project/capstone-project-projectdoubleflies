@@ -30,7 +30,6 @@ class LoginModal extends Component {
 	}
 
 	handleSubmit = (e) => {
-		console.log("login")
 		e.preventDefault();
 		this.props.loginUser(this.state.username, this.state.password);
 	}
@@ -51,12 +50,10 @@ class LoginModal extends Component {
 	}
 
 	onChangePass=(e)=>{
-		console.log(this.state.username)
 		this.setState({
 			password :e.target.value
 		})
 		if(e.target.value!=="" && this.state.username!==""){
-			console.log(e.target.value)
 			this.setState({
 				disable: false
 			})

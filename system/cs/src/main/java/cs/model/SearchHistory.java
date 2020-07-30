@@ -10,15 +10,11 @@ public class SearchHistory {
 
 		@Override
 		public String convertToDatabaseColumn(List<String> attribute) {
-			System.out.println("Attribute");
-			System.out.println(attribute.toString());
 			return String.join(",", attribute); 
 		}
 
 		@Override
 		public List<String> convertToEntityAttribute(String dbData) {
-			System.out.println("dbData");
-			System.out.println(dbData);
 			return new ArrayList<>(Arrays.asList(dbData.split(",")));
 		}
 		

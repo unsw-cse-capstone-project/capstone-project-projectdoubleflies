@@ -77,7 +77,6 @@ class PostRecipe extends Component {
    
   onChangeText=(event)=>{
     event.preventDefault();
-    console.log(event.target.id)
     this.setState(
       { [event.target.id]: event.target.value}
     )
@@ -110,7 +109,6 @@ class PostRecipe extends Component {
     var id = temp[temp.length-1];
     var array=[...this.state.instruction_rows];
     array[id]= event.target.value;
-    console.log(array[id])
     this.setState(
       { instruction_rows: array }
     )
@@ -126,12 +124,10 @@ class PostRecipe extends Component {
          ),
       }
     )
-    console.log(this.state.ingredient_rows)
   }
 
   deleteIngredient=(e, id)=>{
     e.preventDefault();
-    console.log(id)
     var array = [...this.state.ingredient_rows];
     array.splice(id, 1);
     this.setState(
@@ -144,7 +140,6 @@ class PostRecipe extends Component {
     var temp = event.target.id.split("_");
     var id = temp[temp.length-1]
     var array = [...this.state.ingredient_rows];
-    console.log(event.target.value, id)
     if(event.target.value!==""){
       array[id].category = this.props.category;
       this.setState(
@@ -165,7 +160,6 @@ class PostRecipe extends Component {
     var temp = event.target.id.split("_");
     var id = temp[temp.length-1]
     var array = [...this.state.ingredient_rows];
-    console.log(event.target.value, id)
     if(event.target.value!==""){
       array[id].category = this.props.category;
       this.setState(
@@ -264,10 +258,7 @@ class PostRecipe extends Component {
         user: obj
       }
       const formData = new FormData();
-      console.log(this.state.file)
       formData.append('file', this.state.file);
-      console.log(formData.get("file"))
-      console.log(temp)
       this.props.createRecipe(obj.id, temp, formData)
     }else{
    

@@ -35,11 +35,9 @@ class ViewRecipe extends Component {
 	}
 
 	componentDidMount() {
-		console.log('mounted')
 		const path = window.location.pathname
 		var temp = path.split('/')
 		const id = temp[temp.length-1];
-		console.log(id)
 		let showEdit = temp[1]==="contributor" ? true : false
 		if(temp[1]==="contributor"){
 			this.props.getUserRecipe(parseInt(id))
