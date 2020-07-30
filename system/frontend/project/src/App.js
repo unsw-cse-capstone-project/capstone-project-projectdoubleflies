@@ -8,7 +8,7 @@ import ContributorPage from './pages/ContributorPage';
 
 import { PersistGate } from 'redux-persist/integration/react';
 import {Provider} from 'react-redux';
-import { store, persistor } from './store.js';
+import { store, persistor } from './helpers/store.js';
 import PublicPage from './pages/PublicPage'
 import {PrivateRoute} from './helpers/PrivateRoute';
 import ExplorerPage from './pages/ExplorerPage';

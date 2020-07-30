@@ -13,7 +13,6 @@ export const loginUser = (username, password) => dispatch => {
 			status: response.status
 		})
 	})
-	.catch(err=> alert("Can not Login"))
 }
 
 export const registerUser = (username, password) => dispatch => {
@@ -38,7 +37,7 @@ export const registerUser = (username, password) => dispatch => {
 export const checkUsername = (username)=>dispatch=>{
 	dispatch({
 		type: CHECK_USERNAME,
-		payload: true // replace with axios.get
+		payload: true 
 	})
 }
 
@@ -63,11 +62,3 @@ export const logoutUser = () => dispatch=>{
 		payload: false
 	})
 }
-
-
-// export const getLoggedIn = () => dispatch => {
-// 	dispatch({
-// 		type: GET_LOGGEDIN,
-// 		payload: JSON.parse(localStorage.getItem("username"))
-// 	})
-	

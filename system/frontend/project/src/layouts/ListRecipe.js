@@ -49,32 +49,27 @@ class ListRecipe extends Component {
 			kind: kind
 		})
 		if(kind==="contributor"){
-			this.props.fetchUserRecipes(this.props.username);	
+			this.props.fetchUserRecipes(this.props.username, 0);	
 		}else if(kind==="explorer"){
 			this.props.fetchUserFavourite(this.props.username);
 		}else{
 			const temp=JSON.parse(localStorage.getItem("search"))
-			console.log(temp)
 			if(temp===null){
-				console.log(temp)
 				this.props.fetchRecipes(0)
 				this.setState({
 					searching: false
 				})
-			}else if(Object.keys(temp).length === 0 ){
-				console.log(temp)
+			}else if(Object.keys(temp).length === 0){
 				this.props.fetchRecipes(0)
 				this.setState({
 					searching: false
 				})
-			}else if(temp["ingredients"].length===0){
-				console.log(temp)
+			}else if(temp["ingredients"].length===0 && !temp.type){
 				this.props.fetchRecipes(0)
 				this.setState({
 					searching: false
 				})
 			}else{
-				console.log(temp)
 				this.props.searchRecipes(temp["ingredients"], temp["type"])
 				this.setState({
 					searching: true
@@ -84,27 +79,18 @@ class ListRecipe extends Component {
 	}
 
 	handleScroll=()=>{
-		if(this.state.searching===true){
+		if(this.state.searching===true)
 			return
-		}
 			
 		if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight-5) {
 			const offset=this.state.offset+15;
 			const size=this.state.size+15;
-			// let temp
-			// if(this.state.kind==="contributor"){
-			// 	temp = this.props.user_recipes
-			// }else if(this.state.kind==="explorer"){
-			// 	temp = this.props.favs
-			// }else{
-			// 	temp = this.props.recipes
-			// }
 			this.setState({
 				offset: offset,
 				size: size,
-				// prev: temp.length
 			})
-			this.props.fetchRecipes(offset)
+			if(this.state.kind==="")
+				this.props.fetchRecipes(offset)
 		}
 	}
 	addFavourite = (e, id)=>{
@@ -139,24 +125,23 @@ class ListRecipe extends Component {
 			</div>
 			if(this.props.offset){
 				if(this.props.offset.length===0){
-					loading=<div className="card">
-					<div className="card-body">
-					<p className="card-text">No More Recipes</p>
-					  </div>
-				  </div>
+					loading=
+					<li className="list-group-item">
+						<p className="card-text">No More Recipes</p>
+					</li>
 				}
 			}
 			
 			const pathname = this.state.kind==="contributor" ? "/contributor/view/": "/view/";
 				cards = temp.slice(0, this.state.size).map(item => {
 					return (
-						<div className="card m-2" style={{width: 18 + 'em'}}>
+						<div className="card m-2 card-same" style={{width: 18 + 'em'}}>
 						<Link to={{ pathname: `${pathname}${item.recipeID}`}}>
 						{item.img && <img className="card-img-top" src={URL.createObjectURL(this.dataURLtoFile(item.img))} alt="..."/>}
 						<div className="card-body">
-						<h5 className="card-title">{item.title}</h5>
+						<h5 className="card-title card-same-title">{item.title}</h5>
 						<h6 className="card-subtitle mb-2">Description</h6>
-						<p className="card-text card-same">{item.description}</p>
+						<p className="card-text card-same-text">{item.description}</p>
 						</div>
 						</Link>
 						{
@@ -191,8 +176,7 @@ class ListRecipe extends Component {
 		}
 		return (
 			<div className="container-fluid">	
-			
-			{cards.length===0&& <div> No Recipe Found </div>}
+		
 			<div className="row d-flex justify-content-center">
 				{cards}
 			</div>

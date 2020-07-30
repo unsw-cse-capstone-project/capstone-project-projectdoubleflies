@@ -86,11 +86,6 @@ img.image {
     margin-top: 20px !important;
 }
 
-
-/* .name {
-    margin-top: 12px;
-} */
-
 .nav-header {
     margin-bottom: 20px;
 }
@@ -104,9 +99,8 @@ img.image {
     display: inline-block;
 }
 
-.card-same {
+.card-same-text {
     height: 60px;
-    /* height: 50px; */
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -128,4 +122,18 @@ img.image {
 .sticky-sidebar {
     height: 85%;
     position: relative;
+}
+
+.card-same-title {
+    height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 20px;
+}
+
+.card-same {
+    padding-bottom: 5px;
 }

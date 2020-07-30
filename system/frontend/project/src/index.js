@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-// var cors = require('cors')
-// App.use(cors())
 
 ReactDOM.render(
   <React.StrictMode>

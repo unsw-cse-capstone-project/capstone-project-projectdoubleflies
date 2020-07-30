@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { fetchIngredients, suggestIngredients } from '../actions/explorerActions'
 import { searchRecipes } from '../actions/recipeActions'
+import { Button, Icon} from 'semantic-ui-react'
 
 class Ingredients extends Component {
 	constructor(props) {
@@ -10,7 +11,6 @@ class Ingredients extends Component {
 			selected: {
 				Dairy:{}, Vegetables:{}, Fruites:{}, "Baking & Grains":{}, "Added Sweeteners":{}, Spices:{}, Meats:{}, Fish:{}, Seafood:{}, Condiments:{}, Oils:{}, Seasonings:{}, Sauces:{}, Legumes:{}, Alcohol:{}, Soup:{}, Nuts:{}, "Dairy Alternative":{}, "Desserts & Snackes":{}, Beverages:{}
 			},
-			// ingredients:{},
 			word: "",
 			result:{},
 			type: undefined,
@@ -106,10 +106,9 @@ class Ingredients extends Component {
 			selected: {
 				Dairy:{}, Vegetables:{}, Fruites:{}, "Baking & Grains":{}, "Added Sweeteners":{}, Spices:{}, Meats:{}, Fish:{}, Seafood:{}, Condiments:{}, Oils:{}, Seasonings:{}, Sauces:{}, Legumes:{}, Alcohol:{}, Soup:{}, Nuts:{}, "Dairy Alternative":{}, "Desserts & Snackes":{}, Beverages:{}
 			},
-			// ingredients:{},
 			word: "",
 			result:{},
-			type: undefined,
+			type: "",
 			types: ["Breads", "Breakfast", "Cakes", "Casseroles", "Cookies", "Desserts", "Dinner", "Dips", "Drinks", "Fish recipes", "Grilling & BBQ", "Kid Friendly", "Meat recipes", "Poultry recipes", "Quick & Easy", "Salad Dressings", "Salads", "Sandwiches", "Sauces", "Seafood recipes", "Slow Cooker", "Soups", "Vegetarian recipes", "Vegan recipes", "Gluten free recipes", "Lactose free recipes", "Lunch"],
 			selected_type: {"Breads": false, "Breakfast": false,"Cakes": false, "Casseroles": false, "Cookies": false, "Desserts": false, "Dinner": false, "Dips": false, "Drinks": false, "Fish recipes": false, "Grilling & BBQ": false, "Kid Friendly": false, "Meat recipes": false, "Poultry recipes": false, "Quick & Easy": false, "Salad Dressings": false, "Salads": false, "Sandwiches": false, "Sauces": false, "Seafood recipes": false, "Slow Cooker": false, "Soups": false, "Vegetarian recipes": false, "Vegan recipes": false, "Gluten free recipes": false, "Lactose free recipes": false, "Lunch": false},
 			ingredients: []
@@ -184,7 +183,7 @@ class Ingredients extends Component {
 				}
 			})
 		}
-		let sel=<div></div>
+		let sel
 		let num=0
 		sel = Object.keys(this.state.selected).map(key=> {
 			return(
@@ -201,7 +200,9 @@ class Ingredients extends Component {
 			)
 		});
 		if(num===0)
-			sel=<p>No Ingredients Selected</p>
+			sel=<li className="list-group-item">
+					<p className="card-text">No Ingredients Selected</p>
+				</li>
 
 		let result=<div>You can search</div>
 		result=Object.keys(this.state.result).map(key=>{
@@ -219,22 +220,41 @@ class Ingredients extends Component {
 
 		const types = this.state.types.map((elem, id)=>{
 			return (
-			  <option key={`type_${id}`}>{elem}</option>
+			  <option value={elem} key={`type_${id}`}>{elem}</option>
 			)
 		})
 		
 		return (
+			
 			<div className="sidebar container">
 				<div className="form-group m-1">
 				<label className="font-weight-bold font-italic h5 d-inline title-margin">Filter By Meal-Type</label>
             		<select id="inputType" className="form-control m-1" onChange={e=>this.onFilter(e)} value={this.state.type}>
-            		<option selected>{this.state.type}</option>
+            		<option value={this.state.type}>{this.state.type}</option>
             		{types}
             	</select>
           		</div>
-				<div className="m-1">
-					<button type="button" className="btn btn-primary" onClick={e=>this.clearSearch(e)}> Clear Search </button>
+				
+				<div className="overflow-auto m-2">
+					<label className="font-weight-bold font-italic h5 d-inline title-margin">Selected</label>
+					<ul className="list-group">
+					{sel}
+					</ul>
+					
 				</div>
+				<div className="row justify-content-center">
+					<Button className="button-margin" as='div' labelPosition='right'/>
+					<Button className="btn-margin" onClick={e=>this.clearSearch(e)} size='mini'>
+						<Icon name='trash' />
+					Clear
+					</Button>
+					<Button className="button-margin" as='div' labelPosition='right'/>
+					<Button className="btn-margin ui green button" onClick={e=>this.search(e)} size='mini'>
+						<Icon name='search' />
+					Search
+					</Button>
+				</div>
+				
 				<form className="form-inline d-flex justify-content-center">
 						<label className="font-weight-bold font-italic h5 d-inline title-margin">Choose Ingredients<br/></label>
 						<div className="input-group">
@@ -254,18 +274,8 @@ class Ingredients extends Component {
 				<div className="form-check">
 					{result}
 				</div>
-					<div className="accordion" id="checkboxes">
+				<div className="accordion" id="checkboxes">
 					{checkbox}
-					</div>
-					<div className="overflow-auto m-1">
-					<label className="font-weight-bold font-italic h5 d-inline title-margin">Selected</label>
-					<ul className="list-group">
-					{sel}
-					</ul>
-					
-				</div>
-				<div className="m-1">
-					<button type="submit" className="btn btn-primary" onClick={e=>this.search(e)} data-dismiss="modal"> Search </button>
 				</div>
 			</div>
 			

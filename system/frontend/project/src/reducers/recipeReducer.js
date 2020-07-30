@@ -16,10 +16,12 @@ const initialState = {
 
 
 export default function(state = initialState, action) {
+	let arr
+	let new_arr
 	switch(action.type){
 		case FETCH_RECIPES:
-			const arr=[...state.items]
-			const new_arr=arr.concat(action.payload)
+			arr=[...state.items]
+			new_arr=arr.concat(action.payload)
 			return {
 				...state, 
 				items: new_arr,

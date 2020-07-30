@@ -40,7 +40,6 @@ export const createRecipe = (username, postData, image) => dispatch => {
 			}).catch(error=>{
 				alert("something wrong")
 			})
-			// Delete submitted image
 		})
 	}).catch(error=>{
 		alert("Cannot submit image")
@@ -93,12 +92,12 @@ export const editRecipe = (id, postData, image) => dispatch => {
 					payload: response.status
 				})
 			}).catch(error=>{
-				// axios.delete(`${apiUrl}/image/delete/${imageID}`)
-				// .then(r=>{
-				// 	alert("Can not submit")
-				// }).catch(error=>{
-				// 	alert("something wrong")
-				// })
+				axios.delete(`${apiUrl}/image/delete/${imageID}`)
+				.then(r=>{
+					alert("Can not submit")
+				}).catch(error=>{
+					alert("something wrong")
+				})
 			})
 		}).catch(error=>{
 			alert("Cannot submit image")
@@ -106,19 +105,6 @@ export const editRecipe = (id, postData, image) => dispatch => {
 	})
 	
 }
-// 	axios.put(`${apiUrl}/recipe/${id}`, postData)
-// 	.then(response=>{
-// 		dispatch({
-// 			type: EDIT_RECIPE,
-// 			payload: response.data
-// 		})
-// 	}).catch(error=>{
-// 		if(error.response.status===500){
-// 			alert("Can not Save")
-// 		}
-// 	})
-// }
-
 export const deleteRecipe = (id) => dispatch => {
 	axios.delete(`${apiUrl}/recipe/${id}`)
 	.then(response => {
@@ -137,6 +123,8 @@ export const deleteRecipe = (id) => dispatch => {
 
 export const searchRecipes = (ingredients, type) => dispatch => {
 	let obj=undefined;
+	if(type==="")
+		type=undefined
 	obj={"ingredients": ingredients, "type": type}
 	const strJson=JSON.stringify(obj)
 	localStorage.setItem("search", strJson)

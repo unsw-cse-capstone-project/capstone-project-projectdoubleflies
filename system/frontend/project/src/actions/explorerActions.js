@@ -4,12 +4,6 @@ import axios from 'axios';
 const apiUrl = "http://localhost:8080";
 
 export const fetchIngredients=()=> dispatch=>{
-
-	// const data = {Dairy: ["milk", "egg"], Vegetables:["tomato"], "Baking & Grains": ["bread"], Spices:["tomato"], Meats: ["bread"],Fish:["tomato"], "Baking & Grains": ["bread"], Seafood:["tomato"], "Baking & Grains": ["bread"],  Sauces:["tomato"], Legumes: ["bread"], Beverages:["b"], Nuts:["nuts"], Alcohol:[], Condiments:[], Oils:[]}
-	// dispatch({
-	// 	type: FETCH_INGREDIENTS,
-	// 	payload: data
-	// })
 	axios.get(`${apiUrl}/search/ingredient`)
 	.then(response => {
 		dispatch({

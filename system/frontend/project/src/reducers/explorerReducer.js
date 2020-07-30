@@ -4,7 +4,7 @@ const initialState ={
 	ingredients: {},
 	favs:[],
 	picked: [],
-	suggestions: ""
+	suggestions: "",
 }
 export default function(state=initialState, action){
 	switch (action.type){
