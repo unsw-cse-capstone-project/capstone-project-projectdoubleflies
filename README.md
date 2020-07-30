@@ -20,7 +20,7 @@ https://www.oracle.com/java/technologies/javase-jdk11-downloads.html
 3.Download Node.js and npm
  fromhttps://nodejs.org/en/
 
-4.run command chmod +x run.sh in terminal
+4.cd into the project directory (/system) and run command chmod +x run.sh in terminal
 
 5.run ./run.sh in terminal
 
