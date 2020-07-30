@@ -37,3 +37,5 @@ Le Anh Khoa Nguyen
 Shizuka Hayashi 
 Sijie Wen
 Yu Han
+## License
+This project is licensed under the MIT License.
