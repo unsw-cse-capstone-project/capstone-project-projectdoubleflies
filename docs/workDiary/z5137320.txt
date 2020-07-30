@@ -18,3 +18,9 @@ Add recipe with image and upload images for recipes. Check for constraints for i
 
 Week 6
 Add "/search" API in recipe controller, build a static class named "wrapper" in recipe controller. It is the option that explorer can choose which includes type and ingredient. Add a String converter in Search History class, which allow every list of string of ingredients to be store in database as a format of string. So evey time a user search a list of words, the data base can update its frequency. Also combine "/search" with searh for recipes and stores in search history table. Start with working on report, including how code implementates in backend. 
+
+Week 7
+Do all tests using PostMan for the code of backend. Testing each user story and spending much time debugging with search history table. 
+
+Week 8  -- Week 9
+Join group discussion and discuss about the allocation of final presentation and code. Take part of the backend part in the report and presentation. Most of time write the report for backend. Also, prepare for the PPT of presentation.
