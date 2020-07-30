@@ -126,9 +126,11 @@ class ListRecipe extends Component {
 			if(this.props.offset){
 				if(this.props.offset.length===0){
 					loading=
-					<li className="list-group-item">
-						<p className="card-text">No More Recipes</p>
-					</li>
+					<ul className="list-group">
+						<li className="list-group-item">
+							<p className="card-text">No More Recipes</p>
+						</li>
+					</ul>
 				}
 			}
 			

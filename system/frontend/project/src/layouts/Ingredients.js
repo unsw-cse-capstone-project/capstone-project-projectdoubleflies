@@ -215,7 +215,7 @@ class Ingredients extends Component {
 			return(
 				Object.keys(this.state.result[key]).map(elem=>{
 					return(
-						<li class="list-group-item row">
+						<li class="list-group-item">
 							<div className="form-check text-left">
 							<input name={key} value={elem} type="checkbox" className="form-check-input" checked={this.state.selected[key][elem]} onChange={e=>this.onClick(e)}/>
 							<label className="form-check-label" >{key}:{elem}</label>
@@ -270,18 +270,26 @@ class Ingredients extends Component {
 							<button className="btn btn-primary my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Find</button>
 							
 						</div>
-						<div>
-							<ul class="list-group">
-								{result}
-							</ul>
-						</div>
+						{result.length!==0 &&<div className="p-2">
+								<h5 className="font-weight-bold">Found Ingredients</h5>
+								<ul class="list-group">
+									{result}
+								</ul>
+							</div>}
 						
 				</form>
-				{this.props.suggestions!=="" &&<div className="card m-1">
-					<div class="card-body">
-					<h6  className="card-title font-italic font-weight-bold">Suggested Ingredients</h6>
-					<p className="card-text font-weight-bold">{this.props.suggestions}</p>
-					</div>
+				{this.props.suggestions!=="" &&
+				<div className="p-2">
+					<h5 className="font-italic font-weight-bold">
+						Suggested Ingredients
+					</h5>
+					<ul className="list-group">
+						<li className="list-group-item">
+							<p className="card-text">
+								{this.props.suggestions}
+							</p>
+						</li>
+					</ul>
 				</div>}
 				{this.props.suggestions==="" &&<div className="card m-1">
 					<div className="card-body">No Suggestions</div>
