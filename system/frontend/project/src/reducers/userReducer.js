@@ -22,12 +22,11 @@ export default function(state = initialState, action) {
 				}
 			}else{
 				alert("Not valid Username or Password")
-   		                 
-
 			}
 			return state
+
 		case REGISTER_USER:
-			if(action.payloadsasa){
+			if(action.payload===true){
 				const user = {username: action.username}
 				localStorage.setItem('username', JSON.stringify(user));
 				return {

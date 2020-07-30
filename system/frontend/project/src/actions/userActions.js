@@ -21,7 +21,7 @@ export const registerUser = (username, password) => dispatch => {
 		dispatch({
 			type: REGISTER_USER,
 			payload: response.data,
-			username: username
+			username: username,
 		})
 	})
 	.catch(error=>{
