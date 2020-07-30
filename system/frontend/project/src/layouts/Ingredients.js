@@ -243,13 +243,14 @@ class Ingredients extends Component {
             	</select>
           		</div>
 				
-				<div className="overflow-auto m-2">
+				{num!==0 && <div className="overflow-auto m-2">
 					<label className="font-weight-bold font-italic h5 d-inline title-margin">Selected</label>
 					<ul className="list-group">
 					{sel}
 					</ul>
 					
 				</div>
+				}
 				<div className="row justify-content-center">
 					<Button className="button-margin" as='div' labelPosition='right'/>
 					<Button className="btn-margin" onClick={e=>this.clearSearch(e)} size='mini'>
