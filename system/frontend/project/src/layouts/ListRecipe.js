@@ -42,7 +42,7 @@ class ListRecipe extends Component {
 		this.props.checkLoggedIn()
 		const path = window.location.href.split("/")
 		let kind= path[path.length-1]
-		if(kind=="?"){
+		if(kind==="?"){
 			kind=""	
 		}
 		this.setState({
@@ -53,14 +53,19 @@ class ListRecipe extends Component {
 		}else if(kind==="explorer"){
 			this.props.fetchUserFavourite(this.props.username);
 		}else{
-			const temp=localStorage.getItem("search")
+			const temp=JSON.parse(localStorage.getItem("search"))
 			
 			if(temp===null){
 				this.props.fetchRecipes(0)
 				this.setState({
 					searching: false
 				})
-			}else if(Object.keys(temp).length === 0){
+			}else if(Object.keys(temp).length === 0 ){
+				this.props.fetchRecipes(0)
+				this.setState({
+					searching: false
+				})
+			}else if(temp["ingredients"].length===0){
 				this.props.fetchRecipes(0)
 				this.setState({
 					searching: false
@@ -71,10 +76,6 @@ class ListRecipe extends Component {
 					searching: true
 				})
 			}
-
-			// Object.keys(temp).length === 0
-			// else
-			// 	this.props.fetchRecipes(0)
 		}
 	}
 

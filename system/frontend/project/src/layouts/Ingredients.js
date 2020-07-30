@@ -99,6 +99,7 @@ class Ingredients extends Component {
 				return
 			})
 		})
+		console.log(ingredients, this.state.type)
 		this.props.searchRecipes(ingredients, this.state.type)
 		
 	}
