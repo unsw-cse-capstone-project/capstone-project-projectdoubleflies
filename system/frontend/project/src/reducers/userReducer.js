@@ -23,7 +23,7 @@ export default function(state = initialState, action) {
 			}else{
 				alert("Not valid Username or Password")
 			}
-			return
+			return state
 		case REGISTER_USER:
 			if(action.payload){
 				const user = {username: action.username}
@@ -35,7 +35,7 @@ export default function(state = initialState, action) {
 			}else{
 				alert("Not valid Username")
 			}
-			return
+			return state
 
 		case CHECK_USERNAME:
 			return {

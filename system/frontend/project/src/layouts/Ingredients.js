@@ -120,12 +120,18 @@ class Ingredients extends Component {
 	filterSearch=(e)=>{
 		e.preventDefault();
 		const temp = {}
+		if(this.state.word.length < 1){
+			this.setState({
+				result: {}
+			})
+			return
+		}
 		Object.keys(this.props.ingredients).forEach(key=>{
 			temp[key]={}
 			this.props.ingredients[key].forEach(elem=>{
-				if(elem===this.state.word){
+				var r = new RegExp(this.state.word.toLowerCase());
+				if(r.test(elem.toLowerCase())===true)
 					temp[key][elem]=true
-				}
 			})
 		})
 		this.setState({
@@ -209,10 +215,12 @@ class Ingredients extends Component {
 			return(
 				Object.keys(this.state.result[key]).map(elem=>{
 					return(
-						<div className="form-check text-left">
-						<input name={key} value={elem} type="checkbox" className="form-check-input" checked={this.state.selected[key][elem]} onChange={e=>this.onClick(e)}/>
-						<label className="form-check-label" >{key}:{elem}</label>
-						</div>
+						<li class="list-group-item row">
+							<div className="form-check text-left">
+							<input name={key} value={elem} type="checkbox" className="form-check-input" checked={this.state.selected[key][elem]} onChange={e=>this.onClick(e)}/>
+							<label className="form-check-label" >{key}:{elem}</label>
+							</div>
+						</li>
 					)	
 				})
 			)	
@@ -258,9 +266,16 @@ class Ingredients extends Component {
 				<form className="form-inline d-flex justify-content-center">
 						<label className="font-weight-bold font-italic h5 d-inline title-margin">Choose Ingredients<br/></label>
 						<div className="input-group">
-							<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Search" aria-label="Search" onChange={e=>this.onChange(e)}/>
-							<button className="btn btn-primary my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Search</button>
+							<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Find Ingredients" aria-label="Search" value={this.state.word} onChange={e=>this.onChange(e)}/>
+							<button className="btn btn-primary my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Find</button>
+							
 						</div>
+						<div>
+							<ul class="list-group">
+								{result}
+							</ul>
+						</div>
+						
 				</form>
 				{this.props.suggestions!=="" &&<div className="card m-1">
 					<div class="card-body">
@@ -271,9 +286,7 @@ class Ingredients extends Component {
 				{this.props.suggestions==="" &&<div className="card m-1">
 					<div className="card-body">No Suggestions</div>
 				</div>}
-				<div className="form-check">
-					{result}
-				</div>
+				
 				<div className="accordion" id="checkboxes">
 					{checkbox}
 				</div>
