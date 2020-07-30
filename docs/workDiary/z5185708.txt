@@ -58,7 +58,10 @@ of notifying contributors through email to contributors can be directly viewed o
 
 Week9
 This week we need to upload all our codes, so everyone is trying to test more functionalities and make sure they can all run normally. 
-At the same time, adding more recipes will slow down the website, so we tried using the cloud database for the first time. The database is used for data storage, so that users who use our website do not need to manually set up a local database via mysql, and the running speed of the website is greatly improved. At the same time, our report is also in progress.Many parts have been improved. Next week, more inspections and deletions will be carried out to make the report scores a higher mark.
+At the same time, adding more recipes will slow down the website, so we tried using the cloud database for the first time. The database 
+is used for data storage, so that users who use our website do not need to manually set up a local database via mysql, and the running 
+speed of the website is greatly improved. At the same time, our report is also in progress.Many parts have been improved. 
+Next week, more inspections and deletions will be carried out to make the report scores a higher mark.
 
 
 
