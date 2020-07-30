@@ -1,5 +1,4 @@
 Week1
-
 We have a offline meeting and everyone is very friendly and nice. Firstly, we decided who to be the scrum master and oteher's role.
 After that, we went to the proposal of this assignment and try to make everyone is happy with their work. But one of our team members
 told me that he may drop this course since workload of other courses are too heavy, and he told us he decided to leave a day after, so
@@ -56,6 +55,10 @@ At the same time, we are completing the functionalities that need to be complete
 improvement of the website, we found that there are some previously proposed functionalities do not need to be used anymore, 
 such as viee the history of recipes and we have also optimized some existing functions, such as changing the way 
 of notifying contributors through email to contributors can be directly viewed on the page which ingredients do not have matching recipes
+
+Week9
+This week we need to upload all our codes, so everyone is trying to test more functionalities and make sure they can all run normally. 
+At the same time, adding more recipes will slow down the website, so we tried using the cloud database for the first time. The database is used for data storage, so that users who use our website do not need to manually set up a local database via mysql, and the running speed of the website is greatly improved. At the same time, our report is also in progress.Many parts have been improved. Next week, more inspections and deletions will be carried out to make the report scores a higher mark.
 
 
 
