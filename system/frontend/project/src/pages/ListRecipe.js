@@ -111,13 +111,16 @@ class ListRecipe extends Component {
 			loading=<div className="spinner-border text-primary" role="status">
   				<span className="sr-only">Loading...</span>
 			</div>
-			if(this.props.offset.length===0){
-				loading=<div className="card">
-				<div className="card-body">
-    			<p className="card-text">No More Recipes</p>
-  				</div>
-			  </div>
+			if(this.props.offset){
+				if(this.props.offset.length===0){
+					loading=<div className="card">
+					<div className="card-body">
+					<p className="card-text">No More Recipes</p>
+					  </div>
+				  </div>
+				}
 			}
+			
 			const pathname = this.state.kind==="contributor" ? "/contributor/view/": "/view/";
 				cards = temp.slice(0, this.state.size).map(item => {
 					return (
