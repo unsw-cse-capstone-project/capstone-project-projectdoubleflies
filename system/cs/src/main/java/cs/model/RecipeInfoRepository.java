@@ -67,7 +67,7 @@ public interface RecipeInfoRepository extends JpaRepository<Recipe, Integer> {
     		+ "join (select i2.ingredient from ingredient_info i2 where i2.ingredient IN :ingredients) as t "
     		+ "on i.ingredient=t.ingredient group by r.recipeid having "
     		+ "count(distinct i.ingredient)>=(select count(distinct i3.ingredient) "
-    		+ "from ingredient_info i3 where i3.ingredient IN :ingredients) ORDER BY ct) as t) and type=:types", nativeQuery = true)
+    		+ "from ingredient_info i3 where i3.ingredient IN :ingredients) ORDER BY ct) as t2) and type=:types", nativeQuery = true)
     List<Recipe> ing(@Param("types") String type, @Param("ingredients") List<String> ingredients);
     
     
@@ -76,7 +76,7 @@ public interface RecipeInfoRepository extends JpaRepository<Recipe, Integer> {
     		+ "join (select i2.ingredient from ingredient_info i2 where i2.ingredient IN :ingredients) as t "
     		+ "on i.ingredient=t.ingredient group by r.recipeid having "
     		+ "count(distinct i.ingredient)>=(select count(distinct i3.ingredient) "
-    		+ "from ingredient_info i3 where i3.ingredient IN :ingredients) ORDER BY ct) as t)", nativeQuery = true)
+    		+ "from ingredient_info i3 where i3.ingredient IN :ingredients) ORDER BY ct) as t2)", nativeQuery = true)
     List<Recipe> filter(@Param("ingredients") List<String> ingredients);
 
 }

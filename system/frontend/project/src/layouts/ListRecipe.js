@@ -16,7 +16,8 @@ class ListRecipe extends Component {
 			deleted: false,
 			size: 15,
 			offset: 0,
-			prev: 0
+			prev: 0,
+			searching: false
 		}
 	}
 
@@ -53,14 +54,36 @@ class ListRecipe extends Component {
 			this.props.fetchUserFavourite(this.props.username);
 		}else{
 			const temp=localStorage.getItem("search")
-			if(temp!==null)
-				this.props.searchRecipes(temp["ingredients"], temp["type"])
-			else
+			
+			if(temp===null){
 				this.props.fetchRecipes(0)
+				this.setState({
+					searching: false
+				})
+			}else if(Object.keys(temp).length === 0){
+				this.props.fetchRecipes(0)
+				this.setState({
+					searching: false
+				})
+			}else{
+				this.props.searchRecipes(temp["ingredients"], temp["type"])
+				this.setState({
+					searching: true
+				})
+			}
+
+			// Object.keys(temp).length === 0
+			// else
+			// 	this.props.fetchRecipes(0)
 		}
 	}
 
 	handleScroll=()=>{
+		if(this.state.searching===true){
+			console.log("?????")
+			return
+		}
+			
 		if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight-5) {
 			const offset=this.state.offset+15;
 			const size=this.state.size+15;
