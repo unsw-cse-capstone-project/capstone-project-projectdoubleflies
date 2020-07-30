@@ -23,7 +23,9 @@ export default function(state=initialState, action){
 			}
 
 		case ADD_FAVOURITE:
-			if(action.status===200)
+			if(action.payload===false)
+				alert("You can not add your recipe to your favourites")
+			else if(action.status===200)
 				alert("Added to My Favourite")
 			return {
 				...state,
