@@ -41,3 +41,8 @@ The website looks empty as we did not upload the Ingredients and recipes on it, 
 recipes. Also added more meal-type to the website. Other than that, we were working on css to make the website beautiful. 
 I think everything is going well.
 
+Week8
+This week was demo week, everyone was participanting and we got feedback from our tutor, we also finished our retrsospective B,
+Kyrie and I was working on the test all functionalities completed so far including mysql database, frontend and backend.Also, we started to 
+write the report.
+
