@@ -40,20 +40,5 @@ public interface searchRepository extends JpaRepository<SearchHistory, Long>{
     		"where v2.in2 LIKE concat(\"%,\", replace(v1.in1, \",\" , \",%,\"), \",%\") " + 
     		") " + "order by sh.frequency DESC, sh.searchID ASC " +
     		"limit 5", nativeQuery=true)
-     List<BigInteger> popularSearchNoMatch();
-
-
-    //  @Query(value="select searchID from SearchHistory where searchID not in"
-    // 		+ " (select distinct(s.searchID) from searchistory_Info s where exists "
-    // 		+ "(select recipeID from ingredient_info r join searchistory_Info s1 on "
-    // 		+ "s1.ingredient=r.ingredient where s1.searchID=s.searchID group by r.recipeID "
-    // 		+ "having count(distinct r.ingredient)=(select count(distinct s2.ingredient) "
-    // 		+ "from searchistory_Info s2 where s2.searchID=s.searchID))) ORDER BY frequency DESC", nativeQuery = true)
-    // List<String> search_history();
-
-    // <<<<<<< HEAD
-//     		"where v2.in2 LIKE concat(\"%,\", replace(v1.in1, \",\" , \",%,\"), \",%\") order by v1.freq1 DESC" + 
-//     		")", nativeQuery=true)
-//      List<BigInteger> popularSearchNoMatch();
-// =======
+    List<BigInteger> popularSearchNoMatch();
 }

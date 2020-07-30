@@ -19,7 +19,6 @@ import lombok.EqualsAndHashCode;
 
 
 @Entity
-//@Table(name = "User")
 @EqualsAndHashCode(callSuper = false)
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "favorite_recipe"})
 public class User{
@@ -38,10 +37,8 @@ public class User{
     private List<Recipe> recipes = new ArrayList<>();
 
    
-    //@JsonIgnore
-  //  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    
     @ManyToMany
-   // @JsonBackReference
     @JoinTable(
         name="Explorer_Info",
         joinColumns = @JoinColumn(name="username"),
@@ -51,9 +48,6 @@ public class User{
     
     public User() {}
     
-//    public User(String id) {
-//    	this.username=id;
-//    }
     
     public User(String id, String password) {
     	this.username = id;

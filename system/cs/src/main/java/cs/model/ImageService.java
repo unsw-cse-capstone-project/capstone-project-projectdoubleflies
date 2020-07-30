@@ -1,5 +1,4 @@
 package cs.model;
-
 import  cs.model.Image;
 import  cs.model.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
