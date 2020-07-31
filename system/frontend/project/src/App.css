@@ -141,3 +141,7 @@ img.image {
 .sticky-sidebar {
     padding-right: 0;
 }
+
+.to-left {
+    text-align: left
+}

@@ -189,12 +189,12 @@ class Ingredients extends Component {
 								</h2>
 							</div>
 							<div id={`collapse${id}`} className="collapse" aria-labelledby={`heading${id}`} data-parent="#checkboxes">
-							<div className="card-body">
+							<div className="card-body  to-left">
 								{this.props.ingredients[key].map(elem=>{
 									return(
-										<div className="form-check">
+										<div className="form-check d-inline-block">
 											<input id={`check-${key}`} name={key} value={elem} type="checkbox" className="form-check-input" checked={this.state.selected[key][elem]} onChange={e=>this.onClick(e)}/>
-											<label className="form-check-label" >{elem}</label>
+											<label className="form-check-label" >{elem} &nbsp;&nbsp;</label>
 										</div>
 									)
 								})
@@ -268,19 +268,6 @@ class Ingredients extends Component {
 					</ul>
 					
 				</div>}
-
-				{/* <div className="row justify-content-center">
-					<Button className="button-margin" as='div' labelPosition='right'/>
-					<Button className="btn-margin" onClick={e=>this.clearSearch(e)} size='mini'>
-						<Icon name='trash' />
-					Clear
-					</Button>
-					<Button className="button-margin" as='div' labelPosition='right'/>
-					<Button className="btn-margin ui green button" onClick={e=>this.search(e)} size='mini'>
-						<Icon name='search' />
-					Search
-					</Button>
-				</div> */}
 				<div className="row justify-content-center">
 					<Button className="button-margin" as='div' labelPosition='right'/>
 					<Button className="btn-margin" onClick={e=>this.clearSearch(e)} size='mini'>
