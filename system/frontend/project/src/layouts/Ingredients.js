@@ -43,7 +43,7 @@ class Ingredients extends Component {
 			})
 	}
 
-	onClick=(e)=>{
+	onClick=(e, clear)=>{
 		if(!e.target.name && !e.target.name){
 			this.props.suggestIngredients([])
 		}else if(this.state.selected[e.target.name][e.target.value]===undefined){
@@ -73,6 +73,10 @@ class Ingredients extends Component {
 				ingredients: ing
 			})
 		}
+		if(clear===true)
+			this.search(e, "", [])
+		else
+			this.search(e)
 	}
 
 	onDelete=(e)=>{
@@ -84,11 +88,14 @@ class Ingredients extends Component {
 		this.setState({
 			selected: temp
 		})
+		this.search(e)
 	}
 
-	search=(e)=>{
+	search=(e, type, ing)=>{
 		e.preventDefault();
-		localStorage.setItem("map", JSON.stringify(this.state.selected))
+		
+		if(ing===undefined)
+			localStorage.setItem("map", JSON.stringify(this.state.selected))
 		const ingredients=[]
 		Object.keys(this.state.selected).forEach(key=>{
 			Object.keys(this.state.selected[key]).forEach(elem=>{
@@ -96,7 +103,14 @@ class Ingredients extends Component {
 					ingredients.push(elem)
 			})
 		})
-		this.props.searchRecipes(ingredients, this.state.type)
+		console.log(type!==undefined)
+		if(type!==undefined && ing!==undefined)
+			this.props.searchRecipes([], type)
+		else if(type!==undefined)
+			this.props.searchRecipes(ingredients, type)
+		else
+			this.props.searchRecipes(ingredients, this.state.type)
+
 		window.location.href = "/"
 	}
 
@@ -114,7 +128,7 @@ class Ingredients extends Component {
 			ingredients: []
 		})
 		localStorage.removeItem("map")
-		this.onClick(e)
+		this.onClick(e, true)
 	}
 
 	filterSearch=(e)=>{
@@ -147,6 +161,7 @@ class Ingredients extends Component {
 	}
 
 	onFilter=(e)=>{
+		e.preventDefault()
 		const cur=this.state.type
 		const selected={}
 		Object.assign(selected, this.state.selected_type);
@@ -156,7 +171,9 @@ class Ingredients extends Component {
 			selected_type: selected, 
 			type: e.target.value
 		})
+		this.search(e, e.target.value)
 	}
+
 	render() {
 		let checkbox=<div></div>
 		if(this.props.ingredients!==undefined){
@@ -198,8 +215,7 @@ class Ingredients extends Component {
 						num=+1
 						return(
 							<li className="list-group-item">{key}: {elem}<button type="button" className="close" aria-label="Close" onClick={e=>this.onDelete(e)}>
-								{/* {elem}
-							<span aria-hidden="true" name={key} value={elem}>&times;</span> */}
+							<span aria-hidden="true" name={key} value={elem}>&times;</span>
 						</button></li>
 						)
 					}
@@ -251,9 +267,9 @@ class Ingredients extends Component {
 					{sel}
 					</ul>
 					
-				</div>
-				}
-				<div className="row justify-content-center">
+				</div>}
+
+				{/* <div className="row justify-content-center">
 					<Button className="button-margin" as='div' labelPosition='right'/>
 					<Button className="btn-margin" onClick={e=>this.clearSearch(e)} size='mini'>
 						<Icon name='trash' />
@@ -264,23 +280,16 @@ class Ingredients extends Component {
 						<Icon name='search' />
 					Search
 					</Button>
+				</div> */}
+				<div className="row justify-content-center">
+					<Button className="button-margin" as='div' labelPosition='right'/>
+					<Button className="btn-margin" onClick={e=>this.clearSearch(e)} size='mini'>
+						<Icon name='trash' />
+					Clear
+					</Button>
 				</div>
 				
-				<form className="pt-3 justify-content-center">
-						<label className="font-weight-bold font-italic h5 d-inline title-margin">Choose Ingredients<br/></label>
-						<div className="input-group">
-							<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Find Ingredients" aria-label="Search" value={this.state.word} onChange={e=>this.onChange(e)}/>
-							<button className="btn btn-primary my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Find</button>
-							
-						</div>
-						{result.length!==0 &&<div className="p-2">
-								<h5 className="font-weight-bold">Found Ingredients</h5>
-								<ul class="list-group">
-									{result}
-								</ul>
-							</div>}
-						
-				</form>
+				
 				{this.props.suggestions!=="" &&
 				<div className="p-2">
 					<h5 className="font-italic font-weight-bold">
@@ -294,6 +303,22 @@ class Ingredients extends Component {
 						</li>
 					</ul>
 				</div>}
+
+				<form className="p-2 justify-content-center">
+					<label className="font-weight-bold font-italic h5 d-inline title-margin">Choose Ingredients<br/></label>
+					<div className="input-group">
+						<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Find Ingredients" aria-label="Search" value={this.state.word} onChange={e=>this.onChange(e)}/>
+						<button className="btn btn-primary my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Find</button>
+						
+					</div>
+					{result.length!==0 &&<div className="p-2">
+							<h5 className="font-weight-bold">Found Ingredients</h5>
+							<ul class="list-group">
+								{result}
+							</ul>
+						</div>}
+				</form>
+
 				{this.props.suggestions==="" &&<div className="card m-1">
 					<div className="card-body">No Suggestions</div>
 				</div>}

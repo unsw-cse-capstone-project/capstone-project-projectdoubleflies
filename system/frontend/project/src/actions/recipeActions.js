@@ -123,11 +123,14 @@ export const deleteRecipe = (id) => dispatch => {
 
 export const searchRecipes = (ingredients, type) => dispatch => {
 	let obj=undefined;
-	if(type==="")
-		type=undefined
 	obj={"ingredients": ingredients, "type": type}
 	const strJson=JSON.stringify(obj)
 	localStorage.setItem("search", strJson)
+
+	if(type==="")
+		type=undefined
+	
+	obj={"ingredients": ingredients, "type": type}
 	axios.post(`${apiUrl}/search`, obj)
 	.then(response=>{
 		dispatch({
