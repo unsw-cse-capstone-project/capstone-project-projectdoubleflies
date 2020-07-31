@@ -137,3 +137,7 @@ img.image {
 .card-same {
     padding-bottom: 5px;
 }
+
+.sticky-sidebar {
+    padding-right: 0;
+}

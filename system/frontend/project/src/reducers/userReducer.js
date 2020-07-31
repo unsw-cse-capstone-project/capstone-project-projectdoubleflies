@@ -34,7 +34,7 @@ export default function(state = initialState, action) {
 					registered: action.payload
 				}
 			}else{
-				alert("Not valid Username")
+				alert("Username already exists")
 			}
 			return state
 

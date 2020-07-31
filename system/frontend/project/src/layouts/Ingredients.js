@@ -198,7 +198,8 @@ class Ingredients extends Component {
 						num=+1
 						return(
 							<li className="list-group-item">{key}: {elem}<button type="button" className="close" aria-label="Close" onClick={e=>this.onDelete(e)}>
-							<span aria-hidden="true" name={key} value={elem}>&times;</span>
+								{/* {elem}
+							<span aria-hidden="true" name={key} value={elem}>&times;</span> */}
 						</button></li>
 						)
 					}
@@ -265,7 +266,7 @@ class Ingredients extends Component {
 					</Button>
 				</div>
 				
-				<form className="form-inline d-flex justify-content-center">
+				<form className="pt-3 justify-content-center">
 						<label className="font-weight-bold font-italic h5 d-inline title-margin">Choose Ingredients<br/></label>
 						<div className="input-group">
 							<input className="form-control mr-sm-2 input-sm" type="search" placeholder="Find Ingredients" aria-label="Search" value={this.state.word} onChange={e=>this.onChange(e)}/>

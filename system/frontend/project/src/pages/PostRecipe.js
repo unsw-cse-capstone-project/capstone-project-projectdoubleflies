@@ -374,11 +374,6 @@ class PostRecipe extends Component {
           <div className="form-group">
           <label className="font-italic h5 d-inline title-margin">Upload Image</label>
             <div className="input-group">
-              <div className="input-group-prepend">
-                <span className="input-group-text" id="inputGroupFileAddon01">
-                  Upload Image
-                </span>
-              </div>
               <div className="custom-file">
                 <input
                   type="file"
