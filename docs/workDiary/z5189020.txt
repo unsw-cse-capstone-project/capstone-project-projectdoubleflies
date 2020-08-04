@@ -35,3 +35,10 @@ Week 8:
 
 Work on setting up MYSQL cloud database on AWS and user mannual.
 Prepare for progressive demo 2
+
+Week 9:
+
+The frontpage was sluggish and takes around 15 seconds to load all recipes.
+Therefore, created the offset function to load recipes by a certain amount each time we fetch recipes.
+Write run.sh to run both the backend and frontend from 1 single script.
+
