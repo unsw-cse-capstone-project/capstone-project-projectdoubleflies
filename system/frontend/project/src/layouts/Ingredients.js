@@ -22,7 +22,6 @@ class Ingredients extends Component {
 
 	componentDidMount() {
 		this.props.fetchIngredients()
-		this.props.suggestIngredients([])
 		let temp=null
 		if(localStorage.getItem("search")!==null)
 			temp =JSON.parse(localStorage.getItem("search"))
@@ -32,6 +31,16 @@ class Ingredients extends Component {
 		else{
 			Object.assign(t, JSON.parse(localStorage.getItem("map")))
 		}
+		const ingredients=[]
+		Object.keys(t).forEach(cat=>{
+			Object.keys(t[cat]).forEach(elem=>{
+				if(t[cat][elem]===true){
+					ingredients.push(elem)
+				}
+			})
+		})
+		console.log(ingredients)
+		this.props.suggestIngredients(ingredients)
 		if(temp!==null)
 			this.setState({
 				type: temp["type"],
@@ -44,15 +53,13 @@ class Ingredients extends Component {
 	}
 
 	onClick=(e, clear)=>{
-		if(!e.target.name && !e.target.name){
-			this.props.suggestIngredients([])
-		}else if(this.state.selected[e.target.name][e.target.value]===undefined){
+		if(this.state.selected[e.target.name][e.target.value]===undefined){
 			const temp={}
 			Object.assign(temp, this.state.selected);
 			temp[e.target.name][e.target.value]=true
 			const ing=[...this.state.ingredients]
 			ing.push(e.target.value)
-			this.props.suggestIngredients(ing)
+			console.log(ing)
 			this.setState({
 				selected: temp,
 				ingredients: ing
@@ -67,14 +74,15 @@ class Ingredients extends Component {
 				ing.push(e.target.value)
 			else 
 				ing=ing.filter(i => i!==e.target.value);
-				this.props.suggestIngredients(ing)
+			
 			this.setState({
 				selected: temp,
 				ingredients: ing
 			})
 		}
-		if(clear===true)
+		if(clear===true){
 			this.search(e, "", [])
+		}
 		else
 			this.search(e)
 	}
@@ -298,7 +306,8 @@ class Ingredients extends Component {
 						<button className="btn btn-primary my-2 my-sm-0 btn-sm" type="submit" onClick={e=>this.filterSearch(e)}>Find</button>
 						
 					</div>
-					{result.length!==0 &&<div className="p-2">
+					{result.length!==0 &&
+						<div className="p-2">
 							<h5 className="font-weight-bold">Found Ingredients</h5>
 							<ul class="list-group">
 								{result}
