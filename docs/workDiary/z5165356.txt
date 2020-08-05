@@ -48,4 +48,9 @@ I added load on scroll function in frontend so that the website's loading speed 
 I have written functionalities and implementation challenges for frontend for the report.
 
 Week9
-I wrote the description and justification on all third parties I have used for the frontend.
+I wrote the description and justification on all third parties I have used for the frontend and finishing off my part of the final report
+
+Week10
+I made the powerpoint of the frontend part and made a script for it
+We found some bug in the website and i debugged
+Made some modification for the frontend so it is easier to use.
