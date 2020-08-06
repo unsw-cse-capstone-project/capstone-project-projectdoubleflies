@@ -53,7 +53,16 @@ class Ingredients extends Component {
 	}
 
 	onClick=(e, clear)=>{
-		if(this.state.selected[e.target.name][e.target.value]===undefined){
+		if(!e.target.name || !e.target.value||!this.state.selected[e.target.name]){
+			if(clear===true)
+				this.search(e, "", [])
+			else
+				this.search(e)
+			return
+		}
+		
+
+		if(!this.state.selected[e.target.name][e.target.value]){
 			const temp={}
 			Object.assign(temp, this.state.selected);
 			temp[e.target.name][e.target.value]=true
